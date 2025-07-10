@@ -1,0 +1,85 @@
+import React, { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import { GiSelfLove } from 'react-icons/gi';
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const links = (
+    <>
+      <li className="p-2 hover:underline hover:text-blue-500 cursor-pointer">
+        Home
+      </li>
+      <li className="p-2 hover:underline hover:text-blue-500 cursor-pointer">
+        Biodatas
+      </li>
+      <li className="p-2 hover:underline hover:text-blue-500 cursor-pointer">
+        About Us
+      </li>
+      <li className="p-2 hover:underline hover:text-blue-500 cursor-pointer">
+        Contact Us
+      </li>
+    </>
+  );
+
+  return (
+    <nav className="bg-white shadow-md fixed w-full z-50 top-0 left-0">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex items-center gap-2">
+            <GiSelfLove className="text-3xl text-pink-500" />
+            <h1 className="text-2xl font-bold">
+              Soul<span className="text-pink-500">mate</span>
+            </h1>
+          </div>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center space-x-6">
+            <ul className="flex space-x-4">{links}</ul>
+
+            {/* Buttons */}
+            <div className="flex space-x-3">
+              <button className="px-4 py-1 border border-blue-500 text-blue-500 rounded hover:bg-blue-50 transition">
+                Login
+              </button>
+              <button className="px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+                Register
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile Menu Icon */}
+          <div className="md:hidden">
+            <button
+              onClick={toggleMenu}
+              className="text-gray-700 focus:outline-none"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white shadow-md py-4 px-6 space-y-3">
+          <ul className="flex flex-col items-center space-y-2">{links}</ul>
+
+          <div className="flex flex-col items-center space-y-2 mt-2">
+            <button className="w-full px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-50 transition">
+              Login
+            </button>
+            <button className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
+              Register
+            </button>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
+};
+
+export default Navbar;
