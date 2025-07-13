@@ -1,24 +1,48 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
+import Swal from 'sweetalert2';
 import SocialLogin from './SocialLogin';
+import { AuthContext } from '../Contexts/AuthContext';
 
 const Login = () => {
-  //useForm hook for form handling
+  const { signInUser } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || '/';
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  //data
   const onSubmit = data => {
-    console.log(data);
+    const { email, password } = data;
+    signInUser(email, password)
+      .then(result => {
+        console.log(result.user);
+        navigate(from);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Login successfully',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.message,
+        });
+      });
   };
 
   return (
-    <div className=" flex items-center justify-center  ">
+    <div className="flex items-center justify-center">
       <div className="bg-white rounded-xl shadow-md p-8 w-full max-w-md">
         <h2 className="text-3xl font-bold text-center text-pink-600 mb-6">
           Login to Soul<span className="text-blue-500">mate</span>
@@ -30,11 +54,15 @@ const Login = () => {
             </label>
             <input
               type="email"
-              {...register('email')}
+              {...register('email', { required: 'Email is required' })}
               className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
               placeholder="Enter your email"
-              required
             />
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.email.message}
+              </p>
+            )}
           </div>
           <div>
             <label className="block text-gray-700 font-semibold mb-1">
@@ -42,13 +70,14 @@ const Login = () => {
             </label>
             <input
               type="password"
-              {...register('password')}
+              {...register('password', { required: 'Password is required' })}
               className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
               placeholder="Enter your password"
-              required
             />
-            {errors.password && errors.password.type === 'required' && (
-              <p className="text-red-500 text-sm mt-1">Password is required</p>
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.password.message}
+              </p>
             )}
           </div>
           <button
@@ -63,7 +92,7 @@ const Login = () => {
           <span className="mx-2 text-gray-500 font-medium">OR</span>
           <div className="flex-grow h-px bg-gray-300"></div>
         </div>
-        <SocialLogin></SocialLogin>
+        <SocialLogin />
         <p className="text-center text-gray-600 mt-4">
           Don't have an account?{' '}
           <Link

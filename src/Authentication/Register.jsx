@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import UseAuth from '../Hooks/UseAuth';
 import SocialLogin from './SocialLogin';
+import Swal from 'sweetalert2';
 
 const Register = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || '/';
   const {
     register,
     handleSubmit,
@@ -24,7 +28,15 @@ const Register = () => {
     createUser(data.email, data.password)
       .then(result => {
         const user = result.user;
+        navigate(from);
         console.log('User created successfully:', user);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Registration successful',
+          showConfirmButton: false,
+          timer: 1500,
+        });
       })
       .catch(error => {
         console.error('Error creating user:', error);
