@@ -18,7 +18,7 @@ const SocialLogin = () => {
     <div>
       <button
         onClick={handleGoogleSignIn}
-        className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-md px-4 py-2 transition mb-2"
+        className="w-full flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-md px-4 py-2 transition mb-2"
       >
         <FaGoogle className="text-lg" />
         Sign in with Google
