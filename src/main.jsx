@@ -6,9 +6,12 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import { RouterProvider } from 'react-router';
 import { router } from './Router/Router.jsx';
+import AuthProvider from './Contexts/AuthProvider.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </StrictMode>
 );

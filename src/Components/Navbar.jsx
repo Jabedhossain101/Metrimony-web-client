@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { GiSelfLove } from 'react-icons/gi';
+import { Link } from 'react-router';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -43,10 +44,10 @@ const Navbar = () => {
             {/* Buttons */}
             <div className="flex space-x-3">
               <button className="px-4 py-1 border border-blue-500 text-blue-500 rounded hover:bg-blue-50 transition">
-                Login
+                <Link to={'/login'}> Login</Link>
               </button>
-              <button className="px-4 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
-                Register
+              <button className="px-4 py-1 bg-pink-500 text-white rounded hover:bg-pink-600 transition">
+                <Link to={'/register'}> Register</Link>
               </button>
             </div>
           </div>
@@ -70,10 +71,10 @@ const Navbar = () => {
 
           <div className="flex flex-col items-center space-y-2 mt-2">
             <button className="w-full px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-50 transition">
-              Login
+              <Link to={'/login'}> Login</Link>
             </button>
-            <button className="w-full px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition">
-              Register
+            <button className="w-full px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 transition">
+              <Link to={'/register'}> Register</Link>
             </button>
           </div>
         </div>
