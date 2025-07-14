@@ -6,57 +6,57 @@ import Marquee from 'react-fast-marquee';
 const stories = [
   {
     id: 1,
-    coupleImage: 'https://randomuser.me/api/portraits/men/32.jpg',
+    coupleImage: 'https://i.ibb.co/zHTrrFNP/image.png',
     marriageDate: '2024-12-15',
     stars: 5,
     story:
       "We met on this platform and instantly connected. Now we're happily married! Thank you for making our dreams come true.",
-    names: 'Rahul & Priya',
+    names: 'Rahim & Ayesha',
   },
   {
     id: 2,
-    coupleImage: 'https://randomuser.me/api/portraits/women/44.jpg',
+    coupleImage: 'https://i.ibb.co/zHTrrFNP/image.png',
     marriageDate: '2023-08-10',
     stars: 4,
     story:
       'A wonderful experience! The site made it easy to find my soulmate. Highly recommended.',
-    names: 'Amit & Sneha',
+    names: 'Arif & Sultana',
   },
   {
     id: 3,
-    coupleImage: 'https://randomuser.me/api/portraits/men/45.jpg',
+    coupleImage: 'https://i.ibb.co/zHTrrFNP/image.png',
     marriageDate: '2022-05-22',
     stars: 5,
     story:
       'We are grateful for this website. It brought us together and now we are enjoying our married life.',
-    names: 'Vikram & Anjali',
+    names: 'Naimur & Neha',
   },
   {
     id: 4,
-    coupleImage: 'https://randomuser.me/api/portraits/women/65.jpg',
+    coupleImage: 'https://i.ibb.co/zHTrrFNP/image.png',
     marriageDate: '2024-06-01',
     stars: 5,
     story:
       'The best matrimony site! We found each other and our families are so happy.',
-    names: 'Sourav & Mitali',
+    names: 'Sourav & Nisha',
   },
   {
     id: 5,
-    coupleImage: 'https://randomuser.me/api/portraits/men/77.jpg',
+    coupleImage: 'https://i.ibb.co/zHTrrFNP/image.png',
     marriageDate: '2023-11-20',
     stars: 4,
     story:
       'I never thought online matrimony could work, but now I am a believer. Thank you!',
-    names: 'Arjun & Riya',
+    names: 'Raihan & Farzana',
   },
   {
     id: 6,
-    coupleImage: 'https://randomuser.me/api/portraits/women/12.jpg',
+    coupleImage: 'https://i.ibb.co/zHTrrFNP/image.png',
     marriageDate: '2022-09-18',
     stars: 5,
     story:
       'We matched, we met, and now we are married! The process was smooth and secure.',
-    names: 'Karan & Pooja',
+    names: 'Rafsan & Sayma',
   },
 ];
 

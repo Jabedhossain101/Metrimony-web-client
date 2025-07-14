@@ -1,21 +1,40 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { GiSelfLove } from 'react-icons/gi';
 import { Link } from 'react-router';
+import { AuthContext } from '../Contexts/AuthContext';
 
 const Navbar = () => {
+  const { user, logOut } = use(AuthContext);
+
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        console.log('User logged out successfully');
+      })
+      .catch(error => {
+        console.error('Error logging out:', error);
+      });
+  };
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const links = (
     <>
-      <li className="p-2 hover:underline hover:text-blue-500 cursor-pointer">
+      <Link
+        to={'/'}
+        className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
+      >
         Home
-      </li>
-      <li className="p-2 hover:underline hover:text-blue-500 cursor-pointer">
+      </Link>
+      <Link
+        to={'/biodata'}
+        className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
+      >
         Biodatas
-      </li>
+      </Link>
       <li className="p-2 hover:underline hover:text-blue-500 cursor-pointer">
         About Us
       </li>
@@ -43,12 +62,23 @@ const Navbar = () => {
 
             {/* Buttons */}
             <div className="flex space-x-3">
-              <button className="px-4 py-1 border border-blue-500 text-blue-500 rounded hover:bg-blue-50 transition">
-                <Link to={'/login'}> Login</Link>
-              </button>
-              <button className="px-4 py-1 bg-pink-500 text-white rounded hover:bg-pink-600 transition">
-                <Link to={'/register'}> Register</Link>
-              </button>
+              {user ? (
+                <button
+                  onClick={handleLogout}
+                  className="w-full px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 transition"
+                >
+                  Sign out
+                </button>
+              ) : (
+                <>
+                  <button className="w-full px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-50 transition">
+                    <Link to={'/login'}> Login</Link>
+                  </button>
+                  <button className="w-full px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 transition">
+                    <Link to={'/register'}> Register</Link>
+                  </button>
+                </>
+              )}
             </div>
           </div>
 
@@ -70,12 +100,20 @@ const Navbar = () => {
           <ul className="flex flex-col items-center space-y-2">{links}</ul>
 
           <div className="flex flex-col items-center space-y-2 mt-2">
-            <button className="w-full px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-50 transition">
-              <Link to={'/login'}> Login</Link>
-            </button>
-            <button className="w-full px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 transition">
-              <Link to={'/register'}> Register</Link>
-            </button>
+            {user ? (
+              <button className="w-full px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 transition">
+                Sign out
+              </button>
+            ) : (
+              <>
+                <button className="w-full px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-50 transition">
+                  <Link to={'/login'}> Login</Link>
+                </button>
+                <button className="w-full px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 transition">
+                  <Link to={'/register'}> Register</Link>
+                </button>
+              </>
+            )}
           </div>
         </div>
       )}

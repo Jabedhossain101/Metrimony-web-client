@@ -1,0 +1,254 @@
+[
+  {
+    "id": 1,
+    "type": "male",
+    "name": "Hasan Ahmed",
+    "image": "https://i.ibb.co/qMs4Y3wY/image.png",
+    "division": "Dhaka",
+    "age": 30,
+    "height": "5'8\"",
+    "weight": "70kg",
+    "occupation": "Engineer",
+    "religion": "Islam",
+    "maritalStatus": "Unmarried",
+    "hobby": "Reading",
+    "birthDate": "1993-06-15",
+    "educationalQualifications": [
+      { "degree": "SSC", "year": 2009, "institution": "Dhaka High School" },
+      { "degree": "HSC", "year": 2011, "institution": "Dhaka College" },
+      { "degree": "BSc in EEE", "year": 2015, "institution": "BUET" }
+    ]
+  },
+  {
+    "id": 2,
+    "type": "female",
+    "name": "Fatema Jahan",
+    "image": "https://i.ibb.co/RkQtfYmX/image.png",
+    "division": "Chattogram",
+    "age": 25,
+    "height": "5'4\"",
+    "weight": "55kg",
+    "occupation": "Teacher",
+    "religion": "Islam",
+    "maritalStatus": "Unmarried",
+    "hobby": "Cooking",
+    "birthDate": "1998-01-20",
+    "educationalQualifications": [
+      {
+        "degree": "SSC",
+        "year": 2014,
+        "institution": "Chattogram Girls School"
+      },
+      { "degree": "HSC", "year": 2016, "institution": "Chattogram College" },
+      { "degree": "BA in English", "year": 2020, "institution": "CU" }
+    ]
+  },
+  {
+    "id": 3,
+    "type": "male",
+    "name": "Rafiq Islam",
+    "image": "https://i.ibb.co/qMs4Y3wY/image.png",
+    "division": "Khulna",
+    "age": 28,
+    "height": "5'9\"",
+    "weight": "72kg",
+    "occupation": "Doctor",
+    "religion": "Islam",
+    "maritalStatus": "Unmarried",
+    "hobby": "Gardening",
+    "birthDate": "1995-03-10",
+    "educationalQualifications": [
+      { "degree": "SSC", "year": 2010, "institution": "Khulna Zilla School" },
+      { "degree": "HSC", "year": 2012, "institution": "Khulna Public College" },
+      { "degree": "MBBS", "year": 2018, "institution": "Dhaka Medical College" }
+    ]
+  },
+  {
+    "id": 4,
+    "type": "female",
+    "name": "Sadia Akter",
+    "image": "https://i.ibb.co/RkQtfYmX/image.png",
+    "division": "Barisal",
+    "age": 24,
+    "height": "5'3\"",
+    "weight": "52kg",
+    "occupation": "Software Engineer",
+    "religion": "Islam",
+    "maritalStatus": "Unmarried",
+    "hobby": "Painting",
+    "birthDate": "1999-09-18",
+    "educationalQualifications": [
+      {
+        "degree": "SSC",
+        "year": 2015,
+        "institution": "Barisal Govt. Girls School"
+      },
+      { "degree": "HSC", "year": 2017, "institution": "Barisal College" },
+      { "degree": "BSc in CSE", "year": 2022, "institution": "RUET" }
+    ]
+  },
+  {
+    "id": 5,
+    "type": "male",
+    "name": "Mizanur Rahman",
+    "image": "https://i.ibb.co/qMs4Y3wY/image.png",
+    "division": "Sylhet",
+    "age": 32,
+    "height": "5'7\"",
+    "weight": "75kg",
+    "occupation": "Businessman",
+    "religion": "Islam",
+    "maritalStatus": "Divorced",
+    "hobby": "Traveling",
+    "birthDate": "1991-05-22",
+    "educationalQualifications": [
+      {
+        "degree": "SSC",
+        "year": 2006,
+        "institution": "Sylhet Govt. High School"
+      },
+      { "degree": "HSC", "year": 2008, "institution": "Sylhet MC College" },
+      { "degree": "BBA", "year": 2012, "institution": "NSU" }
+    ]
+  },
+  {
+    "id": 6,
+    "type": "female",
+    "name": "Nusrat Jahan",
+    "image": "https://i.ibb.co/RkQtfYmX/image.png",
+    "division": "Rangpur",
+    "age": 27,
+    "height": "5'5\"",
+    "weight": "58kg",
+    "occupation": "Nurse",
+    "religion": "Islam",
+    "maritalStatus": "Unmarried",
+    "hobby": "Singing",
+    "birthDate": "1996-02-12",
+    "educationalQualifications": [
+      {
+        "degree": "SSC",
+        "year": 2012,
+        "institution": "Rangpur Govt. Girls High School"
+      },
+      { "degree": "HSC", "year": 2014, "institution": "Rangpur College" },
+      {
+        "degree": "Diploma in Nursing",
+        "year": 2017,
+        "institution": "Nursing Institute, Rangpur"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "type": "male",
+    "name": "Kawsar Mahmud",
+    "image": "https://i.ibb.co/qMs4Y3wY/image.png",
+    "division": "Mymensingh",
+    "age": 29,
+    "height": "5'10\"",
+    "weight": "68kg",
+    "occupation": "Lecturer",
+    "religion": "Islam",
+    "maritalStatus": "Unmarried",
+    "hobby": "Cycling",
+    "birthDate": "1994-07-30",
+    "educationalQualifications": [
+      {
+        "degree": "SSC",
+        "year": 2010,
+        "institution": "Mymensingh Zilla School"
+      },
+      { "degree": "HSC", "year": 2012, "institution": "Ananda Mohan College" },
+      { "degree": "MA in Sociology", "year": 2017, "institution": "DU" }
+    ]
+  },
+  {
+    "id": 8,
+    "type": "female",
+    "name": "Ayesha Siddiqua",
+    "image": "https://i.ibb.co/RkQtfYmX/image.png",
+    "division": "Dhaka",
+    "age": 26,
+    "height": "5'2\"",
+    "weight": "54kg",
+    "occupation": "Designer",
+    "religion": "Islam",
+    "maritalStatus": "Unmarried",
+    "hobby": "Photography",
+    "birthDate": "1997-11-03",
+    "educationalQualifications": [
+      {
+        "degree": "SSC",
+        "year": 2013,
+        "institution": "Viqarunnisa Noon School"
+      },
+      { "degree": "HSC", "year": 2015, "institution": "Holy Cross College" },
+      {
+        "degree": "Bachelor of Fine Arts",
+        "year": 2020,
+        "institution": "DU, Faculty of Fine Arts"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "type": "male",
+    "name": "Tariqul Islam",
+    "image": "https://i.ibb.co/qMs4Y3wY/image.png",
+    "division": "Chattogram",
+    "age": 31,
+    "height": "5'9\"",
+    "weight": "73kg",
+    "occupation": "Lawyer",
+    "religion": "Islam",
+    "maritalStatus": "Widowed",
+    "hobby": "Writing",
+    "birthDate": "1992-01-08",
+    "educationalQualifications": [
+      {
+        "degree": "SSC",
+        "year": 2008,
+        "institution": "Chattogram Govt. School"
+      },
+      { "degree": "HSC", "year": 2010, "institution": "Chattogram College" },
+      {
+        "degree": "LLB",
+        "year": 2014,
+        "institution": "University of Chittagong"
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "type": "female",
+    "name": "Mehjabin Rahman",
+    "image": "https://i.ibb.co/RkQtfYmX/image.png",
+    "division": "Khulna",
+    "age": 23,
+    "height": "5'4\"",
+    "weight": "53kg",
+    "occupation": "Student",
+    "religion": "Islam",
+    "maritalStatus": "Unmarried",
+    "hobby": "Dancing",
+    "birthDate": "2000-12-25",
+    "educationalQualifications": [
+      {
+        "degree": "SSC",
+        "year": 2016,
+        "institution": "Khulna Govt. Girls High School"
+      },
+      {
+        "degree": "HSC",
+        "year": 2018,
+        "institution": "Khulna Govt. Women's College"
+      },
+      {
+        "degree": "BA (Hons)",
+        "year": 2023,
+        "institution": "Khulna University"
+      }
+    ]
+  }
+]

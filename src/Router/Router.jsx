@@ -4,6 +4,9 @@ import Home from '../Home/Home';
 import AuthLayout from '../Authentication/AuthLayout/AuthLayout';
 import Login from '../Authentication/Login';
 import Register from '../Authentication/Register';
+import BiodataDetails from '../Pages/BiodataDetails';
+import PrivateRoute from './PrivateRoute';
+import BiodatasPage from '../Pages/BiodatasPage';
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +16,18 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
+      },
+      {
+        path: 'biodata',
+        Component: BiodatasPage,
+      },
+      {
+        path: 'biodata/:id',
+        element: (
+          <PrivateRoute>
+            <BiodataDetails />
+          </PrivateRoute>
+        ),
       },
     ],
   },
