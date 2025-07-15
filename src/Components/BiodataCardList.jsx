@@ -4,7 +4,6 @@ import BiodataCard from './BiodataCard'; // Single Card Component
 const BiodataCardList = ({ biodataList }) => {
   const [showAll, setShowAll] = useState(false);
 
-  // সর্বোচ্চ ৬টা কার্ড দেখানো বা সবগুলো দেখানো নির্ভর করে showAll এর উপর
   const visibleBiodatas = showAll ? biodataList : biodataList.slice(0, 6);
 
   return (

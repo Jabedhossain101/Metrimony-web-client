@@ -3,6 +3,7 @@ import { Menu, X } from 'lucide-react';
 import { GiSelfLove } from 'react-icons/gi';
 import { Link } from 'react-router';
 import { AuthContext } from '../Contexts/AuthContext';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
@@ -10,13 +11,13 @@ const Navbar = () => {
   const handleLogout = () => {
     logOut()
       .then(() => {
-        console.log('User logged out successfully');
+        toast.success('✅ Signed out successfully!');
       })
       .catch(error => {
         console.error('Error logging out:', error);
+        toast.error('❌ Failed to sign out!');
       });
   };
-
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -35,18 +36,22 @@ const Navbar = () => {
       >
         Biodatas
       </Link>
-      <Link
-        to={'/added-member'}
-        className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
-      >
-        Added Members
-      </Link>
-      <Link
-        to={'/dashboard'}
-        className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
-      >
-        DashBoard
-      </Link>
+      {user && (
+        <>
+          <Link
+            to={'/added-member'}
+            className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
+          >
+            Added Members
+          </Link>
+          <Link
+            to={'/dashboard'}
+            className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
+          >
+            DashBoard
+          </Link>
+        </>
+      )}
       <li className="p-2 hover:underline hover:text-blue-500 cursor-pointer">
         About Us
       </li>
@@ -113,7 +118,10 @@ const Navbar = () => {
 
           <div className="flex flex-col items-center space-y-2 mt-2">
             {user ? (
-              <button className="w-full px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 transition">
+              <button
+                onClick={handleLogout}
+                className="w-full px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 transition"
+              >
                 Sign out
               </button>
             ) : (

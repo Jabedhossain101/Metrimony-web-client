@@ -39,7 +39,11 @@ export const router = createBrowserRouter([
 
       {
         path: 'added-member',
-        Component: AddedMember,
+        element: (
+          <PrivateRoute>
+            <AddedMember />
+          </PrivateRoute>
+        ),
       },
       {
         path: '/checkout/:biodataId',
@@ -67,7 +71,13 @@ export const router = createBrowserRouter([
   },
   {
     path: 'dashboard',
-    Component: UserLayout,
+    element: (
+      <PrivateRoute>
+        {' '}
+        <UserLayout />
+      </PrivateRoute>
+    ),
+
     children: [
       {
         path: 'edit-biodata',

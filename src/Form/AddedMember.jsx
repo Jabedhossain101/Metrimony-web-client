@@ -29,6 +29,19 @@ const AddedMember = () => {
     }
   };
 
+  const divisions = [
+    'Dhaka',
+    'Chattagram',
+    'Rangpur',
+    'Barisal',
+    'Khulna',
+    'Mymensingh',
+    'Sylhet',
+    'Rajshahi',
+  ];
+
+  const skinColors = ['Fair', 'Medium', 'Dark'];
+
   return (
     <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md mt-8">
       <div className="h-10"></div>
@@ -37,7 +50,7 @@ const AddedMember = () => {
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        {/* Each input with label */}
+        {/* Static Fields */}
         {[
           { name: 'name', label: 'Full Name', type: 'text' },
           { name: 'profileImage', label: 'Profile Image URL', type: 'text' },
@@ -46,15 +59,8 @@ const AddedMember = () => {
           { name: 'weight', label: 'Weight', type: 'text' },
           { name: 'age', label: 'Age', type: 'number' },
           { name: 'occupation', label: 'Occupation', type: 'text' },
-          { name: 'race', label: 'Skin Color', type: 'text' },
           { name: 'fathersName', label: "Father's Name", type: 'text' },
           { name: 'mothersName', label: "Mother's Name", type: 'text' },
-          {
-            name: 'permanentDivision',
-            label: 'Permanent Division',
-            type: 'text',
-          },
-          { name: 'presentDivision', label: 'Present Division', type: 'text' },
           {
             name: 'expectedPartnerAge',
             label: 'Expected Partner Age',
@@ -90,6 +96,73 @@ const AddedMember = () => {
             )}
           </div>
         ))}
+
+        {/* Skin Color (Select) */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Skin Color
+          </label>
+          <select
+            {...register('race', { required: true })}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Select Skin Color</option>
+            {skinColors.map(color => (
+              <option key={color} value={color}>
+                {color}
+              </option>
+            ))}
+          </select>
+          {errors.race && (
+            <p className="text-red-500 text-sm mt-1">Skin Color is required</p>
+          )}
+        </div>
+
+        {/* Permanent Division (Select) */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Permanent Division
+          </label>
+          <select
+            {...register('permanentDivision', { required: true })}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Select Division</option>
+            {divisions.map(div => (
+              <option key={div} value={div}>
+                {div}
+              </option>
+            ))}
+          </select>
+          {errors.permanentDivision && (
+            <p className="text-red-500 text-sm mt-1">
+              Permanent Division is required
+            </p>
+          )}
+        </div>
+
+        {/* Present Division (Select) */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Present Division
+          </label>
+          <select
+            {...register('presentDivision', { required: true })}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Select Division</option>
+            {divisions.map(div => (
+              <option key={div} value={div}>
+                {div}
+              </option>
+            ))}
+          </select>
+          {errors.presentDivision && (
+            <p className="text-red-500 text-sm mt-1">
+              Present Division is required
+            </p>
+          )}
+        </div>
 
         <button
           type="submit"

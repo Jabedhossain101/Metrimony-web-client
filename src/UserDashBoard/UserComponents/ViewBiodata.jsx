@@ -9,7 +9,7 @@ const ViewBiodata = () => {
       .then(data => setBiodata(data));
   }, []);
 
-  if (!biodata) return <p>Loading...</p>;
+  // if (!biodata) return <p>Loading...</p>;
 
   return (
     <div>

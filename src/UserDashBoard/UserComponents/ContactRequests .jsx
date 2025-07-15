@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AuthContext } from '../../Contexts/AuthContext';
+import { Link } from 'react-router';
+import Swal from 'sweetalert2';
 
 const ContactRequests = () => {
   const { user } = useContext(AuthContext);
@@ -12,6 +14,34 @@ const ContactRequests = () => {
         .then(data => setRequests(data));
     }
   }, [user]);
+
+  const handleDelete = async id => {
+    const confirm = await Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to delete this contact request?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+    });
+
+    if (!confirm.isConfirmed) return;
+
+    try {
+      const res = await fetch(`http://localhost:3000/contact-request/${id}`, {
+        method: 'DELETE',
+      });
+
+      const result = await res.json();
+      if (result.deletedCount > 0) {
+        Swal.fire('Deleted!', 'Contact request has been deleted.', 'success');
+        setRequests(requests.filter(req => req._id !== id));
+      } else {
+        Swal.fire('Error', 'Failed to delete the contact request.', 'error');
+      }
+    } catch (err) {
+      Swal.fire('Error', err.message, 'error');
+    }
+  };
 
   return (
     <div>
@@ -35,10 +65,16 @@ const ContactRequests = () => {
               <td>{req.status}</td>
               <td>{req.status === 'approved' ? req.mobile : 'N/A'}</td>
               <td>{req.status === 'approved' ? req.email : 'N/A'}</td>
-              <td>
+              <td className="flex gap-2">
+                <Link
+                  to={`/biodata/${req.biodataId}`}
+                  className="bg-pink-500 text-white px-2 py-1 rounded hover:bg-pink-700"
+                >
+                  View
+                </Link>
                 <button
-                  className="text-red-500"
-                  onClick={() => alert('Delete Request')}
+                  className="text-red-500 hover:underline"
+                  onClick={() => handleDelete(req._id)}
                 >
                   Delete
                 </button>

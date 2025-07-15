@@ -9,11 +9,13 @@ import { router } from './Router/Router.jsx';
 import AuthProvider from './Contexts/AuthProvider.jsx';
 import { Toaster } from 'react-hot-toast';
 import Aos from 'aos';
+import { ToastContainer } from 'react-toastify';
 
 Aos.init();
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <Toaster position="top-center" />
+    <ToastContainer></ToastContainer>
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
