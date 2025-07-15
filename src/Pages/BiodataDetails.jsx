@@ -31,12 +31,54 @@ const BiodataDetails = () => {
 
   const isPremium = user?.role === 'premium'; // Adjust logic based on your system
 
-  const handleAddToFavourites = () => {
-    // POST to /api/favourites or update local storage/context
+  const handleAddToFavourites = async () => {
+    const favData = {
+      userEmail: user?.email,
+      biodataId: biodata.id,
+      name: biodata.name,
+      occupation: biodata.occupation,
+      permanentDivision: biodata.division,
+    };
+
+    const res = await fetch('http://localhost:3000/favourites', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(favData),
+    });
+
+    const result = await res.json();
+    if (result.insertedId) {
+      alert('Added to favourites!');
+    } else {
+      alert('Already in favourites or error occurred.');
+    }
     console.log('Added to favourites:', biodata.id);
   };
 
-  const handleRequestContact = () => {
+  const handleRequestContact = async () => {
+    const requestData = {
+      userEmail: user?.email,
+      biodataId: biodata.id,
+      name: biodata.name,
+      status: 'pending', // default status
+    };
+
+    const res = await fetch('http://localhost:3000/contact-request', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(requestData),
+    });
+
+    const result = await res.json();
+    if (result.insertedId) {
+      alert('Request submitted! Wait for admin approval.');
+    } else {
+      alert('Already requested or something went wrong.');
+    }
     navigate(`/checkout/${biodata.id}`);
   };
 

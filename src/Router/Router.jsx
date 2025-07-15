@@ -7,6 +7,13 @@ import Register from '../Authentication/Register';
 import BiodataDetails from '../Pages/BiodataDetails';
 import PrivateRoute from './PrivateRoute';
 import BiodatasPage from '../Pages/BiodatasPage';
+import AddedMember from '../Form/AddedMember';
+import UserLayout from '../UserDashBoard/UserLayout/UserLayout';
+import EditBiodata from '../UserDashBoard/UserComponents/EditBiodata';
+import ViewBiodata from '../UserDashBoard/UserComponents/ViewBiodata';
+import ContactRequests from '../UserDashBoard/UserComponents/ContactRequests ';
+import Favourites from '../UserDashBoard/UserComponents/Favourites ';
+import CheckoutPage from '../Pages/CheckoutPage';
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +36,19 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+
+      {
+        path: 'added-member',
+        Component: AddedMember,
+      },
+      {
+        path: '/checkout/:biodataId',
+        element: (
+          <PrivateRoute>
+            <CheckoutPage />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   {
@@ -42,6 +62,28 @@ export const router = createBrowserRouter([
       {
         path: 'register',
         Component: Register,
+      },
+    ],
+  },
+  {
+    path: 'dashboard',
+    Component: UserLayout,
+    children: [
+      {
+        path: 'edit-biodata',
+        Component: EditBiodata,
+      },
+      {
+        path: 'view-biodata',
+        Component: ViewBiodata,
+      },
+      {
+        path: 'contact-requests',
+        Component: ContactRequests,
+      },
+      {
+        path: 'favourites',
+        Component: Favourites,
       },
     ],
   },

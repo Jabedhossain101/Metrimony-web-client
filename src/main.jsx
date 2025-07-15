@@ -7,9 +7,13 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { RouterProvider } from 'react-router';
 import { router } from './Router/Router.jsx';
 import AuthProvider from './Contexts/AuthProvider.jsx';
+import { Toaster } from 'react-hot-toast';
+import Aos from 'aos';
 
+Aos.init();
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <Toaster position="top-center" />
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>

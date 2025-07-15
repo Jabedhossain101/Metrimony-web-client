@@ -35,6 +35,18 @@ const Navbar = () => {
       >
         Biodatas
       </Link>
+      <Link
+        to={'/added-member'}
+        className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
+      >
+        Added Members
+      </Link>
+      <Link
+        to={'/dashboard'}
+        className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
+      >
+        DashBoard
+      </Link>
       <li className="p-2 hover:underline hover:text-blue-500 cursor-pointer">
         About Us
       </li>
