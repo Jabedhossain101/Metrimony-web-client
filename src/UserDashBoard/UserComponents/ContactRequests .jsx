@@ -45,44 +45,72 @@ const ContactRequests = () => {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold mb-4">My Contact Requests</h2>
-      <table className="w-full border">
-        <thead>
-          <tr className="bg-gray-200">
-            <th>Name</th>
-            <th>Biodata ID</th>
-            <th>Status</th>
-            <th>Mobile</th>
-            <th>Email</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {requests.map(req => (
-            <tr key={req._id} className="border-t">
-              <td>{req.name}</td>
-              <td>{req.biodataId}</td>
-              <td>{req.status}</td>
-              <td>{req.status === 'approved' ? req.mobile : 'N/A'}</td>
-              <td>{req.status === 'approved' ? req.email : 'N/A'}</td>
-              <td className="flex gap-2">
-                <Link
-                  to={`/biodata/${req.biodataId}`}
-                  className="bg-pink-500 text-white px-2 py-1 rounded hover:bg-pink-700"
-                >
-                  View
-                </Link>
-                <button
-                  className="text-red-500 hover:underline"
-                  onClick={() => handleDelete(req._id)}
-                >
-                  Delete
-                </button>
-              </td>
+      <h2 className="text-2xl font-bold mb-4 text-center">
+        My Contact Requests
+      </h2>
+
+      <div className="overflow-x-auto">
+        <table className="min-w-full divide-y divide-gray-200 border border-gray-300">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                Name
+              </th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                Biodata ID
+              </th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                Status
+              </th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                Mobile
+              </th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                Email
+              </th>
+              <th className="px-4 py-2 text-left text-sm font-medium text-gray-700">
+                Actions
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody className="bg-white divide-y divide-gray-200">
+            {requests.map(req => (
+              <tr key={req._id} className="hover:bg-gray-50">
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-800">
+                  {req.name}
+                </td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-800">
+                  {req.biodataId}
+                </td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm capitalize text-gray-800">
+                  {req.status}
+                </td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-800">
+                  {req.status === 'approved' ? req.mobile : 'N/A'}
+                </td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm text-gray-800">
+                  {req.status === 'approved' ? req.email : 'N/A'}
+                </td>
+                <td className="px-4 py-3 whitespace-nowrap text-sm flex gap-2">
+                  <Link
+                    to={`/biodata/${req.biodataId}`}
+                    className="bg-pink-500 text-white px-3 py-1 rounded hover:bg-pink-600 transition"
+                  >
+                    View
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(req._id)}
+                    className="text-red-600 hover:underline"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

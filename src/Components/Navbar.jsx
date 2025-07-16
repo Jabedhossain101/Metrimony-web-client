@@ -50,6 +50,12 @@ const Navbar = () => {
           >
             DashBoard
           </Link>
+          <Link
+            to={'/admin-dashboard'}
+            className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
+          >
+            Admin Dashboard
+          </Link>
         </>
       )}
       <li className="p-2 hover:underline hover:text-blue-500 cursor-pointer">

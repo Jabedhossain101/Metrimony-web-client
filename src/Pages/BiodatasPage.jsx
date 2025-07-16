@@ -7,18 +7,18 @@ const BiodatasPage = () => {
   const [filters, setFilters] = useState({});
 
   useEffect(() => {
-    fetch('/biodata.json') // or API endpoint
+    fetch('http://localhost:3000/biodatas')
       .then(res => res.json())
-      .then(data => setBiodatas(data.slice(0, 20))); // limit to 20
+      .then(data => setBiodatas(data));
   }, []);
 
   const filteredData = biodatas.filter(item => {
     const ageValid =
       (!filters.minAge || item.age >= filters.minAge) &&
       (!filters.maxAge || item.age <= filters.maxAge);
-    const typeValid = !filters.type || item.type === filters.type;
+    const typeValid = !filters.type || item.biodataType === filters.type;
     const divisionValid =
-      !filters.division || item.division === filters.division;
+      !filters.division || item.permanentDivision === filters.division;
     return ageValid && typeValid && divisionValid;
   });
 
@@ -27,7 +27,7 @@ const BiodatasPage = () => {
       <FilterSidebar filters={filters} setFilters={setFilters} />
       <div className="w-full md:w-3/4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {filteredData.map(biodata => (
-          <BiodataCard key={biodata.id} biodata={biodata} />
+          <BiodataCard key={biodata._id} biodata={biodata} />
         ))}
       </div>
     </div>

@@ -14,6 +14,12 @@ import ViewBiodata from '../UserDashBoard/UserComponents/ViewBiodata';
 import ContactRequests from '../UserDashBoard/UserComponents/ContactRequests ';
 import Favourites from '../UserDashBoard/UserComponents/Favourites ';
 import CheckoutPage from '../Pages/CheckoutPage';
+import AdminLayout from '../AdminPanel/Layout/AdminLayout';
+import AdminDashboard from '../AdminPanel/AdminDashboard';
+import ManageUsers from '../AdminPanel/ManageUsers';
+import ApprovedPremium from '../AdminPanel/ApprovedPremium';
+import ApprovedContactRequest from '../AdminPanel/ApprovedContactRequest';
+import AdminRoute from './AdminRoute';
 
 export const router = createBrowserRouter([
   {
@@ -94,6 +100,32 @@ export const router = createBrowserRouter([
       {
         path: 'favourites',
         Component: Favourites,
+      },
+    ],
+  },
+  {
+    path: 'admin-dashboard',
+    element: (
+      <AdminRoute>
+        <AdminLayout />
+      </AdminRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <AdminDashboard />, // ✅ element
+      },
+      {
+        path: 'manage',
+        element: <ManageUsers />,
+      },
+      {
+        path: 'approvedPremium',
+        element: <ApprovedPremium />,
+      },
+      {
+        path: 'approvedContactRequest',
+        element: <ApprovedContactRequest />,
       },
     ],
   },

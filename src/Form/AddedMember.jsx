@@ -39,8 +39,8 @@ const AddedMember = () => {
     'Sylhet',
     'Rajshahi',
   ];
-
   const skinColors = ['Fair', 'Medium', 'Dark'];
+  const biodataTypes = ['male', 'female'];
 
   return (
     <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md mt-8">
@@ -52,32 +52,34 @@ const AddedMember = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Static Fields */}
         {[
-          { name: 'name', label: 'Full Name', type: 'text' },
-          { name: 'profileImage', label: 'Profile Image URL', type: 'text' },
-          { name: 'dob', label: 'Date of Birth', type: 'date' },
-          { name: 'height', label: 'Height', type: 'text' },
-          { name: 'weight', label: 'Weight', type: 'text' },
-          { name: 'age', label: 'Age', type: 'number' },
-          { name: 'occupation', label: 'Occupation', type: 'text' },
-          { name: 'fathersName', label: "Father's Name", type: 'text' },
-          { name: 'mothersName', label: "Mother's Name", type: 'text' },
-          {
-            name: 'expectedPartnerAge',
-            label: 'Expected Partner Age',
-            type: 'number',
-          },
-          {
-            name: 'expectedPartnerHeight',
-            label: 'Expected Partner Height',
-            type: 'text',
-          },
-          {
-            name: 'expectedPartnerWeight',
-            label: 'Expected Partner Weight',
-            type: 'text',
-          },
-          { name: 'contactEmail', label: 'Contact Email', type: 'email' },
-          { name: 'mobileNumber', label: 'Mobile Number', type: 'text' },
+          ...[
+            { name: 'name', label: 'Full Name', type: 'text' },
+            { name: 'profileImage', label: 'Profile Image URL', type: 'text' },
+            { name: 'dob', label: 'Date of Birth', type: 'date' },
+            { name: 'height', label: 'Height', type: 'text' },
+            { name: 'weight', label: 'Weight', type: 'text' },
+            { name: 'age', label: 'Age', type: 'number' },
+            { name: 'occupation', label: 'Occupation', type: 'text' },
+            { name: 'fathersName', label: "Father's Name", type: 'text' },
+            { name: 'mothersName', label: "Mother's Name", type: 'text' },
+            {
+              name: 'expectedPartnerAge',
+              label: 'Expected Partner Age',
+              type: 'number',
+            },
+            {
+              name: 'expectedPartnerHeight',
+              label: 'Expected Partner Height',
+              type: 'text',
+            },
+            {
+              name: 'expectedPartnerWeight',
+              label: 'Expected Partner Weight',
+              type: 'text',
+            },
+            { name: 'contactEmail', label: 'Contact Email', type: 'email' },
+            { name: 'mobileNumber', label: 'Mobile Number', type: 'text' },
+          ],
         ].map(field => (
           <div key={field.name}>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -97,7 +99,30 @@ const AddedMember = () => {
           </div>
         ))}
 
-        {/* Skin Color (Select) */}
+        {/* Biodata Type (Select) */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">
+            Biodata Type
+          </label>
+          <select
+            {...register('biodataType', { required: true })}
+            className="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="">Select Type</option>
+            {biodataTypes.map(type => (
+              <option key={type} value={type}>
+                {type.charAt(0).toUpperCase() + type.slice(1)}
+              </option>
+            ))}
+          </select>
+          {errors.biodataType && (
+            <p className="text-red-500 text-sm mt-1">
+              Biodata Type is required
+            </p>
+          )}
+        </div>
+
+        {/* Skin Color */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Skin Color
@@ -118,7 +143,7 @@ const AddedMember = () => {
           )}
         </div>
 
-        {/* Permanent Division (Select) */}
+        {/* Permanent Division */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Permanent Division
@@ -141,7 +166,7 @@ const AddedMember = () => {
           )}
         </div>
 
-        {/* Present Division (Select) */}
+        {/* Present Division */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Present Division
@@ -164,6 +189,7 @@ const AddedMember = () => {
           )}
         </div>
 
+        {/* Submit */}
         <button
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 mt-4 rounded-md font-semibold transition"
