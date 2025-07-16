@@ -1,36 +1,92 @@
-import React from 'react';
-import { Outlet, NavLink } from 'react-router';
+import React, { useState } from 'react';
+import { Outlet, NavLink } from 'react-router'; // ✅ Use react-router-dom
+import { Menu, X } from 'lucide-react';
 
 const AdminLayout = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
+  const closeSidebar = () => setIsSidebarOpen(false);
+
   return (
-    <div className="flex min-h-screen">
-      <aside className="w-64 bg-gray-100 p-6 border-r">
-        <nav className="space-y-2">
-          <NavLink to="/admin-dashboard" className="block hover:text-pink-600">
+    <div className="flex flex-col md:flex-row min-h-screen">
+      {/* ✅ Mobile Topbar */}
+      <div className="md:hidden flex justify-between items-center p-4 border-b shadow-sm bg-white ">
+        <h1 className="text-xl font-bold text-pink-600">Admin Panel</h1>
+        <button onClick={toggleSidebar}>
+          <Menu size={28} />
+        </button>
+      </div>
+
+      {/* ✅ Sidebar Menu - Overlay on Mobile */}
+      <aside
+        className={`fixed md:static top-0 left-0 h-full w-64 bg-gray-100 min-h-screen p-6 border-r z-50 transition-transform duration-300 ${
+          isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+        }`}
+      >
+        {/* ✅ Close button for mobile */}
+        <div className="flex justify-between items-center mb-6 md:hidden">
+          <h2 className="text-lg font-semibold text-pink-600">Menu</h2>
+          <button onClick={closeSidebar}>
+            <X size={26} />
+          </button>
+        </div>
+
+        {/* ✅ Navigation Links */}
+        <nav className="space-y-4">
+          <NavLink
+            to="/admin-dashboard"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              `block font-medium ${
+                isActive ? 'text-pink-600' : 'text-gray-800'
+              }`
+            }
+          >
             Admin Dashboard
           </NavLink>
           <NavLink
             to="/admin-dashboard/manage"
-            className="block hover:text-pink-600"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              `block font-medium ${
+                isActive ? 'text-pink-600' : 'text-gray-800'
+              }`
+            }
           >
             Manage Users
           </NavLink>
           <NavLink
             to="/admin-dashboard/approvedPremium"
-            className="block hover:text-pink-600"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              `block font-medium ${
+                isActive ? 'text-pink-600' : 'text-gray-800'
+              }`
+            }
           >
             Approved Premium
           </NavLink>
           <NavLink
             to="/admin-dashboard/approvedContactRequest"
-            className="block hover:text-pink-600"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              `block font-medium ${
+                isActive ? 'text-pink-600' : 'text-gray-800'
+              }`
+            }
           >
             Approved Contact Request
           </NavLink>
-          <button className="text-red-600 mt-4">Logout</button>
+
+          <button className="black w-full mt-6  p-2 rounded-md bg-pink-500">
+            Logout
+          </button>
         </nav>
       </aside>
-      <main className="flex-1 p-6">
+
+      {/* ✅ Main Content */}
+      <main className="flex-1 p-6 bg-white">
         <Outlet />
       </main>
     </div>
