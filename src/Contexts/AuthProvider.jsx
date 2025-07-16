@@ -14,7 +14,6 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
   const [loading, setLoading] = useState(true);
 
   const createUser = (email, password) => {
@@ -31,20 +30,43 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
+
   const logOut = () => {
     setLoading(true);
     return signOut(auth);
   };
+
+  // ✅ Get user role from DB after Firebase auth
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, currentUser => {
-      setUser(currentUser);
-      console.log('user in the auth state change', currentUser);
+    const unSubscribe = onAuthStateChanged(auth, async currentUser => {
+      setLoading(true);
+
+      if (currentUser) {
+        try {
+          const res = await fetch(
+            `http://localhost:3000/users/${currentUser.email}`
+          );
+          const dbUser = await res.json();
+
+          const updatedUser = {
+            email: currentUser.email,
+            name: currentUser.displayName,
+            role: dbUser?.role || 'user',
+          };
+
+          setUser(updatedUser);
+        } catch (error) {
+          console.error('Failed to fetch user role:', error);
+          setUser({ email: currentUser.email, role: 'user' });
+        }
+      } else {
+        setUser(null);
+      }
+
       setLoading(false);
     });
 
-    return () => {
-      unSubscribe();
-    };
+    return () => unSubscribe();
   }, []);
 
   const authInfo = {
@@ -55,7 +77,10 @@ const AuthProvider = ({ children }) => {
     logOut,
     signInWithGoogle,
   };
-  return <AuthContext value={authInfo}>{children}</AuthContext>;
+
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

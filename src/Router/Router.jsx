@@ -20,6 +20,7 @@ import ManageUsers from '../AdminPanel/ManageUsers';
 import ApprovedPremium from '../AdminPanel/ApprovedPremium';
 import ApprovedContactRequest from '../AdminPanel/ApprovedContactRequest';
 import AdminRoute from './AdminRoute';
+import UserRoute from './UserRoute';
 
 export const router = createBrowserRouter([
   {
@@ -78,10 +79,10 @@ export const router = createBrowserRouter([
   {
     path: 'dashboard',
     element: (
-      <PrivateRoute>
+      <UserRoute>
         {' '}
         <UserLayout />
-      </PrivateRoute>
+      </UserRoute>
     ),
 
     children: [
@@ -105,11 +106,7 @@ export const router = createBrowserRouter([
   },
   {
     path: 'admin-dashboard',
-    element: (
-      <AdminRoute>
-        <AdminLayout />
-      </AdminRoute>
-    ),
+    Component: AdminLayout,
     children: [
       {
         index: true,

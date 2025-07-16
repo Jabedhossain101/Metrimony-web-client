@@ -30,12 +30,14 @@ const Navbar = () => {
       >
         Home
       </Link>
+
       <Link
         to={'/biodata'}
         className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
       >
         Biodatas
       </Link>
+
       {user && (
         <>
           <Link
@@ -44,20 +46,27 @@ const Navbar = () => {
           >
             Added Members
           </Link>
-          <Link
-            to={'/dashboard'}
-            className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
-          >
-            DashBoard
-          </Link>
-          <Link
-            to={'/admin-dashboard'}
-            className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
-          >
-            Admin Dashboard
-          </Link>
+
+          {user.role === 'user' && (
+            <Link
+              to={'/dashboard'}
+              className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
+            >
+              Dashboard
+            </Link>
+          )}
+
+          {user.role === 'admin' && (
+            <Link
+              to={'/admin-dashboard'}
+              className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
+            >
+              Admin Dashboard
+            </Link>
+          )}
         </>
       )}
+
       <li className="p-2 hover:underline hover:text-blue-500 cursor-pointer">
         About Us
       </li>
