@@ -49,45 +49,47 @@ const ApprovedContactRequest = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-2xl font-bold mb-4">Approved Contact Requests</h2>
-      <table className="w-full border border-gray-300 border-collapse">
-        <thead>
-          <tr className="bg-gray-200 text-center">
-            <th className="border border-gray-300 px-4 py-2">Name</th>
-            <th className="border border-gray-300 px-4 py-2">Email</th>
-            <th className="border border-gray-300 px-4 py-2">Biodata ID</th>
-            <th className="border border-gray-300 px-4 py-2">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {requests.length === 0 && (
-            <tr>
-              <td colSpan="4" className="text-center p-4">
-                No contact requests found.
-              </td>
+    <div className="p-4 md:p-8">
+      <h2 className="text-xl md:text-2xl font-bold mb-4 text-center">
+        Approved Contact Requests
+      </h2>
+      <div className="overflow-x-auto">
+        <table className="w-full border border-gray-300 text-sm md:text-base">
+          <thead>
+            <tr className="bg-gray-200 text-center">
+              <th className="border px-2 md:px-4 py-2">Name</th>
+              <th className="border px-2 md:px-4 py-2">Email</th>
+              <th className="border px-2 md:px-4 py-2">Biodata ID</th>
+              <th className="border px-2 md:px-4 py-2">Actions</th>
             </tr>
-          )}
+          </thead>
+          <tbody>
+            {requests.length === 0 && (
+              <tr>
+                <td colSpan="4" className="text-center p-4">
+                  No contact requests found.
+                </td>
+              </tr>
+            )}
 
-          {requests.map(req => (
-            <tr key={req._id} className="text-center">
-              <td className="border border-gray-300 px-4 py-2">{req.name}</td>
-              <td className="border border-gray-300 px-4 py-2">{req.email}</td>
-              <td className="border border-gray-300 px-4 py-2">
-                {req.biodataId}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
-                <button
-                  onClick={() => handleApproveContact(req._id)}
-                  className="bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700"
-                >
-                  Approve Contact
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            {requests.map(req => (
+              <tr key={req._id} className="text-center">
+                <td className="border px-2 md:px-4 py-2">{req.name}</td>
+                <td className="border px-2 md:px-4 py-2">{req.email}</td>
+                <td className="border px-2 md:px-4 py-2">{req.biodataId}</td>
+                <td className="border px-2 md:px-4 py-2">
+                  <button
+                    onClick={() => handleApproveContact(req._id)}
+                    className="bg-green-600 text-white px-2 md:px-3 py-1 rounded hover:bg-green-700 transition"
+                  >
+                    Approve
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

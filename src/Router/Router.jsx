@@ -21,6 +21,7 @@ import ApprovedPremium from '../AdminPanel/ApprovedPremium';
 import ApprovedContactRequest from '../AdminPanel/ApprovedContactRequest';
 import AdminRoute from './AdminRoute';
 import UserRoute from './UserRoute';
+import AdminPremiumRequests from '../AdminPanel/AdminPremiumRequests';
 
 export const router = createBrowserRouter([
   {
@@ -124,6 +125,10 @@ export const router = createBrowserRouter([
       {
         path: 'approvedContactRequest',
         element: <ApprovedContactRequest />,
+      },
+      {
+        path: 'premiumRequests',
+        Component: AdminPremiumRequests,
       },
     ],
   },

@@ -1,12 +1,47 @@
-import React, { useState } from 'react';
-import { Outlet, NavLink } from 'react-router'; // ✅ Use react-router-dom
+import React, { use, useState } from 'react';
+import { Outlet, NavLink, useNavigate } from 'react-router'; // ✅ Use react-router-dom
 import { Menu, X } from 'lucide-react';
+import { AuthContext } from '../../Contexts/AuthContext';
+import Swal from 'sweetalert2';
 
 const AdminLayout = () => {
+  const { logOut } = use(AuthContext);
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
   const closeSidebar = () => setIsSidebarOpen(false);
+  const handleLogout = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will be logged out!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, logout!',
+    }).then(result => {
+      if (result.isConfirmed) {
+        logOut()
+          .then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Logged out!',
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate('/');
+          })
+          .catch(error => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Logout Failed!',
+              text: error.message,
+            });
+          });
+      }
+    });
+  };
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen">
@@ -78,8 +113,22 @@ const AdminLayout = () => {
           >
             Approved Contact Request
           </NavLink>
+          <NavLink
+            to="/admin-dashboard/premiumRequests"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              `block font-medium ${
+                isActive ? 'text-pink-600' : 'text-gray-800'
+              }`
+            }
+          >
+            Premium Requests
+          </NavLink>
 
-          <button className="black w-full mt-6  p-2 rounded-md bg-pink-500">
+          <button
+            onClick={handleLogout}
+            className="black w-full mt-6  p-2 rounded-md bg-pink-500"
+          >
             Logout
           </button>
         </nav>
