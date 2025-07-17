@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../Contexts/AuthContext';
 
 const AddedMember = () => {
+  const { user } = useContext(AuthContext); // ✅ using logged-in user
+  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -10,7 +14,25 @@ const AddedMember = () => {
     formState: { errors },
   } = useForm();
 
+  // ✅ Check if biodata already submitted
+  useEffect(() => {
+    if (!user?.email) return;
+    fetch(`http://localhost:3000/biodatas/me?email=${user.email}`)
+      .then(res => (res.ok ? res.json() : null))
+      .then(data => {
+        if (data) setAlreadySubmitted(true);
+      })
+      .catch(err => console.error('Check failed:', err));
+  }, [user?.email]);
+
   const onSubmit = async data => {
+    if (!user?.email) {
+      toast.error('❌ User not logged in');
+      return;
+    }
+
+    data.contactEmail = user.email; // ✅ Set logged in user's email
+
     try {
       const res = await fetch('http://localhost:3000/biodatas', {
         method: 'POST',
@@ -21,8 +43,10 @@ const AddedMember = () => {
       if (res.ok) {
         toast.success('🎉 Biodata submitted successfully!');
         reset();
+        setAlreadySubmitted(true);
       } else {
-        toast.error('❌ Submission failed');
+        const err = await res.json();
+        toast.error(err.message || '❌ Submission failed');
       }
     } catch (error) {
       toast.error('❌ Server error');
@@ -44,42 +68,39 @@ const AddedMember = () => {
 
   return (
     <div className="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md mt-8">
-      <div className="h-10"></div>
+      <div className="h-10" />
       <h2 className="text-2xl font-bold text-center mb-6 text-blue-700">
         Submit Your Biodata
       </h2>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-        {/* Static Fields */}
+        {/* Input Fields */}
         {[
-          ...[
-            { name: 'name', label: 'Full Name', type: 'text' },
-            { name: 'profileImage', label: 'Profile Image URL', type: 'text' },
-            { name: 'dob', label: 'Date of Birth', type: 'date' },
-            { name: 'height', label: 'Height', type: 'text' },
-            { name: 'weight', label: 'Weight', type: 'text' },
-            { name: 'age', label: 'Age', type: 'number' },
-            { name: 'occupation', label: 'Occupation', type: 'text' },
-            { name: 'fathersName', label: "Father's Name", type: 'text' },
-            { name: 'mothersName', label: "Mother's Name", type: 'text' },
-            {
-              name: 'expectedPartnerAge',
-              label: 'Expected Partner Age',
-              type: 'number',
-            },
-            {
-              name: 'expectedPartnerHeight',
-              label: 'Expected Partner Height',
-              type: 'text',
-            },
-            {
-              name: 'expectedPartnerWeight',
-              label: 'Expected Partner Weight',
-              type: 'text',
-            },
-            { name: 'contactEmail', label: 'Contact Email', type: 'email' },
-            { name: 'mobileNumber', label: 'Mobile Number', type: 'text' },
-          ],
+          { name: 'name', label: 'Full Name', type: 'text' },
+          { name: 'profileImage', label: 'Profile Image URL', type: 'text' },
+          { name: 'dob', label: 'Date of Birth', type: 'date' },
+          { name: 'height', label: 'Height', type: 'text' },
+          { name: 'weight', label: 'Weight', type: 'text' },
+          { name: 'age', label: 'Age', type: 'number' },
+          { name: 'occupation', label: 'Occupation', type: 'text' },
+          { name: 'fathersName', label: "Father's Name", type: 'text' },
+          { name: 'mothersName', label: "Mother's Name", type: 'text' },
+          {
+            name: 'expectedPartnerAge',
+            label: 'Expected Partner Age',
+            type: 'number',
+          },
+          {
+            name: 'expectedPartnerHeight',
+            label: 'Expected Partner Height',
+            type: 'text',
+          },
+          {
+            name: 'expectedPartnerWeight',
+            label: 'Expected Partner Weight',
+            type: 'text',
+          },
+          { name: 'mobileNumber', label: 'Mobile Number', type: 'text' },
         ].map(field => (
           <div key={field.name}>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -99,7 +120,7 @@ const AddedMember = () => {
           </div>
         ))}
 
-        {/* Biodata Type (Select) */}
+        {/* Biodata Type */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Biodata Type
@@ -189,12 +210,15 @@ const AddedMember = () => {
           )}
         </div>
 
-        {/* Submit */}
+        {/* Submit Button */}
         <button
           type="submit"
-          className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 mt-4 rounded-md font-semibold transition"
+          disabled={alreadySubmitted}
+          className={`w-full ${
+            alreadySubmitted ? 'bg-gray-400' : 'bg-blue-600 hover:bg-blue-700'
+          } text-white py-3 mt-4 rounded-md font-semibold transition`}
         >
-          Submit Biodata
+          {alreadySubmitted ? 'Already Submitted' : 'Submit Biodata'}
         </button>
       </form>
     </div>
