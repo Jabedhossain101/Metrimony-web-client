@@ -1,5 +1,3 @@
-// Step 2: AdminDashboard.jsx (inside /pages/admin folder)
-
 import React, { useEffect, useState } from 'react';
 
 const AdminDashboard = () => {
