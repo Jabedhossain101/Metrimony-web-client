@@ -46,15 +46,22 @@ const EditBiodata = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="max-w-5xl mx-auto p-8 bg-white rounded-xl shadow space-y-6"
+      className="max-w-5xl mx-auto p-8  bg-gradient-to-br from-pink-100 to-blue-100 rounded-3xl shadow-2xl space-y-8"
     >
-      <h2 className="text-2xl font-bold text-center">Edit Biodata</h2>
+      <h2 className="text-3xl font-extrabold text-center text-pink-700 dark:text-pink-400 mb-6 tracking-wide">
+        Edit Your Biodata
+      </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {/* Biodata Type */}
         <div>
-          <label className="block font-medium mb-1">Biodata Type</label>
-          <select {...register('biodataType')} className="input w-full">
+          <label className="block font-semibold mb-2 text-black ">
+            Biodata Type
+          </label>
+          <select
+            {...register('biodataType')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
+          >
             <option value="">Select</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -62,144 +69,189 @@ const EditBiodata = () => {
         </div>
 
         <div>
-          <label className="block font-medium mb-1">Name</label>
-          <input {...register('name')} className="input w-full" />
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Profile Image URL</label>
-          <input {...register('profileImage')} className="input w-full" />
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Date of Birth</label>
-          <input type="date" {...register('dob')} className="input w-full" />
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Height</label>
-          <input {...register('height')} className="input w-full" />
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Weight</label>
-          <input {...register('weight')} className="input w-full" />
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Age</label>
-          <input type="number" {...register('age')} className="input w-full" />
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Occupation</label>
-          <input {...register('occupation')} className="input w-full" />
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Skin Color</label>
-          <input {...register('race')} className="input w-full" />
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Father's Name</label>
-          <input {...register('fathersName')} className="input w-full" />
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Mother's Name</label>
-          <input {...register('mothersName')} className="input w-full" />
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Permanent Division</label>
-          <select {...register('permanentDivision')} className="input w-full">
-            {[
-              'Dhaka',
-              'Chattagram',
-              'Rangpur',
-              'Barisal',
-              'Khulna',
-              'Mymensingh',
-              'Sylhet',
-            ].map(div => (
-              <option key={div} value={div}>
-                {div}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Present Division</label>
-          <select {...register('presentDivision')} className="input w-full">
-            {[
-              'Dhaka',
-              'Chattagram',
-              'Rangpur',
-              'Barisal',
-              'Khulna',
-              'Mymensingh',
-              'Sylhet',
-            ].map(div => (
-              <option key={div} value={div}>
-                {div}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Expected Partner Age</label>
+          <label className="block font-semibold mb-2 ">Name</label>
           <input
-            type="number"
-            {...register('expectedPartnerAge')}
-            className="input w-full"
+            {...register('name')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white focus:ring-2 focus:ring-pink-400 transition"
           />
         </div>
 
         <div>
-          <label className="block font-medium mb-1">
+          <label className="block font-semibold mb-2 ">Profile Image URL</label>
+          <input
+            {...register('profileImage')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2  ">Date of Birth</label>
+          <input
+            type="date"
+            {...register('dob')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2 ">Height</label>
+          <input
+            {...register('height')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2 ">Weight</label>
+          <input
+            {...register('weight')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2 ">Age</label>
+          <input
+            type="number"
+            {...register('age')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2 ">Occupation</label>
+          <input
+            {...register('occupation')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2 ">Skin Color</label>
+          <input
+            {...register('race')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2 ">Father's Name</label>
+          <input
+            {...register('fathersName')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2 ">Mother's Name</label>
+          <input
+            {...register('mothersName')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2 ">
+            Permanent Division
+          </label>
+          <select
+            {...register('permanentDivision')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
+          >
+            {[
+              'Dhaka',
+              'Chattagram',
+              'Rangpur',
+              'Barisal',
+              'Khulna',
+              'Mymensingh',
+              'Sylhet',
+            ].map(div => (
+              <option key={div} value={div}>
+                {div}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2 ">Present Division</label>
+          <select
+            {...register('presentDivision')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
+          >
+            {[
+              'Dhaka',
+              'Chattagram',
+              'Rangpur',
+              'Barisal',
+              'Khulna',
+              'Mymensingh',
+              'Sylhet',
+            ].map(div => (
+              <option key={div} value={div}>
+                {div}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2 ">
+            Expected Partner Age
+          </label>
+          <input
+            type="number"
+            {...register('expectedPartnerAge')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
+          />
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2 ">
             Expected Partner Height
           </label>
           <input
             {...register('expectedPartnerHeight')}
-            className="input w-full"
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
           />
         </div>
 
         <div>
-          <label className="block font-medium mb-1">
+          <label className="block font-semibold mb-2 ">
             Expected Partner Weight
           </label>
           <input
             {...register('expectedPartnerWeight')}
-            className="input w-full"
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
           />
         </div>
 
         <div>
-          <label className="block font-medium mb-1">Contact Email</label>
+          <label className="block font-semibold mb-2 ">Contact Email</label>
           <input
             type="email"
             {...register('contactEmail')}
-            className="input w-full"
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed"
             readOnly
           />
         </div>
 
         <div>
-          <label className="block font-medium mb-1">Mobile Number</label>
-          <input {...register('mobileNumber')} className="input w-full" />
+          <label className="block font-semibold mb-2 ">Mobile Number</label>
+          <input
+            {...register('mobileNumber')}
+            className="w-full rounded-lg border border-gray-300 dark:border-gray-700 px-4 py-2 bg-white  focus:ring-2 focus:ring-pink-400 transition"
+          />
         </div>
       </div>
 
-      <div className="text-center pt-4">
+      <div className="text-center pt-6">
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-md"
+          className="bg-gradient-to-r from-pink-500 to-blue-500 hover:from-pink-600 hover:to-blue-600 text-white font-bold px-8 py-3 rounded-full shadow-lg transition-all duration-300 text-lg"
         >
-          Save & Publish Now
+          Save &amp; Publish Now
         </button>
       </div>
     </form>
