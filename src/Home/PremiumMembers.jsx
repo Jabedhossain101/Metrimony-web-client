@@ -75,7 +75,7 @@ const PremiumMembers = () => {
         <select
           value={sortOrder}
           onChange={e => setSortOrder(e.target.value)}
-          className="border px-3 py-2 rounded shadow-sm focus:outline-none"
+          className="border px-2 py-2 rounded shadow-sm focus:outline-none"
         >
           <option value="asc">Sort by Age: Ascending</option>
           <option value="desc">Sort by Age: Descending</option>
