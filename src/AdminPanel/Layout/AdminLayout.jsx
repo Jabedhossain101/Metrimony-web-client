@@ -1,8 +1,9 @@
 import React, { use, useState } from 'react';
-import { Outlet, NavLink, useNavigate } from 'react-router'; // ✅ Use react-router-dom
+import { Outlet, NavLink, useNavigate, Link } from 'react-router'; // ✅ Use react-router-dom
 import { Menu, X } from 'lucide-react';
 import { AuthContext } from '../../Contexts/AuthContext';
 import Swal from 'sweetalert2';
+import { IoHome } from 'react-icons/io5';
 
 const AdminLayout = () => {
   const { logOut } = use(AuthContext);
@@ -59,6 +60,10 @@ const AdminLayout = () => {
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
         }`}
       >
+        <Link to={'/'} className="text-3xl flex">
+          <IoHome />
+        </Link>
+
         {/* ✅ Close button for mobile */}
         <div className="flex justify-between items-center mb-6 md:hidden">
           <h2 className="text-lg font-semibold text-pink-600">Menu</h2>
@@ -123,6 +128,28 @@ const AdminLayout = () => {
             }
           >
             Premium Requests
+          </NavLink>
+          <NavLink
+            to="/admin-dashboard/chartBiodata"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              `block font-medium ${
+                isActive ? 'text-pink-600' : 'text-gray-800'
+              }`
+            }
+          >
+            Biodata Chart
+          </NavLink>
+          <NavLink
+            to="/admin-dashboard/success-stories"
+            onClick={closeSidebar}
+            className={({ isActive }) =>
+              `block font-medium ${
+                isActive ? 'text-pink-600' : 'text-gray-800'
+              }`
+            }
+          >
+            Success Married
           </NavLink>
 
           <button

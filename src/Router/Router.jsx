@@ -22,6 +22,9 @@ import ApprovedContactRequest from '../AdminPanel/ApprovedContactRequest';
 import AdminRoute from './AdminRoute';
 import UserRoute from './UserRoute';
 import AdminPremiumRequests from '../AdminPanel/AdminPremiumRequests';
+import GotMarried from '../UserDashBoard/UserComponents/GotMarried ';
+import ChartBiodata from '../AdminPanel/ChartBiodata';
+import AdminSuccessStories from '../AdminPanel/AdminSuccessStories';
 
 export const router = createBrowserRouter([
   {
@@ -104,6 +107,10 @@ export const router = createBrowserRouter([
         path: 'favourites',
         Component: Favourites,
       },
+      {
+        path: 'got-married',
+        Component: GotMarried,
+      },
     ],
   },
   {
@@ -129,6 +136,14 @@ export const router = createBrowserRouter([
       {
         path: 'premiumRequests',
         Component: AdminPremiumRequests,
+      },
+      {
+        path: 'chartBiodata',
+        Component: ChartBiodata,
+      },
+      {
+        path: 'success-stories',
+        Component: AdminSuccessStories,
       },
     ],
   },

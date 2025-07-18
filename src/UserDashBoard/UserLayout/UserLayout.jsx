@@ -3,6 +3,7 @@ import { Link, Outlet, useNavigate } from 'react-router';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import { AuthContext } from '../../Contexts/AuthContext';
 import Swal from 'sweetalert2';
+import { IoHome } from 'react-icons/io5';
 
 const UserLayout = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -63,7 +64,10 @@ const UserLayout = () => {
       >
         {/* Mobile only close button */}
         <div className="flex justify-between items-center mb-6 md:hidden">
-          <h2 className="text-xl font-bold">Dashboard</h2>
+          <Link to={'/'} className="text-3xl flex">
+            <IoHome />
+          </Link>
+          <h2 className="text-xl font-bold -ml-10">Dashboard</h2>
           <button onClick={toggleSidebar}>
             <FaTimes size={20} />
           </button>
@@ -82,6 +86,9 @@ const UserLayout = () => {
           </Link>
           <Link to="favourites" onClick={() => setIsOpen(false)}>
             Favourites Biodata
+          </Link>
+          <Link to="got-married" onClick={() => setIsOpen(false)}>
+            Add Got Married
           </Link>
 
           {/* Auth Buttons */}

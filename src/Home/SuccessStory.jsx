@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Marquee from 'react-fast-marquee';
 
 const SuccessStories = () => {
   const [stories, setStories] = useState([]);
@@ -12,9 +13,13 @@ const SuccessStories = () => {
   return (
     <div className="p-6">
       <h2 className="text-3xl font-bold mb-4 text-center">Success Stories</h2>
-      <div className="grid md:grid-cols-3 gap-6">
+      <Marquee pauseOnHover gradient={false} speed={50}>
         {stories.map(story => (
-          <div key={story._id} className="bg-white shadow rounded p-4">
+          <div
+            key={story._id}
+            className="bg-white shadow rounded p-4 mr-6 flex-shrink-0"
+            style={{ width: '300px' }}
+          >
             <img
               src={story.image}
               alt="Couple"
@@ -27,7 +32,7 @@ const SuccessStories = () => {
             <p className="text-sm text-gray-600 italic">"{story.review}"</p>
           </div>
         ))}
-      </div>
+      </Marquee>
     </div>
   );
 };
