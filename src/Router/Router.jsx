@@ -25,6 +25,8 @@ import AdminPremiumRequests from '../AdminPanel/AdminPremiumRequests';
 import GotMarried from '../UserDashBoard/UserComponents/GotMarried ';
 import ChartBiodata from '../AdminPanel/ChartBiodata';
 import AdminSuccessStories from '../AdminPanel/AdminSuccessStories';
+import About from '../Components/About';
+import ContractUs from '../Components/ContractUs';
 
 export const router = createBrowserRouter([
   {
@@ -46,6 +48,14 @@ export const router = createBrowserRouter([
             <BiodataDetails />
           </PrivateRoute>
         ),
+      },
+      {
+        path: 'about',
+        Component: About,
+      },
+      {
+        path: 'contact',
+        Component: ContractUs,
       },
 
       {

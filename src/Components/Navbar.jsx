@@ -81,12 +81,18 @@ const Navbar = () => {
         </>
       )}
 
-      <li className="p-2 hover:underline hover:text-blue-500 cursor-pointer">
+      <Link
+        to={'/about'}
+        className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
+      >
         About Us
-      </li>
-      <li className="p-2 hover:underline hover:text-blue-500 cursor-pointer">
+      </Link>
+      <Link
+        to={'/contact'}
+        className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
+      >
         Contact Us
-      </li>
+      </Link>
     </>
   );
 
