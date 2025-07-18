@@ -47,7 +47,7 @@ const Navbar = () => {
             Added Members
           </Link>
 
-          <Link
+          {/* <Link
             to={'/dashboard'}
             className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
           >
@@ -59,9 +59,9 @@ const Navbar = () => {
             className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
           >
             Admin Dashboard
-          </Link>
+          </Link> */}
 
-          {/* {user.role === 'user' && (
+          {user.role === 'user' && (
             <Link
               to={'/dashboard'}
               className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
@@ -77,7 +77,7 @@ const Navbar = () => {
             >
               Admin Dashboard
             </Link>
-          )} */}
+          )}
         </>
       )}
 

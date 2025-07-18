@@ -9,7 +9,7 @@ const Banner = () => {
     <div className="mt-16">
       {/* Search Bar & Age Filter */}
       <div className="absolute z-10 w-full flex justify-center top-28">
-        <form className="bg-white/90 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-4 px-6 py-4 max-w-2xl w-full">
+        {/* <form className="bg-white/90 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-4 px-6 py-4 max-w-2xl w-full">
           <input
             type="text"
             placeholder="Search by name or keyword"
@@ -39,7 +39,7 @@ const Banner = () => {
           >
             Search
           </button>
-        </form>
+        </form> */}
       </div>
       {/* Carousel */}
       <Carousel

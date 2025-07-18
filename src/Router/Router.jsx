@@ -93,11 +93,10 @@ export const router = createBrowserRouter([
   {
     path: 'dashboard',
     element: (
-      // <UserRoute>
-      //   {' '}
-      //   <UserLayout />
-      // </UserRoute>
-      <UserLayout />
+      <UserRoute>
+        {' '}
+        <UserLayout />
+      </UserRoute>
     ),
 
     children: [
