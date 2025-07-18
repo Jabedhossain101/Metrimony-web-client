@@ -4,13 +4,14 @@ import HowItWorks from './HowItWorks';
 import SuccessCounter from './SuccessCounter';
 import SuccessStory from './SuccessStory';
 import Faq from './Faq';
+import PremiumMembers from './PremiumMembers';
 
 const Home = () => {
   return (
     <div>
       <Banner></Banner>
 
-      <h1 className="text-4xl text-center">6 premium card</h1>
+      <PremiumMembers></PremiumMembers>
 
       <HowItWorks />
       <SuccessCounter></SuccessCounter>

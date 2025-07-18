@@ -7,7 +7,7 @@ const BiodataCard = ({ biodata }) => {
 
   return (
     <div>
-      <div className="h-10"></div>
+      <div className="h-12"></div>
       <div className="border rounded-xl shadow-lg p-4 w-full max-w-sm bg-white">
         <img
           src={profileImage}
