@@ -9,7 +9,7 @@ const BiodatasPage = () => {
   const itemsPerPage = 10;
 
   useEffect(() => {
-    fetch('http://localhost:3000/biodatas')
+    fetch('https://metrimony-server-ten.vercel.app/biodatas')
       .then(res => res.json())
       .then(data => setBiodatas(data));
   }, []);

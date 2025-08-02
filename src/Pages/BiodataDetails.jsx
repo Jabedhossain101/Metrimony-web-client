@@ -16,7 +16,9 @@ const BiodataDetails = () => {
   useEffect(() => {
     const fetchBiodata = async () => {
       try {
-        const res = await fetch(`http://localhost:3000/biodatas/${id}`);
+        const res = await fetch(
+          `https://metrimony-server-ten.vercel.app/biodatas/${id}`
+        );
         const data = await res.json();
         setBiodata(data);
         setLoading(false);
@@ -33,7 +35,7 @@ const BiodataDetails = () => {
     const fetchSimilarBiodatas = async () => {
       try {
         const res = await fetch(
-          `http://localhost:3000/biodatas?type=${biodata.biodataType}`
+          `https://metrimony-server-ten.vercel.app/biodatas?type=${biodata.biodataType}`
         );
         const data = await res.json();
         const filtered = data.filter(b => b._id !== biodata._id);
@@ -58,11 +60,14 @@ const BiodataDetails = () => {
     };
 
     try {
-      const res = await fetch('http://localhost:3000/favourites', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(favData),
-      });
+      const res = await fetch(
+        'https://metrimony-server-ten.vercel.app/favourites',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(favData),
+        }
+      );
       const result = await res.json();
       if (result.insertedId) {
         alert('Added to favourites!');
@@ -83,11 +88,14 @@ const BiodataDetails = () => {
     };
 
     try {
-      const res = await fetch('http://localhost:3000/contact-request', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestData),
-      });
+      const res = await fetch(
+        'https://metrimony-server-ten.vercel.app/contact-request',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(requestData),
+        }
+      );
       const result = await res.json();
       if (result.insertedId) {
         alert('Request submitted! Wait for admin approval.');
@@ -115,6 +123,7 @@ const BiodataDetails = () => {
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
         <p>বায়োডাটা ধরন: {biodata.biodataType}</p>
+        <p>বায়োডাটা নাম:{biodata.name}</p>
         <p>স্থায়ী বিভাগ: {biodata.permanentDivision}</p>
         <p>বর্তমান বিভাগ: {biodata.presentDivision}</p>
         <p>বয়স: {biodata.age}</p>

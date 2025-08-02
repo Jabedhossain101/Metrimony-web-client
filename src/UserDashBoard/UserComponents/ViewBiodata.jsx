@@ -8,14 +8,16 @@ const ViewBiodata = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/biodata/me?email=${user.email}`)
+      fetch(
+        `https://metrimony-server-ten.vercel.app/biodata/me?email=${user.email}`
+      )
         .then(res => res.json())
         .then(data => setBiodata(data));
     }
   }, [user?.email]);
 
   const handlePremiumRequest = () => {
-    fetch('http://localhost:3000/premium-requests', {
+    fetch('https://metrimony-server-ten.vercel.app/premium-requests', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

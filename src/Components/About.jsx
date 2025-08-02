@@ -5,36 +5,36 @@ const About = () => {
   return (
     <div>
       <div className="h-12"></div>
-      <section className="min-h-screen flex items-center justify-center  bg-gradient-to-br from-pink-100 to-blue-100 dark:from-gray-900 dark:to-gray-800 transition">
-        <div className="bg-white/90 dark:bg-gray-900 rounded-2xl shadow-2xl p-8 max-w-3xl w-full mx-4 mb-2">
+      <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 to-blue-100 transition">
+        <div className="bg-white mt-6 rounded-2xl shadow-2xl p-8 max-w-4xl w-full mx-4 mb-2">
           <div className="flex flex-col items-center mb-6">
             <GiSelfLove className="text-5xl text-pink-500 mb-2" />
-            <h1 className="text-4xl font-bold text-pink-700 dark:text-pink-400 mb-2">
+            <h1 className="text-4xl font-bold text-pink-700 mb-2">
               About Soul
-              <span className="text-blue-500 dark:text-blue-300">mate</span>
+              <span className="text-blue-500">mate</span>
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300 text-center max-w-xl">
+            <p className="text-lg text-gray-600 text-center max-w-xl">
               Your trusted platform for finding the perfect life partner. We
               believe in meaningful connections, transparency, and a safe
               environment for everyone seeking their soulmate.
             </p>
           </div>
           <div className="mt-8 space-y-6">
-            <div className="bg-pink-50 dark:bg-gray-800 rounded-xl p-5 shadow">
-              <h2 className="text-2xl font-semibold text-pink-600 dark:text-pink-300 mb-2">
+            <div className="bg-pink-50 rounded-xl p-5 shadow">
+              <h2 className="text-2xl font-semibold text-pink-600 mb-2">
                 Our Mission
               </h2>
-              <p className="text-gray-700 dark:text-gray-200">
+              <p className="text-gray-700">
                 To empower individuals and families to find genuine, compatible
                 matches through advanced technology, personalized
                 recommendations, and a caring support team.
               </p>
             </div>
-            <div className="bg-blue-50 dark:bg-gray-800 rounded-xl p-5 shadow">
-              <h2 className="text-2xl font-semibold text-blue-600 dark:text-blue-300 mb-2">
+            <div className="bg-blue-50 rounded-xl p-5 shadow">
+              <h2 className="text-2xl font-semibold text-blue-600 mb-2">
                 Why Choose Us?
               </h2>
-              <ul className="list-disc pl-5 text-gray-700 dark:text-gray-200 space-y-1">
+              <ul className="list-disc pl-5 text-gray-700 space-y-1">
                 <li>Verified and secure profiles</li>
                 <li>Advanced search and matching algorithms</li>
                 <li>Dedicated customer support</li>
@@ -42,11 +42,11 @@ const About = () => {
                 <li>Privacy and safety as our top priorities</li>
               </ul>
             </div>
-            <div className="bg-yellow-50 dark:bg-gray-800 rounded-xl p-5 shadow">
-              <h2 className="text-2xl font-semibold text-yellow-600 dark:text-yellow-300 mb-2">
+            <div className="bg-yellow-50 rounded-xl p-5 shadow">
+              <h2 className="text-2xl font-semibold text-yellow-600 mb-2">
                 Join Our Community
               </h2>
-              <p className="text-gray-700 dark:text-gray-200">
+              <p className="text-gray-700">
                 Whether you are searching for your soulmate or helping a loved
                 one, Soulmate is here to make your journey joyful and
                 successful. Start your story with us today!

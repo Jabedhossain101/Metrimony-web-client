@@ -14,11 +14,19 @@ const AdminDashboard = () => {
       try {
         const [totalRes, maleRes, femaleRes, premiumRes, revenueRes] =
           await Promise.all([
-            fetch('http://localhost:3000/biodatas/count'),
-            fetch('http://localhost:3000/biodatas/count?type=male'),
-            fetch('http://localhost:3000/biodatas/count?type=female'),
-            fetch('http://localhost:3000/biodatas/count?premium=true'),
-            fetch('http://localhost:3000/contact-request/revenue'),
+            fetch('https://metrimony-server-ten.vercel.app/biodatas/count'),
+            fetch(
+              'https://metrimony-server-ten.vercel.app/biodatas/count?type=male'
+            ),
+            fetch(
+              'https://metrimony-server-ten.vercel.app/biodatas/count?type=female'
+            ),
+            fetch(
+              'https://metrimony-server-ten.vercel.app/biodatas/count?premium=true'
+            ),
+            fetch(
+              'https://metrimony-server-ten.vercel.app/contact-request/revenue'
+            ),
           ]);
 
         const [total, male, female, premium, revenue] = await Promise.all([

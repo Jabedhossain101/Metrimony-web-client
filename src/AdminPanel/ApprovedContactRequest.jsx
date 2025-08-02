@@ -6,7 +6,9 @@ const ApprovedContactRequest = () => {
 
   const fetchRequests = async () => {
     try {
-      const res = await fetch('http://localhost:3000/contact-requests/pending');
+      const res = await fetch(
+        'https://metrimony-server-ten.vercel.app/contact-requests/pending'
+      );
       const data = await res.json();
       setRequests(data);
     } catch (error) {
@@ -30,7 +32,7 @@ const ApprovedContactRequest = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/contact-requests/approve/${id}`,
+        `https://metrimony-server-ten.vercel.app/contact-requests/approve/${id}`,
         {
           method: 'PATCH',
         }

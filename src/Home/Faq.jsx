@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const faqData = [
   {
@@ -37,18 +39,30 @@ const faqData = [
 const Faq = () => {
   const [openIndex, setOpenIndex] = useState(null);
 
+  useEffect(() => {
+    AOS.init({ duration: 700, once: true });
+  }, []);
+
   const toggleFaq = idx => {
     setOpenIndex(openIndex === idx ? null : idx);
   };
 
   return (
     <section className="max-w-5xl mx-auto mt-16 px-4 py-12">
-      <h2 className="text-3xl font-bold text-center mb-10 text-pink-700">
+      <h2
+        className="text-3xl font-bold text-center mb-10 text-pink-700"
+        data-aos="fade-up"
+      >
         Frequently Asked Questions
       </h2>
       <div className="space-y-4">
         {faqData.map((faq, idx) => (
-          <div key={idx} className="bg-white rounded-xl shadow-md">
+          <div
+            key={idx}
+            className="bg-white rounded-xl shadow-md"
+            data-aos="fade-up"
+            data-aos-delay={idx * 100}
+          >
             <button
               className="w-full flex justify-between items-center px-6 py-4 text-left focus:outline-none"
               onClick={() => toggleFaq(idx)}
@@ -63,7 +77,9 @@ const Faq = () => {
               )}
             </button>
             {openIndex === idx && (
-              <div className="px-6 pb-4 text-gray-700">{faq.answer}</div>
+              <div className="px-6 pb-4 text-gray-700" data-aos="fade-in">
+                {faq.answer}
+              </div>
             )}
           </div>
         ))}

@@ -20,7 +20,7 @@ const ChartBiodata = () => {
   });
 
   useEffect(() => {
-    fetch('http://localhost:3000/dashboard/stats')
+    fetch('https://metrimony-server-ten.vercel.app/dashboard/stats')
       .then(res => res.json())
       .then(data => setStats(data))
       .catch(err => console.error(err));

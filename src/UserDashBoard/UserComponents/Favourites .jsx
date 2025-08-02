@@ -11,7 +11,9 @@ const Favourites = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/favourites/me?email=${user.email}`)
+      fetch(
+        `https://metrimony-server-ten.vercel.app/favourites/me?email=${user.email}`
+      )
         .then(res => res.json())
         .then(data => setFavs(data));
     }
@@ -29,9 +31,12 @@ const Favourites = () => {
     if (!confirm.isConfirmed) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/favourites/${id}`, {
-        method: 'DELETE',
-      });
+      const res = await fetch(
+        `https://metrimony-server-ten.vercel.app/favourites/${id}`,
+        {
+          method: 'DELETE',
+        }
+      );
 
       const result = await res.json();
 

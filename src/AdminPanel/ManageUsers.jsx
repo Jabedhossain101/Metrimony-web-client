@@ -8,7 +8,9 @@ const ManageUsers = () => {
   const fetchUsers = async (query = '') => {
     try {
       const res = await fetch(
-        `http://localhost:3000/users${query ? `?search=${query}` : ''}`
+        `https://metrimony-server-ten.vercel.app/users${
+          query ? `?search=${query}` : ''
+        }`
       );
       const data = await res.json();
       setUsers(data);
@@ -25,11 +27,14 @@ const ManageUsers = () => {
     const newRole = user.role === 'admin' ? 'user' : 'admin';
 
     try {
-      const res = await fetch(`http://localhost:3000/users/${user._id}`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ role: newRole }),
-      });
+      const res = await fetch(
+        `https://metrimony-server-ten.vercel.app/users/${user._id}`,
+        {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ role: newRole }),
+        }
+      );
 
       const result = await res.json();
       if (result.modifiedCount > 0) {
@@ -49,7 +54,7 @@ const ManageUsers = () => {
     const isPremium = user.isPremium;
     try {
       const res = await fetch(
-        `http://localhost:3000/users/premium/${user._id}`,
+        `https://metrimony-server-ten.vercel.app/users/premium/${user._id}`,
         {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },

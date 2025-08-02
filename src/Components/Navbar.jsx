@@ -1,4 +1,4 @@
-import React, { use, useState } from 'react';
+import React, { use, useState, useRef, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { GiSelfLove } from 'react-icons/gi';
 import { Link } from 'react-router';
@@ -7,6 +7,12 @@ import { toast } from 'react-toastify';
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
+  // console.log(user?.userData?.photoURL);
+  const [isOpen, setIsOpen] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const dropdownRef = useRef();
+
+  const toggleMenu = () => setIsOpen(!isOpen);
 
   const handleLogout = () => {
     logOut()
@@ -18,21 +24,31 @@ const Navbar = () => {
         toast.error('❌ Failed to sign out!');
       });
   };
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  useEffect(() => {
+    const handleClickOutside = event => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const links = (
     <>
       <Link
-        to={'/'}
+        to="/"
         className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
       >
         Home
       </Link>
 
       <Link
-        to={'/biodata'}
+        to="/biodata"
         className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
       >
         Biodatas
@@ -40,30 +56,9 @@ const Navbar = () => {
 
       {user && (
         <>
-          <Link
-            to={'/added-member'}
-            className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
-          >
-            Added Members
-          </Link>
-
-          {/* <Link
-            to={'/dashboard'}
-            className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
-          >
-            Dashboard
-          </Link>
-
-          <Link
-            to={'/admin-dashboard'}
-            className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
-          >
-            Admin Dashboard
-          </Link> */}
-
           {user.role === 'user' && (
             <Link
-              to={'/dashboard'}
+              to="/dashboard"
               className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
             >
               Dashboard
@@ -72,7 +67,7 @@ const Navbar = () => {
 
           {user.role === 'admin' && (
             <Link
-              to={'/admin-dashboard'}
+              to="/admin-dashboard"
               className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
             >
               Admin Dashboard
@@ -82,13 +77,13 @@ const Navbar = () => {
       )}
 
       <Link
-        to={'/about'}
+        to="/about"
         className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
       >
         About Us
       </Link>
       <Link
-        to={'/contact'}
+        to="/contact"
         className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
       >
         Contact Us
@@ -113,21 +108,72 @@ const Navbar = () => {
             <ul className="flex space-x-4">{links}</ul>
 
             {/* Buttons */}
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 items-center">
               {user ? (
-                <button
-                  onClick={handleLogout}
-                  className="w-full px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 transition"
-                >
-                  Sign out
-                </button>
+                <div className="relative" ref={dropdownRef}>
+                  <img
+                    src={user?.userData?.photoURL}
+                    alt="User Avatar"
+                    className="w-10 h-10 rounded-full border-2 border-gray-300 cursor-pointer"
+                    onClick={() => setShowDropdown(!showDropdown)}
+                  />
+
+                  {showDropdown && (
+                    <div className="absolute right-0 mt-2 w-60 bg-white border rounded-md shadow-lg z-50">
+                      <div className="p-4 border-b text-center">
+                        <img
+                          src={user?.userData?.photoURL}
+                          className="w-14 h-14 rounded-full mx-auto mb-2"
+                          alt="User Avatar"
+                        />
+                        <h3 className="font-semibold">{user?.name}</h3>
+                        <p className="text-sm text-gray-600">{user?.email}</p>
+                      </div>
+                      <ul className="text-sm">
+                        <li>
+                          <Link
+                            to="/profile"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                          >
+                            Your profile
+                          </Link>
+                        </li>
+                        <li>
+                          {user?.role === 'admin' ? (
+                            <Link
+                              to="/admin-dashboard"
+                              className="block px-4 py-2 hover:bg-gray-100"
+                            >
+                              Admin Dashboard
+                            </Link>
+                          ) : (
+                            <Link
+                              to="/dashboard"
+                              className="block px-4 py-2 hover:bg-gray-100"
+                            >
+                              Dashboard
+                            </Link>
+                          )}
+                        </li>
+                        <li>
+                          <button
+                            onClick={handleLogout}
+                            className="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100"
+                          >
+                            Log out
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
               ) : (
                 <>
-                  <button className="w-full px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-50 transition">
-                    <Link to={'/login'}> Login</Link>
+                  <button className="px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-50 transition">
+                    <Link to="/login"> Login</Link>
                   </button>
-                  <button className="w-full px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 transition">
-                    <Link to={'/register'}> Register</Link>
+                  <button className="px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 transition">
+                    <Link to="/register"> Register</Link>
                   </button>
                 </>
               )}
@@ -147,8 +193,74 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
+
       {isOpen && (
         <div className="md:hidden bg-white shadow-md py-4 px-6 space-y-3">
+          <div className="flex space-x-3 items-center justify-center">
+            {user ? (
+              <div className="relative" ref={dropdownRef}>
+                <img
+                  src={user?.userData?.photoURL}
+                  alt="User Avatar"
+                  className="w-10 h-10 rounded-full border-2 border-gray-300 cursor-pointer"
+                  onClick={() => setShowDropdown(!showDropdown)}
+                />
+
+                {showDropdown && (
+                  <div className="absolute -left-4 mt-2 w-60 bg-white border rounded-md shadow-lg z-50">
+                    <div className="p-4 border-b text-center">
+                      <img
+                        src={user?.userData?.photoURL}
+                        className="w-14 h-14 rounded-full mx-auto mb-2"
+                        alt="User Avatar"
+                      />
+                      <h3 className="font-semibold">{user?.name}</h3>
+                      <p className="text-sm text-gray-600">{user?.email}</p>
+                    </div>
+                    <ul className="text-sm">
+                      <li>
+                        <Link
+                          to="/profile"
+                          className="block px-4 py-2 hover:bg-gray-100"
+                        >
+                          Your profile
+                        </Link>
+                      </li>
+                      <li>
+                        {user?.role === 'admin' ? (
+                          <Link
+                            to="/admin-dashboard"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                          >
+                            Admin Dashboard
+                          </Link>
+                        ) : (
+                          <Link
+                            to="/dashboard"
+                            className="block px-4 py-2 hover:bg-gray-100"
+                          >
+                            Dashboard
+                          </Link>
+                        )}
+                      </li>
+                      <li>
+                        <button
+                          onClick={handleLogout}
+                          className="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100"
+                        >
+                          Log out
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <>
+                <h1></h1>
+              </>
+            )}
+          </div>
           <ul className="flex flex-col items-center space-y-2">{links}</ul>
 
           <div className="flex flex-col items-center space-y-2 mt-2">
@@ -162,10 +274,10 @@ const Navbar = () => {
             ) : (
               <>
                 <button className="w-full px-4 py-2 border border-blue-500 text-blue-500 rounded hover:bg-blue-50 transition">
-                  <Link to={'/login'}> Login</Link>
+                  <Link to="/login"> Login</Link>
                 </button>
                 <button className="w-full px-4 py-2 bg-pink-500 text-white rounded hover:bg-pink-600 transition">
-                  <Link to={'/register'}> Register</Link>
+                  <Link to="/register"> Register</Link>
                 </button>
               </>
             )}

@@ -27,7 +27,7 @@ const Register = () => {
   // Backend এ ইউজার সেভ করার ফাংশন
   const saveUserToDB = async userInfo => {
     try {
-      const res = await fetch('http://localhost:3000/users', {
+      const res = await fetch('https://metrimony-server-ten.vercel.app/users', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userInfo),

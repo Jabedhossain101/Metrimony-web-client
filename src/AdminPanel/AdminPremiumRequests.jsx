@@ -4,7 +4,7 @@ const AdminPremiumRequests = () => {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/premium-requests')
+    fetch('https://metrimony-server-ten.vercel.app/premium-requests')
       .then(res => res.json())
       .then(data => {
         console.log(data);
@@ -14,7 +14,7 @@ const AdminPremiumRequests = () => {
 
   const handleApprove = async id => {
     const res = await fetch(
-      `http://localhost:3000/premium-requests/approve/${id}`,
+      `https://metrimony-server-ten.vercel.app/premium-requests/approve/${id}`,
       {
         method: 'PATCH',
       }

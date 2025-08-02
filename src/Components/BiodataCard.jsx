@@ -19,6 +19,7 @@ const BiodataCard = ({ biodata }) => {
         </p>
         <div className="text-gray-700 space-y-1">
           <p>ধরণ: {biodataType}</p>
+          <p>name:{}</p>
           <p>বিভাগ: {permanentDivision}</p>
           <p>বয়স: {age}</p>
           <p>পেশা: {occupation}</p>

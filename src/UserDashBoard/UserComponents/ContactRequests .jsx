@@ -9,7 +9,9 @@ const ContactRequests = () => {
 
   useEffect(() => {
     if (user?.email) {
-      fetch(`http://localhost:3000/contact-request/me?email=${user.email}`)
+      fetch(
+        `https://metrimony-server-ten.vercel.app/contact-request/me?email=${user.email}`
+      )
         .then(res => res.json())
         .then(data => setRequests(data));
     }
@@ -27,9 +29,12 @@ const ContactRequests = () => {
     if (!confirm.isConfirmed) return;
 
     try {
-      const res = await fetch(`http://localhost:3000/contact-request/${id}`, {
-        method: 'DELETE',
-      });
+      const res = await fetch(
+        `https://metrimony-server-ten.vercel.app/contact-request/${id}`,
+        {
+          method: 'DELETE',
+        }
+      );
 
       const result = await res.json();
       if (result.deletedCount > 0) {

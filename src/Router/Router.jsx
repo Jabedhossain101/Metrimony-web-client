@@ -27,10 +27,12 @@ import ChartBiodata from '../AdminPanel/ChartBiodata';
 import AdminSuccessStories from '../AdminPanel/AdminSuccessStories';
 import About from '../Components/About';
 import ContractUs from '../Components/ContractUs';
+import Error from '../Components/Error';
 
 export const router = createBrowserRouter([
   {
     path: '/',
+    errorElement: <Error></Error>,
     Component: MainLayout,
     children: [
       {
@@ -69,9 +71,9 @@ export const router = createBrowserRouter([
       {
         path: '/checkout/:biodataId',
         element: (
-          <PrivateRoute>
             <CheckoutPage />
-          </PrivateRoute>
+          // <PrivateRoute>
+          // </PrivateRoute>
         ),
       },
     ],

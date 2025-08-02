@@ -9,7 +9,7 @@ const AdminSuccessStories = () => {
   const [currentStory, setCurrentStory] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:3000/success-stories')
+    fetch('https://metrimony-server-ten.vercel.app/success-stories')
       .then(res => res.json())
       .then(data => setStories(data))
       .catch(console.error);

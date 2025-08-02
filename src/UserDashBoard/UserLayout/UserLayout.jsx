@@ -73,7 +73,13 @@ const UserLayout = () => {
           </button>
         </div>
 
-        <h2 className="text-2xl font-bold mb-6 hidden md:block">Dashboard</h2>
+        <Link
+          to={'/'}
+          className="text-2xl font-bold mb-6 hidden md:block"
+        >
+          Dashboard
+        </Link>
+
         <nav className="flex flex-col space-y-4">
           <Link to="edit-biodata" onClick={() => setIsOpen(false)}>
             Edit Biodata

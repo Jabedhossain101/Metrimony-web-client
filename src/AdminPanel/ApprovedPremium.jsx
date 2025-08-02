@@ -5,7 +5,9 @@ const ApprovedPremium = () => {
   const [requests, setRequests] = useState([]);
 
   const fetchApproved = async () => {
-    const res = await fetch('http://localhost:3000/premium-requests');
+    const res = await fetch(
+      'https://metrimony-server-ten.vercel.app/premium-requests'
+    );
     const data = await res.json();
     setRequests(data.filter(r => r.status === 'approved'));
   };
@@ -27,7 +29,7 @@ const ApprovedPremium = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:3000/users/remove-premium/${userId}`,
+        `https://metrimony-server-ten.vercel.app/users/remove-premium/${userId}`,
         {
           method: 'PATCH',
         }

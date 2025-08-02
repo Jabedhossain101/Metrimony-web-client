@@ -22,9 +22,11 @@ const Login = () => {
 
   const onSubmit = data => {
     const { email, password } = data;
+    console.log(data);
     signInUser(email, password)
       .then(result => {
         console.log(result.user);
+        console.log(from);
         navigate(from);
         Swal.fire({
           position: 'top-end',

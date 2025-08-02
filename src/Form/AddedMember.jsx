@@ -17,7 +17,9 @@ const AddedMember = () => {
   // ✅ Check if biodata already submitted
   useEffect(() => {
     if (!user?.email) return;
-    fetch(`http://localhost:3000/biodatas/me?email=${user.email}`)
+    fetch(
+      `https://metrimony-server-ten.vercel.app/biodatas/me?email=${user.email}`
+    )
       .then(res => (res.ok ? res.json() : null))
       .then(data => {
         if (data) setAlreadySubmitted(true);
@@ -34,11 +36,14 @@ const AddedMember = () => {
     data.contactEmail = user.email; // ✅ Set logged in user's email
 
     try {
-      const res = await fetch('http://localhost:3000/biodatas', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+      const res = await fetch(
+        'https://metrimony-server-ten.vercel.app/biodatas',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        }
+      );
 
       if (res.ok) {
         toast.success('🎉 Biodata submitted successfully!');

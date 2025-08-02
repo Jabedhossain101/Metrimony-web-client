@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         try {
           const res = await fetch(
-            `http://localhost:3000/users/${currentUser.email}`
+            `https://metrimony-server-ten.vercel.app/users/${currentUser.email}`
           );
           const dbUser = await res.json();
 
@@ -57,7 +57,7 @@ const AuthProvider = ({ children }) => {
           setUser(updatedUser);
         } catch (error) {
           console.error('Failed to fetch user role:', error);
-          setUser({ email: currentUser.email, role: 'user' });
+          setUser({ email: currentUser.email, role: 'user' , userData : currentUser });
         }
       } else {
         setUser(null);

@@ -5,13 +5,13 @@ const SuccessStories = () => {
   const [stories, setStories] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/success-stories')
+    fetch('https://metrimony-server-ten.vercel.app/success-stories')
       .then(res => res.json())
       .then(data => setStories(data));
   }, []);
 
   return (
-    <div className="p-6">
+    <div className="p-6" data-aos="fade-up">
       <h2 className="text-3xl font-bold mb-4 text-center">Success Stories</h2>
       <Marquee pauseOnHover gradient={false} speed={50}>
         {stories.map(story => (
