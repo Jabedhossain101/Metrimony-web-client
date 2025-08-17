@@ -11,7 +11,7 @@ const SuccessStories = () => {
   }, []);
 
   return (
-    <div className="p-6" data-aos="fade-up">
+    <div className="p-6 max-w-7xl mx-auto" data-aos="fade-up">
       <h2 className="text-3xl font-bold mb-4 text-center">Success Stories</h2>
       <Marquee pauseOnHover gradient={false} speed={50}>
         {stories.map(story => (

@@ -6,9 +6,9 @@ import banner3 from '../assets/banner3.jpg';
 
 const Banner = () => {
   return (
-    <div className="mt-16">
+    <div className="mt-25">
       {/* Search Bar & Age Filter */}
-      <div className="absolute z-10 w-full flex justify-center top-28">
+      <div className="absolute z-10 w-full flex justify-center top-28 ">
         {/* <form className="bg-white/90 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-4 px-6 py-4 max-w-2xl w-full">
           <input
             type="text"
@@ -43,6 +43,7 @@ const Banner = () => {
       </div>
       {/* Carousel */}
       <Carousel
+        className=' rounded-2xl shadow-lg max-w-7xl mx-auto'
         showThumbs={false}
         autoPlay
         infiniteLoop
@@ -56,7 +57,7 @@ const Banner = () => {
           <img
             src={banner1}
             alt="Happy Couple 1"
-            className="h-[70vh] object-cover w-full"
+            className="h-[70vh] object-cover w-full rounded-2xl"
           />
           <p className="legend">Find Your Perfect Match</p>
         </div>
@@ -64,7 +65,7 @@ const Banner = () => {
           <img
             src={banner2}
             alt="Happy Couple 2"
-            className="h-[70vh] object-cover w-full"
+            className="h-[70vh] object-cover w-full rounded-2xl"
           />
           <p className="legend">Trusted Matrimony Service</p>
         </div>
@@ -72,7 +73,7 @@ const Banner = () => {
           <img
             src={banner3}
             alt="Happy Couple 3"
-            className="h-[70vh] object-cover w-full"
+            className="h-[70vh] object-cover w-full rounded-2xl"
           />
           <p className="legend">Join Thousands of Success Stories</p>
         </div>

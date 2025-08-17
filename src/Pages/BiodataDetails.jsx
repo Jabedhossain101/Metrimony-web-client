@@ -123,7 +123,9 @@ const BiodataDetails = () => {
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
         <p>বায়োডাটা ধরন: {biodata.biodataType}</p>
-        <p>বায়োডাটা নাম:{biodata.name}</p>
+        <p className='flex items-center gap-1.5'>
+          বায়োডাটা নাম:<p className='font-bold'>{biodata.name}</p>
+        </p>
         <p>স্থায়ী বিভাগ: {biodata.permanentDivision}</p>
         <p>বর্তমান বিভাগ: {biodata.presentDivision}</p>
         <p>বয়স: {biodata.age}</p>

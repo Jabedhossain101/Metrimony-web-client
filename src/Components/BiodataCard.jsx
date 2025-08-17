@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const BiodataCard = ({ biodata }) => {
-  const { _id, profileImage, biodataType, permanentDivision, age, occupation } =
+  const { _id,name, profileImage, biodataType, permanentDivision, age, occupation } =
     biodata;
 
   return (
@@ -19,7 +19,7 @@ const BiodataCard = ({ biodata }) => {
         </p>
         <div className="text-gray-700 space-y-1">
           <p>ধরণ: {biodataType}</p>
-          <p>name:{}</p>
+          <p>নাম: {name}</p>
           <p>বিভাগ: {permanentDivision}</p>
           <p>বয়স: {age}</p>
           <p>পেশা: {occupation}</p>
