@@ -1,5 +1,5 @@
 import React, { use, useState, useRef, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react'; // Icons
 import { GiSelfLove } from 'react-icons/gi';
 import { Link } from 'react-router';
 import { AuthContext } from '../Contexts/AuthContext';
@@ -7,10 +7,28 @@ import { toast } from 'react-toastify';
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
-  // console.log(user?.userData?.photoURL);
   const [isOpen, setIsOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef();
+
+  // Theme state
+  const [theme, setTheme] = useState(
+    localStorage.getItem('theme') ? localStorage.getItem('theme') : 'light'
+  );
+
+  // Apply theme on load/change
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -31,7 +49,6 @@ const Navbar = () => {
         setShowDropdown(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -46,14 +63,12 @@ const Navbar = () => {
       >
         Home
       </Link>
-
       <Link
         to="/biodata"
         className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
       >
         Biodatas
       </Link>
-
       {user && (
         <>
           {user.role === 'user' && (
@@ -64,7 +79,6 @@ const Navbar = () => {
               Dashboard
             </Link>
           )}
-
           {user.role === 'admin' && (
             <Link
               to="/admin-dashboard"
@@ -75,7 +89,6 @@ const Navbar = () => {
           )}
         </>
       )}
-
       <Link
         to="/about"
         className="p-2 hover:underline hover:text-blue-500 cursor-pointer"
@@ -92,22 +105,44 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-white shadow-md fixed w-full z-50 top-0 left-0">
+    <nav
+      className={`w-full fixed top-0 left-0 z-50 shadow-md transition-colors duration-300 ${
+        theme === 'light' ? 'bg-white' : 'bg-gray-900'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex items-center gap-2">
             <GiSelfLove className="text-3xl text-pink-500" />
-            <h1 className="text-2xl font-bold">
+            <h1
+              className={`text-2xl font-bold  ${
+                theme === 'light' ? 'text-gray-800' : 'text-white'
+              }`}
+            >
               Soul<span className="text-pink-500">mate</span>
             </h1>
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6">
-            <ul className="flex space-x-4">{links}</ul>
+            <ul
+              className={`flex space-x-4  ${
+                theme === 'light' ? 'text-gray-800' : 'text-white'
+              }`}
+            >
+              {links}
+            </ul>
 
-            {/* Buttons */}
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-full bg-gray-200 dark:bg-gray-400  transition`}
+            >
+              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+            </button>
+
+            {/* User / Auth buttons */}
             <div className="flex space-x-3 items-center">
               {user ? (
                 <div className="relative" ref={dropdownRef}>
@@ -117,23 +152,31 @@ const Navbar = () => {
                     className="w-10 h-10 rounded-full border-2 border-gray-300 cursor-pointer"
                     onClick={() => setShowDropdown(!showDropdown)}
                   />
-
                   {showDropdown && (
-                    <div className="absolute right-0 mt-2 w-60 bg-white border rounded-md shadow-lg z-50">
+                    <div
+                      className={`absolute right-0 
+                    mt-2 w-60 border rounded-md shadow-lg z-50  ${
+                      theme === 'light' ? 'bg-white' : 'bg-gray-800'
+                    }`}
+                    >
                       <div className="p-4 border-b text-center">
                         <img
                           src={user?.userData?.photoURL}
                           className="w-14 h-14 rounded-full mx-auto mb-2"
                           alt="User Avatar"
                         />
-                        <h3 className="font-semibold">{user?.name}</h3>
-                        <p className="text-sm text-gray-600">{user?.email}</p>
+                        <h3 className="font-semibold text-gray-900 dark:text-white">
+                          {user?.name}
+                        </h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">
+                          {user?.email}
+                        </p>
                       </div>
                       <ul className="text-sm">
                         <li>
                           <Link
                             to="/profile"
-                            className="block px-4 py-2 hover:bg-gray-100"
+                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                           >
                             Your profile
                           </Link>
@@ -142,14 +185,14 @@ const Navbar = () => {
                           {user?.role === 'admin' ? (
                             <Link
                               to="/admin-dashboard"
-                              className="block px-4 py-2 hover:bg-gray-100"
+                              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
                               Admin Dashboard
                             </Link>
                           ) : (
                             <Link
                               to="/dashboard"
-                              className="block px-4 py-2 hover:bg-gray-100"
+                              className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                             >
                               Dashboard
                             </Link>
@@ -158,7 +201,7 @@ const Navbar = () => {
                         <li>
                           <button
                             onClick={handleLogout}
-                            className="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100"
+                            className="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700"
                           >
                             Log out
                           </button>
@@ -181,10 +224,19 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu Icon */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center gap-2">
+            {/* Theme toggle in mobile */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-yellow-400 transition"
+            >
+              {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+            </button>
             <button
               onClick={toggleMenu}
-              className="text-gray-700 focus:outline-none"
+              className={`focus:outline-none  ${
+                theme === 'light' ? 'text-gray-800' : 'text-white'
+              }`}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -192,36 +244,46 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
-
       {isOpen && (
-        <div className="md:hidden bg-white shadow-md py-4 px-6 space-y-3">
+        <div
+          className={`md:hidden  ${
+            theme === 'light' ? 'bg-white' : 'bg-gray-800'
+          }  shadow-md py-4 px-6 space-y-3 transition-colors duration-300`}
+        >
           <div className="flex space-x-3 items-center justify-center">
             {user ? (
-              <div className="relative" ref={dropdownRef}>
+              <div className="relative " ref={dropdownRef}>
                 <img
                   src={user?.userData?.photoURL}
                   alt="User Avatar"
                   className="w-10 h-10 rounded-full border-2 border-gray-300 cursor-pointer"
                   onClick={() => setShowDropdown(!showDropdown)}
                 />
-
                 {showDropdown && (
-                  <div className="absolute -left-4 mt-2 w-60 bg-white border rounded-md shadow-lg z-50">
+                  <div
+                    className={`absolute -left-4 mt-2 w-60 ${
+                      theme === 'light' ? 'bg-white' : 'bg-gray-800'
+                    } border rounded-md shadow-lg z-50`}
+                  >
                     <div className="p-4 border-b text-center">
                       <img
                         src={user?.userData?.photoURL}
                         className="w-14 h-14 rounded-full mx-auto mb-2"
                         alt="User Avatar"
                       />
-                      <h3 className="font-semibold">{user?.name}</h3>
-                      <p className="text-sm text-gray-600">{user?.email}</p>
+
+                      <h3 className="font-semibold text-gray-900 dark:text-white">
+                        {user?.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        {user?.email}
+                      </p>
                     </div>
                     <ul className="text-sm">
                       <li>
                         <Link
                           to="/profile"
-                          className="block px-4 py-2 hover:bg-gray-100"
+                          className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                         >
                           Your profile
                         </Link>
@@ -230,14 +292,14 @@ const Navbar = () => {
                         {user?.role === 'admin' ? (
                           <Link
                             to="/admin-dashboard"
-                            className="block px-4 py-2 hover:bg-gray-100"
+                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                           >
                             Admin Dashboard
                           </Link>
                         ) : (
                           <Link
                             to="/dashboard"
-                            className="block px-4 py-2 hover:bg-gray-100"
+                            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
                           >
                             Dashboard
                           </Link>
@@ -246,7 +308,7 @@ const Navbar = () => {
                       <li>
                         <button
                           onClick={handleLogout}
-                          className="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100"
+                          className="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100 dark:hover:bg-gray-700"
                         >
                           Log out
                         </button>
@@ -256,9 +318,7 @@ const Navbar = () => {
                 )}
               </div>
             ) : (
-              <>
-                <h1></h1>
-              </>
+              <></>
             )}
           </div>
           <ul className="flex flex-col items-center space-y-2">{links}</ul>

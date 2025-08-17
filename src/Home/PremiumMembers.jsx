@@ -86,7 +86,7 @@ const PremiumMembers = () => {
         {sortedMembers.map(member => (
           <div
             key={member._id}
-            className="bg-white border rounded-2xl shadow-xl p-5 relative transition-transform hover:scale-105 hover:shadow-2xl"
+            className="bg-white  border rounded-2xl shadow-xl p-5 relative transition-transform hover:scale-105 hover:shadow-2xl"
           >
             {/* Premium badge */}
             <div className="absolute top-3 right-3 bg-gradient-to-r from-pink-500 to-yellow-500 text-white text-xs px-3 py-1 rounded-full font-semibold shadow">

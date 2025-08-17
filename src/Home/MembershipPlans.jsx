@@ -24,7 +24,7 @@ const MembershipPlans = () => {
 
   return (
     <section className="my-12 px-4 max-w-7xl mx-auto">
-      <h2 className="text-2xl font-bold text-center text-gray-800 mb-8">
+      <h2 className="text-2xl font-bold text-center text-pink-600 mb-8">
         💎 Membership Plans
       </h2>
       <div className="grid md:grid-cols-3 gap-8">
