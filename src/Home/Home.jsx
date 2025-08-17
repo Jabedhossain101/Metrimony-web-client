@@ -8,6 +8,8 @@ import PremiumMembers from './PremiumMembers';
 import Success from './Success';
 import FeaturedBiodatas from './FeaturedBiodatas';
 import MembershipPlans from './MembershipPlans';
+import About from '../Components/About';
+import CallToAction from './CallToAction';
 
 const Home = () => {
   return (
@@ -23,6 +25,8 @@ const Home = () => {
 
       <SuccessStory></SuccessStory>
       <MembershipPlans></MembershipPlans>
+      <About></About>
+      <CallToAction></CallToAction>
       <Faq></Faq>
     </div>
   );

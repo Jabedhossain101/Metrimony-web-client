@@ -5,8 +5,8 @@ const About = () => {
   return (
     <div>
       <div className="h-12"></div>
-      <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-pink-100 to-blue-100 transition">
-        <div className="bg-white mt-6 rounded-2xl shadow-2xl p-8 max-w-4xl w-full mx-4 mb-2">
+      <section className="min-h-screen flex items-center justify-center  transition">
+        <div className="bg-white mt-6 rounded-2xl shadow-2xl p-8 max-w-7xl w-full mx-4 mb-2">
           <div className="flex flex-col items-center mb-6">
             <GiSelfLove className="text-5xl text-pink-500 mb-2" />
             <h1 className="text-4xl font-bold text-pink-700 mb-2">

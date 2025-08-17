@@ -71,11 +71,12 @@ export const router = createBrowserRouter([
       {
         path: '/checkout/:biodataId',
         element: (
-            <CheckoutPage />
+          <CheckoutPage />
           // <PrivateRoute>
           // </PrivateRoute>
         ),
       },
+
     ],
   },
   {

@@ -1,26 +1,36 @@
 import React from 'react';
+import { useNavigate } from 'react-router';
 
 const MembershipPlans = () => {
+  const navigate = useNavigate(); // useNavigate hook
   const plans = [
     {
       title: 'Free',
       price: '৳0/month',
       features: ['Basic Search', 'Limited Biodatas', 'Email Support'],
       color: 'from-gray-400 to-gray-600',
+      amount: 0, // Stripe payment amount in cents or Taka equivalent
     },
     {
       title: 'Premium',
       price: '৳500/month',
       features: ['Unlimited Search', 'View All Biodatas', 'Priority Support'],
       color: 'from-pink-500 to-purple-500',
+      amount: 500,
     },
     {
       title: 'Gold',
       price: '৳1000/month',
       features: ['Unlimited Search', 'Direct Contact', 'Dedicated Support'],
       color: 'from-yellow-500 to-orange-500',
+      amount: 1000,
     },
   ];
+
+  const handleChoosePlan = plan => {
+    // এখানে CheckoutPage এ navigate করছি, সাথে plan এর amount বা title পাঠাতে পারো
+    navigate(`/checkout/${plan.title}`, { state: { planAmount: plan.amount } });
+  };
 
   return (
     <section className="my-12 px-4 max-w-7xl mx-auto">
@@ -45,7 +55,10 @@ const MembershipPlans = () => {
                 <li key={idx}>✅ {f}</li>
               ))}
             </ul>
-            <button className="mt-6 w-full px-4 py-2 bg-pink-600 text-white rounded-full hover:bg-pink-700">
+            <button
+              onClick={() => handleChoosePlan(plan)}
+              className="mt-6 w-full px-4 py-2 bg-pink-600 text-white rounded-full hover:bg-pink-700"
+            >
               Choose Plan
             </button>
           </div>
