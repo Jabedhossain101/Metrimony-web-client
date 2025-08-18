@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react';
 import { AuthContext } from '../../Contexts/AuthContext';
 import Swal from 'sweetalert2';
 import { IoHome } from 'react-icons/io5';
+import ProfileCard from '../../Components/Profile';
 
 const AdminLayout = () => {
   const { logOut } = use(AuthContext);
@@ -71,6 +72,7 @@ const AdminLayout = () => {
             <X size={26} />
           </button>
         </div>
+        <ProfileCard />
 
         {/* ✅ Navigation Links */}
         <nav className="space-y-4">

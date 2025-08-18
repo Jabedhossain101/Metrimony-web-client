@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 
 const Navbar = () => {
   const { user, logOut } = use(AuthContext);
+  console.log(user);
   const [isOpen, setIsOpen] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdownRef = useRef();
