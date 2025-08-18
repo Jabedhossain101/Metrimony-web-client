@@ -4,6 +4,7 @@ import { FaBars, FaTimes } from 'react-icons/fa';
 import { AuthContext } from '../../Contexts/AuthContext';
 import Swal from 'sweetalert2';
 import { IoHome } from 'react-icons/io5';
+import Profile from '../../Components/Profile';
 
 const UserLayout = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -48,7 +49,12 @@ const UserLayout = () => {
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Mobile Navbar */}
       <div className="md:hidden bg-blue-800 text-white flex justify-between items-center p-4">
-        <h2 className="text-xl font-bold">Dashboard</h2>
+        <h2 className="text-xl font-bold flex items-center space-x-2 gap-1.5">
+          <Link to={'/'} className="text-3xl flex">
+            <IoHome />
+          </Link>
+          Dashboard
+        </h2>
         <button onClick={toggleSidebar}>
           {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
         </button>
@@ -73,13 +79,13 @@ const UserLayout = () => {
           </button>
         </div>
 
-        <Link
-          to={'/'}
-          className="text-2xl font-bold mb-6 hidden md:block"
-        >
+        <Link className="text-2xl font-bold mb-6 hidden md:block">
+          <Link to={'/'} className="text-3xl flex">
+            <IoHome />
+          </Link>
           Dashboard
         </Link>
-
+        <Profile></Profile>
         <nav className="flex flex-col space-y-4">
           <Link to="edit-biodata" onClick={() => setIsOpen(false)}>
             Edit Biodata

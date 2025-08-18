@@ -1,5 +1,6 @@
 import React from 'react';
 import { FaHeart } from 'react-icons/fa';
+import { Link } from 'react-router';
 
 const CallToAction = () => {
   return (
@@ -11,12 +12,12 @@ const CallToAction = () => {
       <p className="text-lg text-gray-700 mb-6 max-w-2xl">
         Join thousands of happy couples who found their perfect match on Soulmate. Create your profile today and take the first step towards a beautiful journey together!
       </p>
-      <a
-        href="/register"
+      <Link
+        to={'/add-biodata'}
         className="bg-pink-600 hover:bg-pink-700 text-white font-semibold px-8 py-3 rounded-full shadow-lg transition-all duration-300 text-lg"
       >
         Register Biodata now
-      </a>
+      </Link>
     </section>
   );
 };

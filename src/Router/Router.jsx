@@ -28,6 +28,7 @@ import AdminSuccessStories from '../AdminPanel/AdminSuccessStories';
 import About from '../Components/About';
 import ContractUs from '../Components/ContractUs';
 import Error from '../Components/Error';
+import Profile from '../Components/Profile';
 
 export const router = createBrowserRouter([
   {
@@ -92,6 +93,11 @@ export const router = createBrowserRouter([
         Component: Register,
       },
     ],
+  },
+  {
+    path: 'profile',
+    Component: Profile,
+
   },
   {
     path: 'dashboard',

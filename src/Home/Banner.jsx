@@ -6,7 +6,7 @@ import banner3 from '../assets/banner3.jpg';
 
 const Banner = () => {
   return (
-    <div className="mt-25">
+    <div className="mt-18">
       {/* Search Bar & Age Filter */}
       <div className="absolute z-10 w-full flex justify-center top-28 ">
         {/* <form className="bg-white/90 rounded-xl shadow-lg flex flex-col md:flex-row items-center gap-4 px-6 py-4 max-w-2xl w-full">
