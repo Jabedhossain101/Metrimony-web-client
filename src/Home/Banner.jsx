@@ -59,7 +59,7 @@ const Banner = () => {
             alt="Happy Couple 1"
             className="h-[70vh] object-cover w-full rounded-2xl"
           />
-          <p className="legend">Find Your Perfect Match</p>
+       
         </div>
         <div>
           <img
@@ -67,7 +67,6 @@ const Banner = () => {
             alt="Happy Couple 2"
             className="h-[70vh] object-cover w-full rounded-2xl"
           />
-          <p className="legend">Trusted Matrimony Service</p>
         </div>
         <div>
           <img
@@ -75,7 +74,7 @@ const Banner = () => {
             alt="Happy Couple 3"
             className="h-[70vh] object-cover w-full rounded-2xl"
           />
-          <p className="legend">Join Thousands of Success Stories</p>
+          
         </div>
       </Carousel>
     </div>
