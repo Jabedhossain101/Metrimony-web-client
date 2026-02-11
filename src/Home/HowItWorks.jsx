@@ -1,136 +1,147 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  FaUserPlus,
-  FaSearch,
-  FaUserCheck,
-  FaComments,
-  FaHeart,
-  FaSmile,
-} from 'react-icons/fa';
-import { Link } from 'react-router';
+  UserPlus,
+  Search,
+  Heart,
+  MessageCircle,
+  CheckCircle2,
+  Sparkles,
+  ArrowRight,
+} from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const HowItWorks = () => {
   const steps = [
     {
-      icon: <FaUserPlus />,
+      icon: <UserPlus className="w-8 h-8" />,
       title: 'Create Profile',
-      desc: 'Sign up and build your detailed biodata with ease.',
-      color: 'from-pink-500 to-rose-400',
+      desc: 'Build your detailed biodata and showcase your authentic self.',
+      tag: 'Step 01',
     },
     {
-      icon: <FaSearch />,
-      title: 'Search Profiles',
-      desc: 'Filter matches based on your values and interests.',
-      color: 'from-rose-500 to-orange-400',
+      icon: <Search className="w-8 h-8" />,
+      title: 'Find Matches',
+      desc: 'Use our advanced filters to find profiles aligned with your values.',
+      tag: 'Step 02',
     },
     {
-      icon: <FaUserCheck />,
-      title: 'Express Interest',
-      desc: 'Send a connection request to profiles you like.',
-      color: 'from-pink-600 to-pink-400',
+      icon: <MessageCircle className="w-8 h-8" />,
+      title: 'Initiate Chat',
+      desc: 'Connect securely with interested members through our platform.',
+      tag: 'Step 03',
     },
     {
-      icon: <FaComments />,
-      title: 'Start Chatting',
-      desc: 'Connect securely through our messaging system.',
-      color: 'from-rose-600 to-pink-500',
+      icon: <CheckCircle2 className="w-8 h-8" />,
+      title: 'Verify Intent',
+      desc: 'Discuss compatibility and involve families for a blessed union.',
+      tag: 'Step 04',
     },
     {
-      icon: <FaHeart />,
-      title: 'Build Bond',
-      desc: 'Understand compatibility for a lifelong journey.',
-      color: 'from-pink-700 to-rose-500',
-    },
-    {
-      icon: <FaSmile />,
-      title: 'Find Happiness',
-      desc: 'Start your beautiful future together forever.',
-      color: 'from-orange-500 to-pink-500',
+      icon: <Heart className="w-8 h-8" />,
+      title: 'The Big Day',
+      desc: 'Complete your journey and start your beautiful future together.',
+      tag: 'Step 05',
     },
   ];
 
   return (
-    <section className="relative py-24 bg-white overflow-hidden">
-      {/* Background Decorative Text */}
-      <div className="absolute top-10 left-0 text-[10rem] font-serif font-black text-gray-50/50 select-none -z-0 leading-none">
-        PROCESS
-      </div>
+    <section className="relative py-28 bg-[#FCFBFA] overflow-hidden">
+      {/* Decorative Gradient Background */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-50/50 rounded-full blur-3xl -mr-64 -mt-32" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <motion.h3
+        <div className="text-center mb-24">
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-pink-600 font-black tracking-[0.3em] uppercase text-xs mb-3"
+            className="flex items-center justify-center gap-2 mb-4"
           >
-            Your Journey Starts Here
-          </motion.h3>
+            <Sparkles className="w-4 h-4 text-rose-500" />
+            <span className="text-rose-500 text-[11px] font-bold uppercase tracking-[0.4em]">
+              The Journey
+            </span>
+          </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-serif font-bold text-gray-900"
+            className="text-4xl md:text-6xl font-serif font-medium text-slate-900"
           >
-            How It <span className="text-pink-600 italic">Works</span>
+            Path to Your <span className="italic text-rose-600">Soulmate</span>
           </motion.h2>
-          <div className="mt-6 w-24 h-1 bg-pink-600 mx-auto rounded-full"></div>
+          <p className="mt-6 text-slate-500 font-light max-w-xl mx-auto text-lg">
+            A simple, secure, and dignified process designed to help you find
+            your perfect life partner.
+          </p>
         </div>
 
-        {/* Steps Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-16 gap-x-10">
+        {/* Steps Flexbox/Grid - Centered and Balanced */}
+        <div className="flex flex-wrap justify-center gap-8">
           {steps.map((step, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
               viewport={{ once: true }}
-              className="relative group"
+              className="relative w-full md:w-[calc(50%-2rem)] lg:w-[calc(33.33%-2rem)] xl:w-[calc(20%-2rem)] group"
             >
-              {/* Step Number Background */}
-              <div className="absolute -top-6 -left-4 text-7xl font-serif font-black text-pink-50 group-hover:text-pink-100 transition-colors duration-500 select-none">
-                0{index + 1}
-              </div>
+              {/* Vertical Connector for Mobile / Horizontal for Desktop (Logic simplified for UI) */}
+              {index !== steps.length - 1 && (
+                <div className="hidden xl:block absolute top-14 left-full w-full h-[1px] bg-slate-100 z-0" />
+              )}
 
-              <div className="relative p-10 bg-[#fdf8f7]/60 border border-white rounded-[2.5rem] hover:bg-white hover:shadow-[0_30px_60px_-15px_rgba(236,72,153,0.1)] transition-all duration-500">
-                {/* Icon Box */}
-                <div
-                  className={`w-20 h-20 mb-8 rounded-3xl bg-gradient-to-br ${step.color} flex items-center justify-center text-white text-3xl shadow-lg group-hover:scale-110 group-hover:rotate-6 transition-transform duration-500`}
-                >
+              <div className="relative z-10 flex flex-col items-center text-center">
+                {/* Icon Container */}
+                <div className="w-24 h-24 mb-6 rounded-[2.5rem] bg-white border border-slate-100 flex items-center justify-center text-rose-500 shadow-sm transition-all duration-500 group-hover:bg-rose-600 group-hover:text-white group-hover:shadow-xl group-hover:shadow-rose-100 group-hover:-translate-y-2">
                   {step.icon}
                 </div>
 
+                {/* Tag */}
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">
+                  {step.tag}
+                </span>
+
                 {/* Content */}
-                <h3 className="text-2xl font-serif font-bold text-gray-800 mb-4 group-hover:text-pink-600 transition-colors">
+                <h3 className="text-xl font-serif font-bold text-slate-900 mb-3">
                   {step.title}
                 </h3>
-                <p className="text-gray-500 leading-relaxed font-light">
+                <p className="text-slate-500 text-sm leading-relaxed font-light px-2">
                   {step.desc}
                 </p>
-
-                {/* Subtle Arrow for Flow (Except last item in row) */}
-                <div className="hidden lg:block absolute top-1/2 -right-6 translate-y-[-50%] text-pink-100 text-3xl opacity-0 group-hover:opacity-100 transition-opacity">
-                  {(index + 1) % 3 !== 0 && (
-                    <FaSearch className="rotate-[-45deg] scale-75" />
-                  )}
-                </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom Call to Action Button */}
+        {/* Bottom CTA */}
         <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="mt-20 text-center"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5 }}
+          className="mt-24 text-center"
         >
-          <Link to={'/login'} className="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-bold text-gray-900 rounded-full group bg-gradient-to-br from-pink-500 to-rose-400 group-hover:from-pink-500 group-hover:to-rose-400 hover:text-white focus:ring-4 focus:outline-none focus:ring-pink-200 shadow-xl shadow-pink-100">
-            <span className="relative px-10 py-4 transition-all ease-in duration-75 bg-white rounded-full group-hover:bg-opacity-0">
-              Create Your Free Account Now
-            </span>
+          <div className="inline-block p-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent w-full max-w-2xl mb-12" />
+
+          <Link
+            to="/login"
+            className="group relative inline-flex items-center gap-3 px-10 py-5 bg-slate-900 text-white rounded-full font-bold overflow-hidden transition-all hover:pr-12"
+          >
+            <span className="relative z-10">Start Your Free Journey</span>
+            <ArrowRight className="w-5 h-5 relative z-10 transition-transform group-hover:translate-x-1" />
+            <div className="absolute inset-0 bg-rose-600 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
           </Link>
+
+          <p className="mt-6 text-slate-400 text-sm">
+            Already have a profile?{' '}
+            <Link
+              to="/login"
+              className="text-rose-500 font-semibold hover:underline"
+            >
+              Sign In
+            </Link>
+          </p>
         </motion.div>
       </div>
     </section>
