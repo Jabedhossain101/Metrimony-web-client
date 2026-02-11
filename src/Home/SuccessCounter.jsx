@@ -1,105 +1,128 @@
 import React from 'react';
-import { FaFemale, FaMale, FaRing } from 'react-icons/fa';
 import CountUp from 'react-countup';
 import { motion } from 'framer-motion';
+import { Users, UserCircle2, Heart, Sparkles, TrendingUp } from 'lucide-react';
 
 const SuccessCounter = () => {
   const stats = [
     {
       id: 1,
-      icon: <FaFemale />,
+      icon: <UserCircle2 className="w-8 h-8" />,
       count: 2500,
-      label: 'Girls Biodata',
-      color: 'text-pink-500',
-      bgColor: 'bg-pink-50',
-      borderColor: 'border-pink-100',
+      label: 'Female Biodatas',
+      accentColor: 'text-rose-500',
+      glowColor: 'group-hover:shadow-rose-100',
+      bgColor: 'bg-rose-50',
     },
     {
       id: 2,
-      icon: <FaMale />,
+      icon: <Users className="w-8 h-8" />,
       count: 3000,
-      label: 'Boys Biodata',
-      color: 'text-blue-500',
+      label: 'Male Biodatas',
+      accentColor: 'text-blue-500',
+      glowColor: 'group-hover:shadow-blue-100',
       bgColor: 'bg-blue-50',
-      borderColor: 'border-blue-100',
     },
     {
       id: 3,
-      icon: <FaRing />,
+      icon: <Heart className="w-8 h-8" />,
       count: 1200,
-      label: 'Marriages Completed',
-      color: 'text-amber-500',
+      label: 'Verified Marriages',
+      accentColor: 'text-amber-500',
+      glowColor: 'group-hover:shadow-amber-100',
       bgColor: 'bg-amber-50',
-      borderColor: 'border-amber-100',
     },
   ];
 
   return (
-    <section className="relative py-24 bg-[#fdfaf9] overflow-hidden">
-      {/* Decorative Blur Backgrounds */}
-      <div className="absolute top-0 left-1/4 w-64 h-64 bg-pink-100/40 rounded-full blur-3xl -z-0"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-50/50 rounded-full blur-3xl -z-0"></div>
+    <section className="relative py-28 bg-[#FCFBFA] overflow-hidden">
+      {/* --- ADVANCED BACKGROUND ELEMENTS --- */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-rose-50 rounded-full blur-[120px] opacity-60" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-50 rounded-full blur-[120px] opacity-60" />
+        <div className="absolute inset-0 opacity-[0.02] bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]" />
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <motion.h3
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            className="text-pink-600 font-black tracking-[0.3em] uppercase text-[10px] mb-3"
+      <div className="container mx-auto px-6 relative z-10">
+        {/* --- HEADER --- */}
+        <div className="text-center mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="flex items-center justify-center gap-2 mb-4"
           >
-            Our Impact
-          </motion.h3>
+            <TrendingUp className="w-4 h-4 text-rose-500" />
+            <span className="text-rose-500 text-[10px] font-black uppercase tracking-[0.4em]">
+              Live Impact
+            </span>
+          </motion.div>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-5xl font-serif font-bold text-gray-900"
+            className="text-4xl md:text-6xl font-serif font-medium text-slate-900"
           >
-            Our Success in <span className="text-pink-600 italic">Numbers</span>
+            Our Success in <span className="italic text-rose-600">Numbers</span>
           </motion.h2>
-          <div className="mt-5 w-20 h-1 bg-pink-600 mx-auto rounded-full"></div>
+
+          <p className="mt-6 text-slate-500 font-light max-w-lg mx-auto text-lg leading-relaxed">
+            Building a community of trust where thousands have already found
+            their meaningful connection.
+          </p>
         </div>
 
-        {/* Counter Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+        {/* --- COUNTER GRID --- */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-14">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
-              className={`relative group bg-white/70 backdrop-blur-md border ${stat.borderColor} rounded-[2.5rem] p-10 transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.08)] hover:-translate-y-2 text-center`}
+              className={`group relative bg-white/60 backdrop-blur-xl border border-white rounded-[3rem] p-12 transition-all duration-500 hover:-translate-y-3 shadow-sm hover:shadow-2xl ${stat.glowColor}`}
             >
-              {/* Icon Container with Shape */}
-              <div
-                className={`relative w-24 h-24 mx-auto mb-8 flex items-center justify-center text-4xl ${stat.color} transition-transform duration-500 group-hover:scale-110`}
-              >
-                <div
-                  className={`absolute inset-0 ${stat.bgColor} rounded-full opacity-60 group-hover:rotate-45 transition-transform duration-700`}
-                ></div>
-                <div className="relative z-10">{stat.icon}</div>
+              {/* Floating Decorative Sparkle */}
+              <div className="absolute top-8 right-8 text-slate-100 group-hover:text-rose-100 transition-colors duration-500">
+                <Sparkles size={24} />
               </div>
 
-              {/* Number with CountUp */}
-              <div className="space-y-2">
-                <h4 className="text-5xl font-serif font-bold text-gray-900 flex items-center justify-center">
-                  <CountUp
-                    end={stat.count}
-                    duration={2.5}
-                    separator=","
-                    enableScrollSpy
-                    scrollSpyOnce
-                  />
-                  <span className="text-pink-600 ml-1">+</span>
-                </h4>
-                <p className="text-gray-500 font-medium tracking-wide text-sm uppercase">
+              {/* Icon Container */}
+              <div
+                className={`w-20 h-20 mx-auto mb-10 rounded-[2rem] ${stat.bgColor} flex items-center justify-center ${stat.accentColor} transition-all duration-500 group-hover:rotate-[10deg] shadow-inner`}
+              >
+                {stat.icon}
+              </div>
+
+              {/* Number Content */}
+              <div className="text-center space-y-3">
+                <div className="flex items-center justify-center gap-1">
+                  <span className="text-5xl lg:text-6xl font-serif font-medium text-slate-900 tracking-tighter">
+                    <CountUp
+                      end={stat.count}
+                      duration={3}
+                      separator=","
+                      enableScrollSpy
+                      scrollSpyOnce
+                    />
+                  </span>
+                  <span className="text-3xl font-light text-rose-500">+</span>
+                </div>
+
+                <p className="text-slate-400 font-bold tracking-[0.2em] text-[10px] uppercase">
                   {stat.label}
                 </p>
               </div>
 
-              {/* Decorative Line */}
-              <div className="mt-8 mx-auto w-12 h-0.5 bg-gray-100 group-hover:w-20 group-hover:bg-pink-200 transition-all duration-500"></div>
+              {/* Progress Indicator line */}
+              <div className="mt-10 h-[1px] w-full bg-slate-50 relative overflow-hidden">
+                <motion.div
+                  initial={{ x: '-100%' }}
+                  whileInView={{ x: '0%' }}
+                  transition={{ duration: 1.5, delay: 0.5 }}
+                  className={`absolute inset-0 bg-gradient-to-r from-transparent via-rose-300 to-transparent opacity-40`}
+                />
+              </div>
             </motion.div>
           ))}
         </div>
