@@ -195,8 +195,8 @@ const ViewBiodata = () => {
         {/* Right Column: Contact & Partner */}
         <div className="space-y-8">
           {/* Verified Contact Card */}
-          <section className="bg-slate-900 border border-slate-800 rounded-[28px] p-6">
-            <h3 className="text-lg font-bold text-white mb-6">Contact Info</h3>
+          <section className="bg-emerald-500/5 border border-slate-800 rounded-[28px] p-6">
+            <h3 className="text-lg font-bold text-black mb-6">Contact Info</h3>
             <div className="space-y-4">
               <div className="p-4 bg-slate-800/50 rounded-2xl border border-slate-700/50">
                 <p className="text-[10px] uppercase font-bold text-slate-500 mb-1">
@@ -220,7 +220,9 @@ const ViewBiodata = () => {
             <div className="absolute top-0 right-0 p-4 opacity-10">
               <HiOutlineSparkles className="w-12 h-12 text-emerald-400" />
             </div>
-            <h3 className="text-lg font-bold text-pink-500 mb-6">Expectations</h3>
+            <h3 className="text-lg font-bold text-pink-500 mb-6">
+              Expectations
+            </h3>
             <div className="space-y-4">
               <div className="flex justify-between items-center">
                 <span className="text-slate-400 text-sm">Partner Age</span>
