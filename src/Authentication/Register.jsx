@@ -24,7 +24,7 @@ const Register = () => {
     setShowPassword(!showPassword);
   };
 
-  // Backend এ ইউজার সেভ করার ফাংশন
+ 
   const saveUserToDB = async userInfo => {
     try {
       const res = await fetch('https://metrimony-server-ten.vercel.app/users', {
