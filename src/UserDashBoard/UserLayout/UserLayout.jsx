@@ -104,7 +104,20 @@ const UserLayout = () => {
           </div>
 
           <div className="px-6 mb-6">
-            <Profile />
+            <div className=" rounded-xl p-4 text-center mb-6">
+              <img
+                src={user?.userData?.photoURL}
+                alt="Profile"
+                className="w-16 h-16 mx-auto rounded-full border-2 border-pink-400"
+              />
+              <h3 className="mt-2 text-lg font-semibold text-gray-900">
+                {user?.userData?.displayName || ''}
+              </h3>
+              <p className="text-sm text-white">{user?.email}</p>
+              <span className="inline-block mt-2 px-2 py-0.5 text-xs rounded-full bg-pink-100 text-pink-600 font-semibold">
+                {user?.role ? user?.role.toUpperCase() : 'USER'}
+              </span>
+            </div>
           </div>
 
           {/* Navigation */}
