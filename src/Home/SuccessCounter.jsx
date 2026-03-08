@@ -94,7 +94,7 @@ const SuccessCounter = () => {
                 {stat.icon}
               </div>
 
-              {/* Number Content */}
+             
               <div className="text-center space-y-3">
                 <div className="flex items-center justify-center gap-1">
                   <span className="text-5xl lg:text-6xl font-serif font-medium text-slate-900 tracking-tighter">

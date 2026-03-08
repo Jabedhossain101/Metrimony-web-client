@@ -82,7 +82,7 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* --- DESKTOP MENU --- */}
+          
           <div className="hidden lg:flex items-center gap-10">
             <ul className="flex items-center gap-8">
               {navLinks.map(link => (
