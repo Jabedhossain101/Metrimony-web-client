@@ -87,7 +87,7 @@ const HowItWorks = () => {
               viewport={{ once: true }}
               className="relative w-full md:w-[calc(50%-2rem)] lg:w-[calc(33.33%-2rem)] xl:w-[calc(20%-2rem)] group"
             >
-              {/* Vertical Connector for Mobile / Horizontal for Desktop (Logic simplified for UI) */}
+            
               {index !== steps.length - 1 && (
                 <div className="hidden xl:block absolute top-14 left-full w-full h-[1px] bg-slate-100 z-0" />
               )}
@@ -98,12 +98,12 @@ const HowItWorks = () => {
                   {step.icon}
                 </div>
 
-                {/* Tag */}
+          
                 <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-3">
                   {step.tag}
                 </span>
 
-                {/* Content */}
+            
                 <h3 className="text-xl font-serif font-bold text-slate-900 mb-3">
                   {step.title}
                 </h3>
@@ -115,7 +115,7 @@ const HowItWorks = () => {
           ))}
         </div>
 
-        {/* Bottom CTA */}
+        
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
