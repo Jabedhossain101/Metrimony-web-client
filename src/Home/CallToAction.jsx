@@ -12,7 +12,6 @@ import { Link } from 'react-router';
 const CallToAction = () => {
   return (
     <section className="py-24 px-6 relative overflow-hidden bg-[#FCFBFA]">
-      {/* --- REFINED LIGHT MODE BACKGROUND --- */}
       <div className="absolute inset-0 z-0">
         {/* Soft floating orbs for depth */}
         <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-rose-100/40 rounded-full blur-[120px]" />
@@ -20,9 +19,7 @@ const CallToAction = () => {
       </div>
 
       <div className="max-w-6xl mx-auto relative z-10">
-        {/* Main Card Container with Glassmorphism */}
-        <div className="relative bg-white/40 backdrop-blur-xl border border-white rounded-[4rem] p-10 md:p-20 shadow-[0_32px_64px_-16px_rgba(225,29,72,0.05)] overflow-hidden">
-          {/* Subtle pattern overlay that works in light mode */}
+        <div className="relative bg-white/40 backdrop-blur-xl border border-white rounded-[4rem] p-10 md:p-19 shadow-[0_32px_64px_-16px_rgba(225,29,72,0.05)] overflow-hidden">
           <div className="absolute inset-0 opacity-[0.03] bg-[url('https://www.transparenttextures.com/patterns/pinstriped-suit.png')] pointer-events-none" />
 
           <div className="max-w-3xl mx-auto text-center relative z-10">
