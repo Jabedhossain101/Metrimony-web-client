@@ -9,7 +9,9 @@ import {
   FaHeart,
   FaRing,
   FaSignOutAlt,
+  FaEnvelope,
 } from 'react-icons/fa';
+import { FaBell } from 'react-icons/fa6';
 import { AuthContext } from '../../Contexts/AuthContext';
 import Swal from 'sweetalert2';
 import { IoHome } from 'react-icons/io5';
@@ -54,12 +56,21 @@ const UserLayout = () => {
   const navLinks = [
     { name: 'Edit Biodata', path: 'edit-biodata', icon: <FaEdit /> },
     { name: 'View Biodata', path: 'view-biodata', icon: <FaEye /> },
-    { name: 'My Contact Request', path: 'contact-requests', icon: <FaUsers /> },
+    { name: 'Connections', path: 'connections', icon: <FaUsers /> },
+    { name: 'Messages', path: 'messages', icon: <FaEnvelope /> },
     { name: 'Favourites Biodata', path: 'favourites', icon: <FaHeart /> },
     { name: 'Add Got Married', path: 'got-married', icon: <FaRing /> },
   ];
 
   const isActive = path => location.pathname.includes(path);
+  const [showNotifications, setShowNotifications] = useState(false);
+  
+  // Mock notifications
+  const notifications = [
+    { id: 1, text: "Aisha requested your contact info", time: "2m ago", unread: true },
+    { id: 2, text: "Omar accepted your connection request", time: "1h ago", unread: true },
+    { id: 3, text: "Your profile reached 100 views!", time: "2d ago", unread: false },
+  ];
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row font-sans">
@@ -188,8 +199,37 @@ const UserLayout = () => {
             Welcome back,{' '}
             <span className="text-pink-600">{user?.displayName || 'User'}</span>
           </h2>
-          <div className="flex items-center gap-4 text-sm text-slate-500">
-            <span>{new Date().toLocaleDateString('en-GB')}</span>
+          <div className="flex items-center gap-6">
+            <span className="text-sm text-slate-500 font-medium">{new Date().toLocaleDateString('en-GB')}</span>
+            
+            {/* Notification Bell */}
+            <div className="relative">
+              <button 
+                onClick={() => setShowNotifications(!showNotifications)}
+                className="p-2 text-slate-500 hover:bg-slate-100 rounded-full relative transition-colors"
+              >
+                <FaBell size={20} />
+                <span className="absolute top-1 right-1.5 w-2 h-2 bg-pink-500 rounded-full border-2 border-white"></span>
+              </button>
+              
+              {/* Notification Dropdown */}
+              {showNotifications && (
+                <div className="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden z-50">
+                  <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+                    <h3 className="font-bold text-slate-800">Notifications</h3>
+                    <span className="text-xs text-pink-600 font-semibold cursor-pointer">Mark all as read</span>
+                  </div>
+                  <div className="max-h-80 overflow-y-auto">
+                    {notifications.map(n => (
+                      <div key={n.id} className={`p-4 border-b border-slate-50 hover:bg-slate-50 cursor-pointer ${n.unread ? 'bg-pink-50/30' : ''}`}>
+                        <p className={`text-sm ${n.unread ? 'text-slate-800 font-semibold' : 'text-slate-600'}`}>{n.text}</p>
+                        <p className="text-xs text-slate-400 mt-1">{n.time}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </header>
 

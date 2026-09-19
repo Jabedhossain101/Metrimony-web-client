@@ -11,7 +11,8 @@ import MultiStepBiodataWizard from '../Form/MultiStepBiodataWizard';
 import UserLayout from '../UserDashBoard/UserLayout/UserLayout';
 import EditBiodata from '../UserDashBoard/UserComponents/EditBiodata';
 import ViewBiodata from '../UserDashBoard/UserComponents/ViewBiodata';
-import ContactRequests from '../UserDashBoard/UserComponents/ContactRequests ';
+import Connections from '../UserDashBoard/UserComponents/Connections';
+import Messages from '../UserDashBoard/UserComponents/Messages';
 import Favourites from '../UserDashBoard/UserComponents/Favourites ';
 import CheckoutPage from '../Pages/CheckoutPage';
 import AdminLayout from '../AdminPanel/Layout/AdminLayout';
@@ -118,8 +119,12 @@ export const router = createBrowserRouter([
         Component: ViewBiodata,
       },
       {
-        path: 'contact-requests',
-        Component: ContactRequests,
+        path: 'connections',
+        Component: Connections,
+      },
+      {
+        path: 'messages',
+        Component: Messages,
       },
       {
         path: 'favourites',
