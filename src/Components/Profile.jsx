@@ -163,9 +163,10 @@ const ProfileCard = () => {
                 <Shield
                   size={18}
                   className="text-blue-500 fill-blue-50 shrink-0"
+                  title="Admin"
                 />
               ) : (
-                <CheckCircle2 size={18} className="text-rose-500 shrink-0" />
+                <CheckCircle2 size={18} className="text-emerald-500 shrink-0" title="Verified Member" />
               )}
             </div>
 

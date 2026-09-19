@@ -7,7 +7,7 @@ import Register from '../Authentication/Register';
 import BiodataDetails from '../Pages/BiodataDetails';
 import PrivateRoute from './PrivateRoute';
 import BiodatasPage from '../Pages/BiodatasPage';
-import AddedMember from '../Form/AddedMember';
+import MultiStepBiodataWizard from '../Form/MultiStepBiodataWizard';
 import UserLayout from '../UserDashBoard/UserLayout/UserLayout';
 import EditBiodata from '../UserDashBoard/UserComponents/EditBiodata';
 import ViewBiodata from '../UserDashBoard/UserComponents/ViewBiodata';
@@ -65,7 +65,7 @@ export const router = createBrowserRouter([
         path: 'added-member',
         element: (
           <PrivateRoute>
-            <AddedMember />
+            <MultiStepBiodataWizard />
           </PrivateRoute>
         ),
       },
