@@ -1,29 +1,119 @@
-/* 1. Shob shuru-te @import thakte hobe */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap');
+/* 1. Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+/* 2. Tailwind Core */
 @import 'tailwindcss';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@theme {
+  --font-sans: 'Inter', sans-serif;
+  --font-serif: 'Playfair Display', serif;
 
-/* 2. Tarpor onno sob rules */
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+}
+
 @layer base {
+  :root {
+    /* Warm, enterprise-grade matrimonial palette */
+    --background: 30 50% 98%; /* Warm sand / off-white */
+    --foreground: 20 14% 4%; /* Dark brown-grey */
+
+    --card: 0 0% 100%;
+    --card-foreground: 20 14% 4%;
+ 
+    --popover: 0 0% 100%;
+    --popover-foreground: 20 14% 4%;
+ 
+    --primary: 346 80% 45%; /* Deep Rose / Maroon */
+    --primary-foreground: 355 100% 97%;
+ 
+    --secondary: 35 20% 90%; /* Warm grey */
+    --secondary-foreground: 24 10% 10%;
+ 
+    --muted: 35 20% 90%;
+    --muted-foreground: 25 5% 45%;
+ 
+    --accent: 35 20% 90%;
+    --accent-foreground: 24 10% 10%;
+ 
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 30 15% 90%;
+    --input: 30 15% 90%;
+    --ring: 346 80% 45%;
+ 
+    --radius: 0.75rem;
+  }
+ 
+  .dark {
+    --background: 20 14% 4%;
+    --foreground: 30 50% 98%;
+ 
+    --card: 24 10% 10%;
+    --card-foreground: 30 50% 98%;
+ 
+    --popover: 24 10% 10%;
+    --popover-foreground: 30 50% 98%;
+ 
+    --primary: 346 80% 55%;
+    --primary-foreground: 0 0% 100%;
+ 
+    --secondary: 25 10% 20%;
+    --secondary-foreground: 30 50% 98%;
+ 
+    --muted: 25 10% 20%;
+    --muted-foreground: 30 20% 70%;
+ 
+    --accent: 25 10% 20%;
+    --accent-foreground: 30 50% 98%;
+ 
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 30 50% 98%;
+ 
+    --border: 25 10% 20%;
+    --input: 25 10% 20%;
+    --ring: 346 80% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
   body {
-    font-family: 'Inter', sans-serif;
-    @apply bg-white text-gray-900 transition-colors duration-300;
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
   }
-
-  h1, h2, h3, h4, .font-serif {
-    font-family: 'Playfair Display', serif;
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: var(--font-serif);
   }
-}
-
-/* Light mode */
-body {
-  @apply bg-white text-gray-900;
-}
-
-/* Dark mode */
-.dark body {
-  @apply bg-gray-900 text-white;
 }

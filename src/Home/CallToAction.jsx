@@ -8,6 +8,7 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import { Link } from 'react-router';
+import { AiFillAlipayCircle } from 'react-icons/ai';
 
 const CallToAction = () => {
   return (
@@ -35,6 +36,7 @@ const CallToAction = () => {
                 fill="currentColor"
               />
             </motion.div>
+            <AiFillAlipayCircle />
 
             {/* Content Header */}
             <motion.div
