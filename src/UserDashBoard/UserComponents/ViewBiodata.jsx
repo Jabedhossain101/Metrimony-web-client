@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Contexts/AuthContext';
 import Swal from 'sweetalert2';
+import { Link } from 'react-router';
 import {
   HiOutlineShieldCheck,
   HiOutlineMail,
@@ -15,24 +16,44 @@ import {
 } from 'react-icons/hi';
 
 const ViewBiodata = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading: authLoading } = useContext(AuthContext);
   const [biodata, setBiodata] = useState(null);
   const [requestSent, setRequestSent] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (user?.email) {
-      fetch(
-        `https://metrimony-server-ten.vercel.app/biodata/me?email=${user.email}`,
-      )
-        .then(res => res.json())
-        .then(data => {
-          setBiodata(data);
-          setLoading(false);
-        })
-        .catch(() => setLoading(false));
+    if (authLoading) return;
+
+    if (!user?.email) {
+      setLoading(false);
+      return;
     }
-  }, [user?.email]);
+
+    const fetchBiodata = async () => {
+      try {
+        const res = await fetch(
+          `https://metrimony-server-ten.vercel.app/biodata/me?email=${user.email}`
+        );
+        if (!res.ok) throw new Error('Not found');
+        
+        const text = await res.text();
+        const data = text ? JSON.parse(text) : null;
+        
+        if (data && data._id) {
+          setBiodata(data);
+        } else {
+          setBiodata(null);
+        }
+      } catch (err) {
+        console.error('Failed to load biodata:', err);
+        setBiodata(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBiodata();
+  }, [user, authLoading]);
 
   const handlePremiumRequest = () => {
     Swal.fire({
@@ -70,41 +91,49 @@ const ViewBiodata = () => {
     });
   };
 
-  if (loading)
+  if (loading || authLoading)
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <div className="w-12 h-12 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin"></div>
+        <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
       </div>
     );
 
   if (!biodata)
     return (
-      <div className="text-center py-20 bg-slate-900/40 rounded-3xl border border-slate-800">
-        <HiOutlineUser className="w-16 h-16 mx-auto mb-4 text-slate-700" />
-        <p className="text-slate-400 font-medium">
-          No biodata found. Please create one first.
+      <div className="text-center py-20 bg-card rounded-[2rem] border border-border shadow-sm max-w-lg mx-auto">
+        <HiOutlineUser className="w-16 h-16 mx-auto mb-4 text-muted-foreground/50" />
+        <h3 className="text-xl font-bold text-foreground mb-2">No Biodata Found</h3>
+        <p className="text-muted-foreground font-medium mb-8 px-4">
+          Create your biodata to start receiving connection requests and find your perfect match.
         </p>
+        <Link
+          to="/dashboard/edit-biodata"
+          className="inline-flex items-center gap-2 px-8 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-xl shadow-lg transition-colors"
+        >
+          Create Biodata Now
+        </Link>
       </div>
     );
 
   return (
     <div className="max-w-5xl mx-auto animate-in fade-in duration-700">
       {/* Top Profile Header */}
-      <div className="relative overflow-hidden bg-slate-900 border border-slate-800 rounded-[32px] p-6 md:p-10 mb-8 shadow-2xl">
+      <div className="relative overflow-hidden bg-card border border-border rounded-[32px] p-6 md:p-10 mb-8 shadow-xl">
         {/* Decorative Background Glow */}
-        <div className="absolute -top-24 -left-24 w-64 h-64 bg-emerald-500/10 blur-[100px] rounded-full"></div>
+        <div className="absolute -top-24 -left-24 w-64 h-64 bg-primary/10 blur-[100px] rounded-full"></div>
 
         <div className="flex flex-col md:flex-row items-center gap-8 relative z-10">
           <div className="relative group">
-            <div className="w-44 h-44 rounded-3xl overflow-hidden border-4 border-slate-800 shadow-2xl group-hover:border-emerald-500/50 transition-colors duration-500">
+            <div className="w-44 h-44 rounded-3xl overflow-hidden border-4 border-card shadow-2xl group-hover:border-primary/50 transition-colors duration-500 relative">
               <img
                 src={biodata.profileImage}
                 className="w-full h-full object-cover"
                 alt={biodata.name}
               />
+               <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent opacity-60" />
             </div>
             {biodata.isPremium && (
-              <div className="absolute -top-3 -right-3 bg-amber-500 text-slate-900 p-1.5 rounded-full border-4 border-slate-900 shadow-lg">
+              <div className="absolute -top-3 -right-3 bg-accent text-background p-1.5 rounded-full border-4 border-card shadow-lg">
                 <HiBadgeCheck className="w-6 h-6" />
               </div>
             )}
@@ -112,23 +141,23 @@ const ViewBiodata = () => {
 
           <div className="text-center md:text-left flex-1">
             <div className="flex flex-col md:flex-row md:items-center gap-3 mb-4">
-              <h1 className="text-4xl font-bold text-white tracking-tight">
+              <h1 className="text-4xl font-serif font-bold text-foreground tracking-tight">
                 {biodata.name}
               </h1>
-              <span className="w-fit mx-auto md:mx-0 px-3 py-1 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-full border border-emerald-500/20 uppercase tracking-widest">
+              <span className="w-fit mx-auto md:mx-0 px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full border border-primary/20 uppercase tracking-widest">
                 {biodata.biodataType}
               </span>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="flex items-center gap-3 text-slate-300">
-                <div className="p-2 bg-slate-800 rounded-lg text-emerald-400">
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <div className="p-2 bg-secondary rounded-lg text-primary">
                   <HiOutlineBriefcase className="w-5 h-5" />
                 </div>
                 <span className="font-medium">{biodata.occupation}</span>
               </div>
-              <div className="flex items-center gap-3 text-slate-300">
-                <div className="p-2 bg-slate-800 rounded-lg text-blue-400">
+              <div className="flex items-center gap-3 text-muted-foreground">
+                <div className="p-2 bg-secondary rounded-lg text-primary">
                   <HiOutlineLocationMarker className="w-5 h-5" />
                 </div>
                 <span className="font-medium">{biodata.presentDivision}</span>
@@ -142,9 +171,9 @@ const ViewBiodata = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column: Personal Stats */}
         <div className="lg:col-span-2 space-y-8">
-          <section className="bg-slate-900 border border-slate-800 rounded-[28px] p-8 shadow-sm">
-            <h3 className="text-xl font-bold text-white mb-8 flex items-center gap-3">
-              <HiOutlineUser className="text-emerald-500" />
+          <section className="bg-card border border-border rounded-[28px] p-8 shadow-sm">
+            <h3 className="text-xl font-bold text-foreground mb-8 flex items-center gap-3">
+              <HiOutlineUser className="text-primary" />
               Personal Details
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
@@ -195,50 +224,50 @@ const ViewBiodata = () => {
         {/* Right Column: Contact & Partner */}
         <div className="space-y-8">
           {/* Verified Contact Card */}
-          <section className="bg-emerald-500/5 border border-slate-800 rounded-[28px] p-6">
-            <h3 className="text-lg font-bold text-black mb-6">Contact Info</h3>
+          <section className="bg-secondary/50 border border-border rounded-[28px] p-6 shadow-sm">
+            <h3 className="text-lg font-bold text-foreground mb-6">Contact Info</h3>
             <div className="space-y-4">
-              <div className="p-4 bg-slate-800/50 rounded-2xl border border-slate-700/50">
-                <p className="text-[10px] uppercase font-bold text-slate-500 mb-1">
+              <div className="p-4 bg-background rounded-2xl border border-border shadow-inner">
+                <p className="text-[10px] uppercase font-bold text-muted-foreground mb-1 tracking-widest">
                   Email Address
                 </p>
-                <p className="text-white font-medium break-all">
+                <p className="text-foreground font-medium break-all">
                   {biodata.contactEmail}
                 </p>
               </div>
-              <div className="p-4 bg-slate-800/50 rounded-2xl border border-slate-700/50">
-                <p className="text-[10px] uppercase font-bold text-slate-500 mb-1">
+              <div className="p-4 bg-background rounded-2xl border border-border shadow-inner">
+                <p className="text-[10px] uppercase font-bold text-muted-foreground mb-1 tracking-widest">
                   Mobile Number
                 </p>
-                <p className="text-white font-medium">{biodata.mobileNumber}</p>
+                <p className="text-foreground font-medium">{biodata.mobileNumber}</p>
               </div>
             </div>
           </section>
 
           {/* Preference Card */}
-          <section className="bg-emerald-500/5 border border-emerald-500/20 rounded-[28px] p-6 relative overflow-hidden">
+          <section className="bg-primary/5 border border-primary/20 rounded-[28px] p-6 relative overflow-hidden">
             <div className="absolute top-0 right-0 p-4 opacity-10">
-              <HiOutlineSparkles className="w-12 h-12 text-emerald-400" />
+              <HiOutlineSparkles className="w-12 h-12 text-primary" />
             </div>
-            <h3 className="text-lg font-bold text-pink-500 mb-6">
+            <h3 className="text-lg font-bold text-primary mb-6">
               Expectations
             </h3>
             <div className="space-y-4">
               <div className="flex justify-between items-center">
-                <span className="text-slate-400 text-sm">Partner Age</span>
-                <span className="text-pink-500 font-bold">
+                <span className="text-muted-foreground text-sm font-bold">Partner Age</span>
+                <span className="text-foreground font-bold">
                   {biodata.expectedPartnerAge} yrs
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-slate-400 text-sm">Min Height</span>
-                <span className="text-pink-500 font-medium">
+                <span className="text-muted-foreground text-sm font-bold">Min Height</span>
+                <span className="text-foreground font-bold">
                   {biodata.expectedPartnerHeight}
                 </span>
               </div>
               <div className="flex justify-between items-center">
-                <span className="text-slate-400 text-sm">Min Weight</span>
-                <span className="text-pink-500 font-medium">
+                <span className="text-muted-foreground text-sm font-bold">Min Weight</span>
+                <span className="text-foreground font-bold">
                   {biodata.expectedPartnerWeight}
                 </span>
               </div>
@@ -249,18 +278,18 @@ const ViewBiodata = () => {
 
       {/* Action Area: Premium Request */}
       {!biodata.isPremium && (
-        <div className="mt-12 text-center p-8 bg-slate-900 border border-slate-800 rounded-[32px]">
-          <h4 className="text-xl font-bold text-white mb-2">
+        <div className="mt-12 text-center p-8 bg-card border border-border rounded-[32px] shadow-sm">
+          <h4 className="text-xl font-serif font-bold text-foreground mb-2">
             Want to stand out?
           </h4>
-          <p className="text-slate-400 mb-8 max-w-md mx-auto">
+          <p className="text-muted-foreground mb-8 max-w-md mx-auto">
             Get the Premium badge and appear at the top of search results to
             find your match 3x faster.
           </p>
           <button
             onClick={handlePremiumRequest}
             disabled={requestSent}
-            className="w-full md:w-auto px-12 py-4 bg-amber-500 hover:bg-amber-600 text-slate-900 font-black rounded-2xl transition-all shadow-xl shadow-amber-500/20 disabled:bg-slate-800 disabled:text-slate-600 uppercase tracking-widest text-sm"
+            className="w-full md:w-auto px-12 py-4 bg-accent hover:bg-accent/90 text-background font-black rounded-2xl transition-all shadow-xl shadow-accent/20 disabled:bg-secondary disabled:text-muted-foreground uppercase tracking-widest text-sm"
           >
             {requestSent ? 'Request Pending...' : 'Upgrade To Premium'}
           </button>
@@ -273,12 +302,12 @@ const ViewBiodata = () => {
 // Custom Component for Detail Rows to ensure color consistency
 const DetailBox = ({ label, value, icon }) => (
   <div className="flex items-start gap-4">
-    <div className="mt-1 text-slate-500">{icon}</div>
+    <div className="mt-1 p-2 bg-secondary rounded-lg text-primary">{icon}</div>
     <div>
-      <p className="text-[11px] uppercase font-bold text-slate-500 tracking-wider mb-0.5">
+      <p className="text-[10px] uppercase font-bold text-muted-foreground tracking-[0.2em] mb-1">
         {label}
       </p>
-      <p className="text-slate-200 font-semibold text-base leading-tight">
+      <p className="text-foreground font-bold text-base leading-tight">
         {value || 'Not Provided'}
       </p>
     </div>

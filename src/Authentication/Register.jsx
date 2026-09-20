@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { Eye, EyeOff, Mail, Lock, User, Image, Heart } from 'lucide-react';
+import { motion } from 'framer-motion';
 import UseAuth from '../Hooks/UseAuth';
 import SocialLogin from './SocialLogin';
 import Swal from 'sweetalert2';
@@ -24,7 +25,6 @@ const Register = () => {
     setShowPassword(!showPassword);
   };
 
- 
   const saveUserToDB = async userInfo => {
     try {
       const res = await fetch('https://metrimony-server-ten.vercel.app/users', {
@@ -56,11 +56,15 @@ const Register = () => {
 
         navigate(from);
         Swal.fire({
-          position: 'top-end',
+          position: 'center',
           icon: 'success',
-          title: 'Registration successful',
+          title: 'Welcome to Soulmate!',
+          text: 'Registration successful.',
           showConfirmButton: false,
-          timer: 1500,
+          timer: 2000,
+          customClass: {
+             popup: 'rounded-[2rem] font-serif',
+          }
         });
       })
       .catch(error => {
@@ -69,127 +73,168 @@ const Register = () => {
           icon: 'error',
           title: 'Oops...',
           text: error.message,
+          confirmButtonColor: '#9F1239',
         });
       });
   };
 
   return (
-    <div className=" flex items-center justify-center bg-gradient-to-br ">
-      <div className="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md">
-        <h2 className="text-3xl font-bold text-center text-pink-600 mb-6">
-          Create Your <span className="text-blue-500">Account</span>
-        </h2>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          <div>
-            <label className="block text-gray-700 font-semibold mb-1">
-              Name
-            </label>
-            <input
-              type="text"
-              {...register('name', { required: 'Name is required' })}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
-              placeholder="Enter your name"
-            />
-            {errors.name && (
-              <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
-            )}
+    <div className="min-h-screen flex items-center justify-center bg-background px-6 py-12 relative overflow-hidden">
+      {/* Decorative Blur Elements */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-primary/20 rounded-full blur-[100px] opacity-50 -z-0"></div>
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/20 rounded-full blur-[100px] opacity-50 -z-0"></div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="bg-card/80 backdrop-blur-xl border border-border rounded-[3rem] shadow-xl p-10 md:p-14 w-full max-w-xl z-10 my-10"
+      >
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-2xl shadow-lg shadow-primary/20 mb-6 text-primary-foreground">
+             <Heart size={32} fill="currentColor" />
+          </div>
+          <h2 className="text-4xl font-serif font-bold text-foreground leading-tight">
+            Create Your <span className="text-primary italic">Account</span>
+          </h2>
+          <p className="text-muted-foreground mt-2 font-light">
+            Start your journey to finding the perfect match.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+             {/* Name Field */}
+             <div className="space-y-2">
+               <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">
+                 Full Name
+               </label>
+               <div className="relative group">
+                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors">
+                   <User size={20} />
+                 </span>
+                 <input
+                   type="text"
+                   {...register('name', { required: 'Name is required' })}
+                   className="w-full bg-secondary/50 border border-border rounded-2xl px-12 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-foreground placeholder:text-muted-foreground"
+                   placeholder="John Doe"
+                 />
+               </div>
+               {errors.name && (
+                 <p className="text-destructive text-xs ml-1">{errors.name.message}</p>
+               )}
+             </div>
+
+             {/* Email Field */}
+             <div className="space-y-2">
+               <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">
+                 Email Address
+               </label>
+               <div className="relative group">
+                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors">
+                   <Mail size={20} />
+                 </span>
+                 <input
+                   type="email"
+                   {...register('email', { required: 'Email is required' })}
+                   className="w-full bg-secondary/50 border border-border rounded-2xl px-12 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-foreground placeholder:text-muted-foreground"
+                   placeholder="mail@example.com"
+                 />
+               </div>
+               {errors.email && (
+                 <p className="text-destructive text-xs ml-1">{errors.email.message}</p>
+               )}
+             </div>
           </div>
 
-          <div>
-            <label className="block text-gray-700 font-semibold mb-1">
-              Email
-            </label>
-            <input
-              type="email"
-              {...register('email', { required: 'Email is required' })}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
-              placeholder="Enter your email"
-            />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.email.message}
-              </p>
-            )}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+             {/* Photo URL Field */}
+             <div className="space-y-2">
+               <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">
+                 Photo URL
+               </label>
+               <div className="relative group">
+                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors">
+                   <Image size={20} />
+                 </span>
+                 <input
+                   type="text"
+                   {...register('photoURL', { required: 'Photo URL is required' })}
+                   className="w-full bg-secondary/50 border border-border rounded-2xl px-12 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-foreground placeholder:text-muted-foreground"
+                   placeholder="https://..."
+                 />
+               </div>
+               {errors.photoURL && (
+                 <p className="text-destructive text-xs ml-1">{errors.photoURL.message}</p>
+               )}
+             </div>
+
+             {/* Password Field */}
+             <div className="space-y-2">
+               <label className="text-xs font-bold uppercase tracking-widest text-muted-foreground ml-1">
+                 Password
+               </label>
+               <div className="relative group">
+                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-primary transition-colors">
+                   <Lock size={20} />
+                 </span>
+                 <input
+                   type={showPassword ? 'text' : 'password'}
+                   {...register('password', {
+                     required: 'Password is required',
+                     minLength: { value: 6, message: 'Must be at least 6 characters' },
+                     pattern: {
+                       value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
+                       message: 'Needs uppercase, lowercase & number',
+                     },
+                   })}
+                   className="w-full bg-secondary/50 border border-border rounded-2xl px-12 py-4 outline-none focus:border-primary focus:ring-4 focus:ring-primary/10 transition-all text-foreground placeholder:text-muted-foreground"
+                   placeholder="••••••••"
+                 />
+                 <button
+                   type="button"
+                   onClick={togglePassword}
+                   className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
+                 >
+                   {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                 </button>
+               </div>
+               {errors.password && (
+                 <p className="text-destructive text-xs ml-1">{errors.password.message}</p>
+               )}
+             </div>
           </div>
 
-          <div>
-            <label className="block text-gray-700 font-semibold mb-1">
-              Password
-            </label>
-            <div className="relative">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                {...register('password', {
-                  required: 'Password is required',
-                  minLength: {
-                    value: 6,
-                    message: 'Password must be at least 6 characters',
-                  },
-                  pattern: {
-                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/,
-                    message: 'Password must have uppercase, lowercase & number',
-                  },
-                })}
-                className="w-full border border-gray-300 rounded-md px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-pink-400"
-                placeholder="Create a password"
-              />
-              {errors.password && (
-                <p className="text-red-500 text-sm mt-1">
-                  {errors.password.message}
-                </p>
-              )}
-              <span
-                onClick={togglePassword}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600 cursor-pointer mb-1"
-              >
-                {showPassword ? <FaEyeSlash /> : <FaEye />}
-              </span>
-            </div>
-          </div>
-
-          <div>
-            <label className="block text-gray-700 font-semibold mb-1">
-              Photo URL
-            </label>
-            <input
-              type="text"
-              {...register('photoURL', { required: 'Photo URL is required' })}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-pink-400"
-              placeholder="Paste your photo URL"
-            />
-            {errors.photoURL && (
-              <p className="text-red-500 text-sm mt-1">
-                {errors.photoURL.message}
-              </p>
-            )}
-          </div>
-
-          <button
+          <motion.button
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.98 }}
             type="submit"
-            className="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold rounded-md px-4 py-2 transition"
+            className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold rounded-2xl py-4 transition-all shadow-xl hover:shadow-primary/20 mt-4"
           >
-            Register
-          </button>
+            Register Now
+          </motion.button>
         </form>
 
-        <div className="my-6 flex items-center">
-          <div className="flex-grow h-px bg-gray-300"></div>
-          <span className="mx-2 text-gray-500 font-medium">OR</span>
-          <div className="flex-grow h-px bg-gray-300"></div>
+        <div className="my-10 flex items-center gap-4">
+          <div className="flex-grow h-px bg-border"></div>
+          <span className="text-xs font-bold text-muted-foreground uppercase tracking-[0.2em]">
+            Or Join With
+          </span>
+          <div className="flex-grow h-px bg-border"></div>
         </div>
 
         <SocialLogin />
 
-        <p className="text-center text-gray-600 mt-4">
+        <p className="text-center text-muted-foreground mt-10 text-sm font-light">
           Already have an account?{' '}
           <Link
             to="/login"
-            className="text-pink-600 font-semibold hover:underline"
+            className="text-primary font-bold hover:underline"
           >
             Login here
           </Link>
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 };

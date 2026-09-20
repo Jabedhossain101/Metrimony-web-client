@@ -10,100 +10,104 @@ import {
 } from 'react-icons/hi';
 
 const EditBiodata = () => {
-  const { user } = useContext(AuthContext);
-  const [hasBiodata, setHasBiodata] = useState(null);
+  const { user, loading: authLoading } = useContext(AuthContext);
+  const [hasBiodata, setHasBiodata] = useState(false);
   const [loading, setLoading] = useState(true);
   const { register, handleSubmit, reset } = useForm();
 
   useEffect(() => {
-    if (user?.email) {
-      fetch(
-        `https://metrimony-server-ten.vercel.app/biodata/me?email=${user.email}`,
-      )
-        .then(res => res.json())
-        .then(data => {
-          if (data && data._id) {
-            setHasBiodata(true);
-            reset(data);
-          } else {
-            setHasBiodata(false);
-          }
-          setLoading(false);
-        })
-        .catch(() => {
-          toast.error('Failed to load biodata');
-          setHasBiodata(false);
-          setLoading(false);
-        });
+    if (authLoading) return;
+
+    if (!user?.email) {
+      setLoading(false);
+      return;
     }
-  }, [user?.email, reset]);
+
+    const fetchBiodata = async () => {
+      try {
+        const res = await fetch(
+          `https://metrimony-server-ten.vercel.app/biodata/me?email=${user.email}`
+        );
+        if (!res.ok) {
+          throw new Error('Not found');
+        }
+        
+        const text = await res.text();
+        const data = text ? JSON.parse(text) : null;
+
+        if (data && data._id) {
+          setHasBiodata(true);
+          reset(data);
+        } else {
+          setHasBiodata(false);
+          reset({ name: user.name || '', contactEmail: user.email });
+        }
+      } catch (err) {
+        console.error('Failed to load biodata:', err);
+        setHasBiodata(false);
+        reset({ name: user.name || '', contactEmail: user.email });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBiodata();
+  }, [user, authLoading, reset]);
 
   const onSubmit = async data => {
-    const loadingToast = toast.loading('Updating your profile...');
+    const loadingToast = toast.loading(hasBiodata ? 'Updating your profile...' : 'Creating your profile...');
+    
+    // Auto-attach user email to ensure consistency
+    data.contactEmail = user.email;
+
+    const url = hasBiodata 
+      ? `https://metrimony-server-ten.vercel.app/biodatas/${data._id}`
+      : `https://metrimony-server-ten.vercel.app/biodatas`;
+      
+    const method = hasBiodata ? 'PUT' : 'POST';
+
     try {
-      const res = await fetch(
-        `https://metrimony-server-ten.vercel.app/biodatas/${data._id}`,
-        {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        },
-      );
+      const res = await fetch(url, {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
 
       if (res.ok) {
-        toast.success('Biodata updated successfully!', { id: loadingToast });
+        toast.success(hasBiodata ? 'Biodata updated successfully!' : 'Biodata created successfully!', { id: loadingToast });
+        if (!hasBiodata) setHasBiodata(true);
       } else {
-        toast.error('Failed to update biodata', { id: loadingToast });
+        toast.error('Failed to save biodata', { id: loadingToast });
       }
     } catch (err) {
       toast.error('Server connection error', { id: loadingToast });
     }
   };
 
-  if (loading)
+  if (loading || authLoading)
     return (
       <div className="flex flex-col items-center justify-center min-h-[400px]">
-        <div className="w-12 h-12 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin"></div>
-        <p className="mt-4 text-slate-500 font-medium">
-          Fetching Profile Data...
+        <div className="w-12 h-12 border-4 border-primary/20 border-t-primary rounded-full animate-spin"></div>
+        <p className="mt-4 text-muted-foreground font-medium">
+          Loading Profile Data...
         </p>
       </div>
     );
 
   return (
     <div className="animate-in fade-in duration-500">
-      {!hasBiodata ? (
-        <div className="flex flex-col items-center justify-center py-20 px-6 text-center bg-slate-800/20 border border-dashed border-slate-700 rounded-[32px]">
-          <div className="bg-emerald-500/10 p-4 rounded-full mb-6">
-            <HiOutlinePlusCircle className="w-12 h-12 text-emerald-400" />
-          </div>
-          <h3 className="text-2xl font-bold text-white mb-3">
-            No Biodata Found
-          </h3>
-          <p className="text-slate-400 max-w-md mb-8">
-            You haven't created a biodata yet. Creating one allows others to
-            find you and helps you find your perfect match.
-          </p>
-          <NavLink
-            to="/added-member"
-            className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold px-8 py-3 rounded-xl transition-all shadow-lg shadow-emerald-500/20"
-          >
-            Create Your Biodata Now
-          </NavLink>
-        </div>
-      ) : (
         <div className="space-y-8">
           {/* Header Section */}
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-8">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-8">
             <div>
-              <h2 className="text-3xl font-bold text-white tracking-tight">
-                Edit Biodata
+              <h2 className="text-3xl font-serif font-bold text-foreground tracking-tight">
+                {hasBiodata ? 'Edit Biodata' : 'Create Biodata'}
               </h2>
-              <p className="text-slate-500 mt-1">
-                Keep your profile updated to get better matches.
+              <p className="text-muted-foreground mt-1">
+                {hasBiodata ? 'Keep your profile updated to get better matches.' : 'Complete your profile to start finding matches.'}
               </p>
             </div>
-            <div className="flex items-center gap-2 bg-blue-500/10 text-blue-400 px-4 py-2 rounded-lg border border-blue-500/20 text-sm">
+            <div className="flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-lg border border-primary/20 text-sm font-bold tracking-wide uppercase">
               <HiOutlineInformationCircle className="w-5 h-5" />
               <span>Public Profile</span>
             </div>
@@ -296,12 +300,12 @@ const EditBiodata = () => {
                 className="group flex items-center gap-3 bg-emerald-500 hover:bg-emerald-600 text-slate-900 font-bold px-10 py-4 rounded-2xl transition-all shadow-xl shadow-emerald-500/10 hover:shadow-emerald-500/20 active:scale-95"
               >
                 <HiOutlineSave className="w-6 h-6 group-hover:rotate-12 transition-transform" />
-                Save & Update Biodata
+                <HiOutlineSave className="w-6 h-6 group-hover:rotate-12 transition-transform" />
+                {hasBiodata ? 'Save & Update Biodata' : 'Create Biodata'}
               </button>
             </div>
           </form>
         </div>
-      )}
 
       {/* Internal CSS for the Ultra-Pro Inputs */}
       <style
@@ -309,21 +313,21 @@ const EditBiodata = () => {
           __html: `
         .input-field {
           width: 100%;
-          background: #1e293b;
-          border: 1px solid #334155;
+          background: var(--secondary);
+          border: 1px solid var(--border);
           border-radius: 12px;
           padding: 12px 16px;
-          color: #f8fafc;
+          color: var(--foreground);
           transition: all 0.3s ease;
           outline: none;
         }
         .input-field:focus {
-          border-color: #10b981;
-          background: #0f172a;
-          box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.1);
+          border-color: var(--primary);
+          background: var(--background);
+          box-shadow: 0 0 0 4px rgba(159, 18, 57, 0.1);
         }
         .input-field::placeholder {
-          color: #475569;
+          color: var(--muted-foreground);
         }
       `,
         }}
@@ -335,7 +339,7 @@ const EditBiodata = () => {
 // Helper Component for consistency
 const FormGroup = ({ label, children }) => (
   <div className="flex flex-col gap-2">
-    <label className="text-sm font-semibold text-slate-400 ml-1">{label}</label>
+    <label className="text-[10px] uppercase tracking-widest font-bold text-muted-foreground ml-1">{label}</label>
     {children}
   </div>
 );

@@ -73,17 +73,17 @@ const UserLayout = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col md:flex-row font-sans">
+    <div className="min-h-screen bg-background flex flex-col md:flex-row font-sans">
       {/* Mobile Navbar */}
-      <div className="md:hidden bg-slate-900 text-white flex justify-between items-center p-4 shadow-lg sticky top-0 z-50">
+      <div className="md:hidden bg-card text-foreground border-b border-border flex justify-between items-center p-4 shadow-sm sticky top-0 z-50">
         <Link
           to="/"
           className="flex items-center gap-2 text-xl font-bold tracking-tight"
         >
-          <IoHome className="text-pink-500 text-2xl" />
+          <IoHome className="text-primary text-2xl" />
           <span>Dashboard</span>
         </Link>
-        <button onClick={toggleSidebar} className="p-2 bg-slate-800 rounded-lg">
+        <button onClick={toggleSidebar} className="p-2 bg-secondary rounded-lg">
           {isOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
         </button>
       </div>
@@ -91,8 +91,8 @@ const UserLayout = () => {
       {/* Sidebar */}
       <aside
         className={`
-          fixed md:sticky top-0 left-0 h-screen w-72 bg-slate-900 text-slate-300 p-0 z-50 
-          transform transition-all duration-300 ease-in-out border-r border-slate-800
+          fixed md:sticky top-0 left-0 h-screen w-72 bg-card text-foreground p-0 z-50 
+          transform transition-all duration-300 ease-in-out border-r border-border
           ${isOpen ? 'translate-x-0' : '-translate-x-full'} 
           md:translate-x-0
         `}
@@ -101,32 +101,32 @@ const UserLayout = () => {
           {/* Sidebar Header */}
           <div className="p-8 pb-4">
             <Link
-              to="/"
-              className="flex items-center gap-3 text-2xl font-bold text-white mb-2"
-            >
-              <div className="bg-pink-500 p-2 rounded-xl shadow-lg shadow-pink-500/20">
-                <IoHome className="text-white" />
-              </div>
-              <span>Platform</span>
+               to="/"
+               className="flex items-center gap-2 text-2xl font-serif font-bold text-foreground mb-2 group"
+             >
+               <div className="bg-primary p-2.5 rounded-2xl shadow-md group-hover:scale-105 transition-transform duration-300">
+                 <FaHeart className="text-primary-foreground w-4 h-4" />
+               </div>
+               <span className="tracking-tight">Soul<span className="text-primary italic">mate</span></span>
             </Link>
-            <p className="text-xs text-slate-500 uppercase tracking-widest font-semibold ml-1">
-              User Management
+            <p className="text-[10px] text-muted-foreground uppercase tracking-[0.2em] font-bold ml-1">
+              User Portal
             </p>
           </div>
 
           <div className="px-6 mb-6">
-            <div className=" rounded-xl p-4 text-center mb-6">
+            <div className="bg-secondary/50 rounded-2xl p-5 text-center mb-6 border border-border shadow-sm">
               <img
-                src={user?.userData?.photoURL}
+                src={user?.userData?.photoURL || 'https://ui-avatars.com/api/?name=User'}
                 alt="Profile"
-                className="w-16 h-16 mx-auto rounded-full border-2 border-pink-400"
+                className="w-16 h-16 mx-auto rounded-full border-2 border-primary object-cover"
               />
-              <h3 className="mt-2 text-lg font-semibold text-gray-900">
-                {user?.userData?.displayName || ''}
+              <h3 className="mt-3 text-lg font-bold text-foreground truncate">
+                {user?.userData?.displayName || 'Welcome'}
               </h3>
-              <p className="text-sm text-white">{user?.email}</p>
-              <span className="inline-block mt-2 px-2 py-0.5 text-xs rounded-full bg-pink-100 text-pink-600 font-semibold">
-                {user?.role ? user?.role.toUpperCase() : 'USER'}
+              <p className="text-xs text-muted-foreground truncate">{user?.email}</p>
+              <span className="inline-block mt-3 px-3 py-1 text-[10px] uppercase tracking-widest rounded-full bg-accent/20 text-accent font-bold">
+                Premium
               </span>
             </div>
           </div>
@@ -138,14 +138,14 @@ const UserLayout = () => {
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-2xl transition-all duration-200 group ${
                   isActive(link.path)
-                    ? 'bg-pink-500 text-white shadow-lg shadow-pink-500/30 font-medium'
-                    : 'hover:bg-slate-800 hover:text-white'
+                    ? 'bg-primary text-primary-foreground shadow-md shadow-primary/20 font-bold'
+                    : 'text-muted-foreground hover:bg-secondary hover:text-foreground font-medium'
                 }`}
               >
                 <span
-                  className={`${isActive(link.path) ? 'text-white' : 'text-slate-500 group-hover:text-pink-400'}`}
+                  className={`${isActive(link.path) ? 'text-primary-foreground' : 'text-primary group-hover:scale-110 transition-transform'}`}
                 >
                   {link.icon}
                 </span>
@@ -155,11 +155,11 @@ const UserLayout = () => {
           </nav>
 
           {/* Sidebar Footer / Logout */}
-          <div className="p-6 border-t border-slate-800">
+          <div className="p-6 border-t border-border bg-card">
             {user ? (
               <button
                 onClick={handleLogout}
-                className="flex items-center justify-center gap-2 w-full px-4 py-3 bg-slate-800 text-red-400 border border-slate-700 rounded-xl hover:bg-red-500 hover:text-white hover:border-red-500 transition-all duration-300 font-medium"
+                className="flex items-center justify-center gap-2 w-full px-4 py-3.5 bg-secondary text-destructive border border-transparent rounded-2xl hover:bg-destructive/10 hover:border-destructive/20 transition-all duration-300 font-bold"
               >
                 <FaSignOutAlt />
                 Sign Out
@@ -168,13 +168,13 @@ const UserLayout = () => {
               <div className="flex flex-col gap-2">
                 <Link
                   to="/login"
-                  className="w-full text-center py-2.5 rounded-xl border border-slate-700 hover:bg-slate-800 transition"
+                  className="w-full text-center py-2.5 rounded-2xl border border-border hover:bg-secondary transition-colors font-bold"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="w-full text-center py-2.5 rounded-xl bg-pink-500 text-white hover:bg-pink-600 transition shadow-lg shadow-pink-500/20"
+                  className="w-full text-center py-2.5 rounded-2xl bg-primary text-primary-foreground hover:bg-primary/90 transition-colors shadow-lg font-bold"
                 >
                   Register
                 </Link>
@@ -188,42 +188,47 @@ const UserLayout = () => {
       {isOpen && (
         <div
           onClick={toggleSidebar}
-          className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 md:hidden transition-opacity"
+          className="fixed inset-0 bg-foreground/60 backdrop-blur-sm z-40 md:hidden transition-opacity"
         ></div>
       )}
 
       {/* Main Content */}
-      <main className="flex-1 overflow-x-hidden">
-        <header className="hidden md:flex items-center justify-between px-8 py-5 bg-white border-b border-slate-200 sticky top-0 z-30">
-          <h2 className="text-xl font-semibold text-slate-800">
+      <main className="flex-1 overflow-x-hidden flex flex-col bg-background relative">
+        {/* Background decorative elements */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-[100px] pointer-events-none" />
+        
+        <header className="hidden md:flex items-center justify-between px-10 py-6 bg-card/80 backdrop-blur-xl border-b border-border sticky top-0 z-30">
+          <h2 className="text-2xl font-serif font-bold text-foreground">
             Welcome back,{' '}
-            <span className="text-pink-600">{user?.displayName || 'User'}</span>
+            <span className="text-primary italic">{user?.displayName || 'User'}</span>
           </h2>
           <div className="flex items-center gap-6">
-            <span className="text-sm text-slate-500 font-medium">{new Date().toLocaleDateString('en-GB')}</span>
+            <span className="text-xs text-muted-foreground font-bold tracking-widest uppercase">
+              {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
+            </span>
             
             {/* Notification Bell */}
             <div className="relative">
               <button 
                 onClick={() => setShowNotifications(!showNotifications)}
-                className="p-2 text-slate-500 hover:bg-slate-100 rounded-full relative transition-colors"
+                className="p-3 bg-secondary text-foreground hover:bg-primary/10 hover:text-primary rounded-full relative transition-colors"
               >
-                <FaBell size={20} />
-                <span className="absolute top-1 right-1.5 w-2 h-2 bg-pink-500 rounded-full border-2 border-white"></span>
+                <FaBell size={18} />
+                <span className="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full border-2 border-card"></span>
               </button>
               
               {/* Notification Dropdown */}
               {showNotifications && (
-                <div className="absolute right-0 mt-3 w-80 bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden z-50">
-                  <div className="p-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
-                    <h3 className="font-bold text-slate-800">Notifications</h3>
-                    <span className="text-xs text-pink-600 font-semibold cursor-pointer">Mark all as read</span>
+                <div className="absolute right-0 mt-3 w-80 bg-card rounded-[2rem] shadow-2xl border border-border overflow-hidden z-50">
+                  <div className="p-5 border-b border-border flex justify-between items-center bg-secondary/30">
+                    <h3 className="font-bold text-foreground">Notifications</h3>
+                    <span className="text-[10px] uppercase font-bold tracking-widest text-primary cursor-pointer hover:text-primary/80 transition-colors">Mark all as read</span>
                   </div>
                   <div className="max-h-80 overflow-y-auto">
                     {notifications.map(n => (
-                      <div key={n.id} className={`p-4 border-b border-slate-50 hover:bg-slate-50 cursor-pointer ${n.unread ? 'bg-pink-50/30' : ''}`}>
-                        <p className={`text-sm ${n.unread ? 'text-slate-800 font-semibold' : 'text-slate-600'}`}>{n.text}</p>
-                        <p className="text-xs text-slate-400 mt-1">{n.time}</p>
+                      <div key={n.id} className={`p-5 border-b border-border hover:bg-secondary/50 cursor-pointer transition-colors ${n.unread ? 'bg-primary/5' : ''}`}>
+                        <p className={`text-sm ${n.unread ? 'text-foreground font-bold' : 'text-muted-foreground'}`}>{n.text}</p>
+                        <p className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground mt-2">{n.time}</p>
                       </div>
                     ))}
                   </div>
@@ -233,10 +238,8 @@ const UserLayout = () => {
           </div>
         </header>
 
-        <div className="p-6 md:p-10 max-w-7xl mx-auto">
-          <div className="bg-white rounded-2xl shadow-sm border border-slate-200 min-h-[80vh] p-4 md:p-8">
-            <Outlet />
-          </div>
+        <div className="flex-1 p-6 md:p-10 max-w-7xl mx-auto w-full relative z-10">
+          <Outlet />
         </div>
       </main>
     </div>

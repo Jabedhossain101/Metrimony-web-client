@@ -34,9 +34,9 @@ const FeaturedBiodatas = () => {
   ];
 
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-24 bg-background relative overflow-hidden">
       {/* Decorative background element */}
-      <div className="absolute top-0 right-0 w-1/3 h-full bg-rose-50/30 skew-x-12 translate-x-20 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-primary/5 skew-x-12 translate-x-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* --- Header Section --- */}
@@ -47,17 +47,17 @@ const FeaturedBiodatas = () => {
               whileInView={{ opacity: 1, x: 0 }}
               className="flex items-center justify-center md:justify-start gap-2 mb-3"
             >
-              <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
-              <span className="text-rose-500 text-[10px] font-black uppercase tracking-[0.4em]">
+              <Star className="w-4 h-4 text-accent fill-accent" />
+              <span className="text-primary text-[10px] font-black uppercase tracking-[0.4em]">
                 Top Picks
               </span>
             </motion.div>
-            <h2 className="text-4xl md:text-6xl font-serif font-medium text-slate-900 leading-tight">
-              Featured <span className="italic text-rose-600">Spotlight</span>
+            <h2 className="text-4xl md:text-6xl font-serif font-medium text-foreground leading-tight">
+              Featured <span className="italic text-primary">Spotlight</span>
             </h2>
           </div>
 
-          <button className="hidden md:flex items-center gap-2 text-slate-500 font-bold text-xs uppercase tracking-widest hover:text-rose-600 transition-colors">
+          <button className="hidden md:flex items-center gap-2 text-muted-foreground font-bold text-xs uppercase tracking-widest hover:text-primary transition-colors">
             Explore All Profiles <ArrowUpRight size={16} />
           </button>
         </div>
@@ -74,59 +74,60 @@ const FeaturedBiodatas = () => {
               className="group relative"
             >
               {/* Card Container */}
-              <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-rose-100/50 group-hover:-translate-y-2">
+              <div className="bg-card rounded-[2.5rem] p-8 border border-border shadow-sm transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-primary/10 group-hover:-translate-y-2 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-secondary/50 pointer-events-none" />
                 {/* Profile Image with Modern Hex/Circle Frame */}
-                <div className="relative w-32 h-32 mx-auto mb-8">
-                  <div className="absolute inset-0 bg-rose-100 rounded-[2rem] rotate-6 group-hover:rotate-12 transition-transform duration-500" />
+                <div className="relative w-32 h-32 mx-auto mb-8 z-10">
+                  <div className="absolute inset-0 bg-primary/20 rounded-[2rem] rotate-6 group-hover:rotate-12 transition-transform duration-500" />
                   <img
                     src={item.image}
                     alt={item.name}
-                    className="relative w-full h-full object-cover rounded-[2rem] border-4 border-white shadow-md"
+                    className="relative w-full h-full object-cover rounded-[2rem] border-4 border-card shadow-md"
                   />
-                  <div className="absolute -bottom-2 -right-2 bg-white p-2 rounded-full shadow-lg">
-                    <div className="bg-green-500 w-3 h-3 rounded-full border-2 border-white" />
+                  <div className="absolute -bottom-2 -right-2 bg-card p-2 rounded-full shadow-lg border border-border">
+                    <div className="bg-emerald-500 w-3 h-3 rounded-full border-2 border-card" />
                   </div>
                 </div>
 
                 {/* Info Section */}
-                <div className="text-center space-y-4">
+                <div className="text-center space-y-4 relative z-10">
                   <div>
-                    <h3 className="text-2xl font-serif font-bold text-slate-900">
+                    <h3 className="text-2xl font-serif font-bold text-foreground">
                       {item.name}
                     </h3>
                     <div className="flex items-center justify-center gap-2 mt-1">
-                      <span className="h-[1px] w-4 bg-rose-200" />
-                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                      <span className="h-[1px] w-4 bg-primary/20" />
+                      <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
                         Verified Profile
                       </span>
-                      <span className="h-[1px] w-4 bg-rose-200" />
+                      <span className="h-[1px] w-4 bg-primary/20" />
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2 py-4 border-y border-slate-50">
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <User size={14} className="text-rose-400" />
+                  <div className="grid grid-cols-2 gap-2 py-4 border-y border-border/50">
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                      <User size={14} className="text-primary/70" />
                       <span className="text-xs font-semibold">
                         {item.age} Years
                       </span>
                     </div>
-                    <div className="flex items-center gap-2 text-slate-600">
-                      <MapPin size={14} className="text-rose-400" />
+                    <div className="flex items-center gap-2 text-muted-foreground">
+                      <MapPin size={14} className="text-primary/70" />
                       <span className="text-xs font-semibold">
                         {item.location}
                       </span>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-center gap-2 text-slate-500 pb-2">
-                    <Briefcase size={14} className="text-slate-300" />
+                  <div className="flex items-center justify-center gap-2 text-muted-foreground pb-2">
+                    <Briefcase size={14} className="text-muted-foreground/50" />
                     <span className="text-sm italic">{item.occupation}</span>
                   </div>
 
                   {/* Action Button */}
                   <button
                     onClick={() => navigate(`/biodata/${item._id}`)}
-                    className="w-full py-4 bg-slate-900 text-white rounded-2xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 group-hover:bg-rose-600 group-hover:shadow-lg group-hover:shadow-rose-100"
+                    className="w-full py-4 bg-foreground text-background rounded-2xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-lg group-hover:shadow-primary/30"
                   >
                     View Profile
                   </button>
@@ -138,7 +139,7 @@ const FeaturedBiodatas = () => {
 
         {/* Mobile View All (Visible only on small screens) */}
         <div className="mt-12 text-center md:hidden">
-          <button className="text-rose-600 font-bold text-xs uppercase tracking-widest flex items-center gap-2 mx-auto">
+          <button className="text-primary font-bold text-xs uppercase tracking-widest flex items-center gap-2 mx-auto">
             Explore All Profiles <ArrowUpRight size={16} />
           </button>
         </div>

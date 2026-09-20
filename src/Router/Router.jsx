@@ -31,7 +31,10 @@ import ContractUs from '../Components/ContractUs';
 import Error from '../Components/Error';
 import Profile from '../Components/Profile';
 
+import DashboardHome from '../UserDashBoard/UserComponents/DashboardHome';
+
 export const router = createBrowserRouter([
+  // ... (rest of the file starts below)
   {
     path: '/',
     errorElement: <Error></Error>,
@@ -110,6 +113,10 @@ export const router = createBrowserRouter([
     ),
 
     children: [
+      {
+        index: true,
+        Component: DashboardHome,
+      },
       {
         path: 'edit-biodata',
         Component: EditBiodata,

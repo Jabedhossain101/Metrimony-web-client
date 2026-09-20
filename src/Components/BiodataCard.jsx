@@ -89,36 +89,50 @@ const BiodataCard = ({ biodata, onClick }) => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-2.5 pt-1 mb-2">
-          <div className="flex items-center gap-3 text-muted-foreground">
-            <div className="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-primary">
-              <MapPin size={12} />
+        <div className="grid grid-cols-2 gap-2.5 pt-1 mb-2">
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-primary shrink-0">
+              <MapPin size={10} />
             </div>
-            <span className="text-sm font-medium truncate">{permanentDivision || 'N/A'}</span>
+            <span className="text-xs font-medium truncate">{permanentDivision || 'N/A'}</span>
           </div>
 
-          <div className="flex items-center gap-3 text-muted-foreground">
-            <div className="w-7 h-7 rounded-full bg-secondary flex items-center justify-center text-primary">
-              <Briefcase size={12} />
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-primary shrink-0">
+              <Briefcase size={10} />
             </div>
-            <span className="text-sm font-medium truncate">{occupation || 'N/A'}</span>
+            <span className="text-xs font-medium truncate">{occupation || 'N/A'}</span>
+          </div>
+
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-primary shrink-0">
+              <Star size={10} />
+            </div>
+            <span className="text-xs font-medium truncate">{biodata.religion || biodata.sect || 'Sunni'}</span>
+          </div>
+
+          <div className="flex items-center gap-2 text-muted-foreground">
+            <div className="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-primary shrink-0">
+              <Hash size={10} />
+            </div>
+            <span className="text-xs font-medium truncate">{biodata.height || "5' 6\""}</span>
           </div>
         </div>
       </div>
 
       {/* --- Quick Actions --- */}
       <div className="grid grid-cols-3 gap-2 mt-4 pt-4 border-t border-border">
-        <button className="flex flex-col items-center gap-1.5 py-2 rounded-xl hover:bg-secondary text-muted-foreground hover:text-primary transition-colors group/btn">
+        <button className="flex flex-col items-center gap-1.5 py-2 rounded-xl hover:bg-secondary text-muted-foreground hover:text-primary transition-colors group/btn" onClick={(e) => { e.stopPropagation(); }}>
            <Heart size={18} className="group-hover/btn:fill-primary" />
            <span className="text-[10px] font-bold uppercase tracking-wider">Interest</span>
         </button>
-        <button className="flex flex-col items-center gap-1.5 py-2 rounded-xl hover:bg-secondary text-muted-foreground hover:text-amber-500 transition-colors group/btn">
+        <button className="flex flex-col items-center gap-1.5 py-2 rounded-xl hover:bg-secondary text-muted-foreground hover:text-amber-500 transition-colors group/btn" onClick={(e) => { e.stopPropagation(); }}>
            <Star size={18} className="group-hover/btn:fill-amber-500" />
            <span className="text-[10px] font-bold uppercase tracking-wider">Shortlist</span>
         </button>
-        <button className="flex flex-col items-center gap-1.5 py-2 rounded-xl hover:bg-secondary text-muted-foreground hover:text-destructive transition-colors">
+        <button className="flex flex-col items-center gap-1.5 py-2 rounded-xl hover:bg-secondary text-muted-foreground hover:text-destructive transition-colors" onClick={(e) => { e.stopPropagation(); }}>
            <X size={18} />
-           <span className="text-[10px] font-bold uppercase tracking-wider">Ignore</span>
+           <span className="text-[10px] font-bold uppercase tracking-wider">Pass</span>
         </button>
       </div>
     </motion.div>

@@ -35,11 +35,11 @@ const SuccessCounter = () => {
   ];
 
   return (
-    <section className="relative py-28 bg-[#FCFBFA] overflow-hidden">
+    <section className="relative py-28 bg-secondary/30 overflow-hidden">
       {/* --- ADVANCED BACKGROUND ELEMENTS --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-rose-50 rounded-full blur-[120px] opacity-60" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-50 rounded-full blur-[120px] opacity-60" />
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] opacity-60" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-[120px] opacity-60" />
         <div className="absolute inset-0 opacity-[0.02] bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]" />
       </div>
 
@@ -51,8 +51,8 @@ const SuccessCounter = () => {
             whileInView={{ opacity: 1, y: 0 }}
             className="flex items-center justify-center gap-2 mb-4"
           >
-            <TrendingUp className="w-4 h-4 text-rose-500" />
-            <span className="text-rose-500 text-[10px] font-black uppercase tracking-[0.4em]">
+            <TrendingUp className="w-4 h-4 text-primary" />
+            <span className="text-primary text-[10px] font-black uppercase tracking-[0.4em]">
               Live Impact
             </span>
           </motion.div>
@@ -60,12 +60,12 @@ const SuccessCounter = () => {
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-4xl md:text-6xl font-serif font-medium text-slate-900"
+            className="text-4xl md:text-6xl font-serif font-medium text-foreground"
           >
-            Our Success in <span className="italic text-rose-600">Numbers</span>
+            Our Success in <span className="italic text-primary">Numbers</span>
           </motion.h2>
 
-          <p className="mt-6 text-slate-500 font-light max-w-lg mx-auto text-lg leading-relaxed">
+          <p className="mt-6 text-muted-foreground font-light max-w-lg mx-auto text-lg leading-relaxed">
             Building a community of trust where thousands have already found
             their meaningful connection.
           </p>
@@ -80,16 +80,16 @@ const SuccessCounter = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
-              className={`group relative bg-white/60 backdrop-blur-xl border border-white rounded-[3rem] p-12 transition-all duration-500 hover:-translate-y-3 shadow-sm hover:shadow-2xl ${stat.glowColor}`}
+              className={`group relative bg-card/60 backdrop-blur-xl border border-border rounded-[3rem] p-12 transition-all duration-500 hover:-translate-y-3 shadow-sm hover:shadow-2xl hover:shadow-primary/5`}
             >
               {/* Floating Decorative Sparkle */}
-              <div className="absolute top-8 right-8 text-slate-100 group-hover:text-rose-100 transition-colors duration-500">
+              <div className="absolute top-8 right-8 text-border group-hover:text-primary/20 transition-colors duration-500">
                 <Sparkles size={24} />
               </div>
 
               {/* Icon Container */}
               <div
-                className={`w-20 h-20 mx-auto mb-10 rounded-[2rem] ${stat.bgColor} flex items-center justify-center ${stat.accentColor} transition-all duration-500 group-hover:rotate-[10deg] shadow-inner`}
+                className={`w-20 h-20 mx-auto mb-10 rounded-[2rem] bg-secondary flex items-center justify-center text-primary transition-all duration-500 group-hover:rotate-[10deg] shadow-inner`}
               >
                 {stat.icon}
               </div>
@@ -97,7 +97,7 @@ const SuccessCounter = () => {
              
               <div className="text-center space-y-3">
                 <div className="flex items-center justify-center gap-1">
-                  <span className="text-5xl lg:text-6xl font-serif font-medium text-slate-900 tracking-tighter">
+                  <span className="text-5xl lg:text-6xl font-serif font-medium text-foreground tracking-tighter">
                     <CountUp
                       end={stat.count}
                       duration={3}
@@ -106,21 +106,21 @@ const SuccessCounter = () => {
                       scrollSpyOnce
                     />
                   </span>
-                  <span className="text-3xl font-light text-rose-500">+</span>
+                  <span className="text-3xl font-light text-primary">+</span>
                 </div>
 
-                <p className="text-slate-400 font-bold tracking-[0.2em] text-[10px] uppercase">
+                <p className="text-muted-foreground font-bold tracking-[0.2em] text-[10px] uppercase">
                   {stat.label}
                 </p>
               </div>
 
               {/* Progress Indicator line */}
-              <div className="mt-10 h-[1px] w-full bg-slate-50 relative overflow-hidden">
+              <div className="mt-10 h-[1px] w-full bg-border relative overflow-hidden">
                 <motion.div
                   initial={{ x: '-100%' }}
                   whileInView={{ x: '0%' }}
                   transition={{ duration: 1.5, delay: 0.5 }}
-                  className={`absolute inset-0 bg-gradient-to-r from-transparent via-rose-300 to-transparent opacity-40`}
+                  className={`absolute inset-0 bg-gradient-to-r from-transparent via-primary/30 to-transparent opacity-40`}
                 />
               </div>
             </motion.div>

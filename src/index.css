@@ -42,65 +42,71 @@
 
 @layer base {
   :root {
-    /* Warm, enterprise-grade matrimonial palette */
-    --background: 30 50% 98%; /* Warm sand / off-white */
-    --foreground: 20 14% 4%; /* Dark brown-grey */
+    /* LUXURY MATRIMONY THEME */
+    
+    /* Clean Pearl & Slate Neutrals */
+    --background: 60 20% 98%; /* #FAFAF9 (Stone 50) */
+    --foreground: 222 47% 11%; /* #0F172A (Slate 900) */
 
-    --card: 0 0% 100%;
-    --card-foreground: 20 14% 4%;
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 222 47% 11%;
  
     --popover: 0 0% 100%;
-    --popover-foreground: 20 14% 4%;
+    --popover-foreground: 222 47% 11%;
  
-    --primary: 346 80% 45%; /* Deep Rose / Maroon */
-    --primary-foreground: 355 100% 97%;
+    /* Royal Crimson / Burgundy */
+    --primary: 343 80% 35%; /* #9F1239 (Rose 800) */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF */
  
-    --secondary: 35 20% 90%; /* Warm grey */
-    --secondary-foreground: 24 10% 10%;
+    /* Soft Pearl / Slate Secondary Surfaces */
+    --secondary: 210 40% 96%; /* #F1F5F9 (Slate 100) */
+    --secondary-foreground: 222 47% 11%;
  
-    --muted: 35 20% 90%;
-    --muted-foreground: 25 5% 45%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%; /* #64748B (Slate 500) */
  
-    --accent: 35 20% 90%;
-    --accent-foreground: 24 10% 10%;
+    /* Warm Antique Gold Accent */
+    --accent: 38 92% 50%; /* #F59E0B / #D97706 (Amber 600) */
+    --accent-foreground: 0 0% 100%;
  
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 84% 60%; /* #EF4444 (Red 500) */
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 30 15% 90%;
-    --input: 30 15% 90%;
-    --ring: 346 80% 45%;
+    --border: 214 32% 91%; /* #E2E8F0 (Slate 200) */
+    --input: 214 32% 91%;
+    --ring: 343 80% 35%; /* Same as primary */
  
-    --radius: 0.75rem;
+    --radius: 1rem;
   }
  
   .dark {
-    --background: 20 14% 4%;
-    --foreground: 30 50% 98%;
+    /* Deep Charcoal & Midnight Slate */
+    --background: 222 47% 11%; /* #0F172A */
+    --foreground: 210 40% 98%; /* #F8FAFC */
  
-    --card: 24 10% 10%;
-    --card-foreground: 30 50% 98%;
+    --card: 215 28% 17%; /* #1E293B */
+    --card-foreground: 210 40% 98%;
  
-    --popover: 24 10% 10%;
-    --popover-foreground: 30 50% 98%;
+    --popover: 215 28% 17%;
+    --popover-foreground: 210 40% 98%;
  
-    --primary: 346 80% 55%;
+    --primary: 346 80% 55%; /* Lighter Rose for Dark Mode */
     --primary-foreground: 0 0% 100%;
  
-    --secondary: 25 10% 20%;
-    --secondary-foreground: 30 50% 98%;
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
  
-    --muted: 25 10% 20%;
-    --muted-foreground: 30 20% 70%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
  
-    --accent: 25 10% 20%;
-    --accent-foreground: 30 50% 98%;
+    --accent: 38 92% 50%;
+    --accent-foreground: 0 0% 100%;
  
     --destructive: 0 62% 30%;
-    --destructive-foreground: 30 50% 98%;
+    --destructive-foreground: 210 40% 98%;
  
-    --border: 25 10% 20%;
-    --input: 25 10% 20%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
     --ring: 346 80% 55%;
   }
 }
